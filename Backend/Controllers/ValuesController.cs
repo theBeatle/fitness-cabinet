@@ -14,6 +14,7 @@ namespace Backend.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
+            //Hello
             return new string[] { "value1", "value2" };
         }
 
