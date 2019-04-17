@@ -27,6 +27,7 @@ import { MaterialModule } from './material';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
+    
     MaterialModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-list-component',
@@ -8,5 +9,6 @@ import { Component } from '@angular/core';
  
 
  export class ListComponent {
+  showFiller = false;
   title = 'app';
 }

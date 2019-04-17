@@ -1,4 +1,4 @@
-<mat-drawer-container class="example-container" [hasBackdrop]="hasBackdrop.value">
+<!-- <mat-drawer-container class="example-container" [hasBackdrop]="hasBackdrop.value">
   <mat-drawer #drawer [mode]="mode.value">I'm a drawer</mat-drawer>
   <mat-drawer-content>
     <mat-form-field>
@@ -19,4 +19,22 @@
     </mat-form-field>
     <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>
   </mat-drawer-content>
+</mat-drawer-container> -->
+
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <p>Auto-resizing sidenav</p>
+    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+      Toggle extra text
+    </button>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <button type="button" mat-button (click)="drawer.toggle()">
+      Toggle sidenav
+    </button>
+  </div>
+
 </mat-drawer-container>
