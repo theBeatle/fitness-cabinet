@@ -5,4 +5,11 @@ import { Component } from '@angular/core';
   templateUrl: './sing-in.component.html',
 })
 export class SingInComponent {
+
+  loading = false;
+  submitted = false;
+
+
+
+
 }
