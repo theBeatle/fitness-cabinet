@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dal
 {
-    interface IDal
+    public interface IDal
     {
         bool DBUserSaveCredentials(string login, string password, string firstName, string lastName, string email, string sex, string phone, string isDeleted, string isBanned);
         bool IsPersonEmailInDb(string loginOrEmail);
