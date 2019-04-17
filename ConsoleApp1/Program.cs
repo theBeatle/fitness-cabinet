@@ -9,7 +9,7 @@ namespace ConsoleApp1
 
         public void func()
         {
-            bool t = library.DBUserSaveCredentials("login", "password", "firstName", "lastName", "email", "sex", "phone", "false", "false");
+            bool t = library.DBUserSaveCredentials("login", "password", "firstName", "lastName", "email", "female", "phone", "false", "false");
             Console.WriteLine(t);
         }
     }

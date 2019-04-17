@@ -49,16 +49,45 @@ namespace Dal
         //    return (input.Trim().ToLower() == "true") || (input.Trim() == "1");
         //}
 
+        //public bool DBUserSaveCredentials(string login, string password, string firstName, string lastName, string email, string sex, string phone, string isDeleted, string isBanned)
+        //{
+        //    var number = _ctx.Set<Person>().Count();
+        //    var isdeleted = isDeleted == "true";
+        //    var isbanned = isBanned == "true";
+        //    var sexstatusid = 1;
+
+        //    if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && !String.IsNullOrEmpty(email) && !String.IsNullOrEmpty(password))
+        //    {
+        //        _ctx.Set<Person>().Add(new Person() { SexStatus = new SexStatus { Sex = "male" }, Login = login, Password = password, FirstName = firstName, LastName = lastName, Email = email, Phone = phone, IsDeleted = isdeleted, IsBanned = isbanned });
+        //        _ctx.SaveChanges();
+
+        //        return _ctx.Set<Person>().Count() > number;
+        //    }
+
+        //    return false;
+        //}
+
         public bool DBUserSaveCredentials(string login, string password, string firstName, string lastName, string email, string sex, string phone, string isDeleted, string isBanned)
         {
             var number = _ctx.Set<Person>().Count();
             var isdeleted = isDeleted == "true";
             var isbanned = isBanned == "true";
-            var sexstatusid = 1;
+
 
             if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && !String.IsNullOrEmpty(email) && !String.IsNullOrEmpty(password))
             {
-                _ctx.Set<Person>().Add(new Person() { SexStatus = new SexStatus { Sex = "male" }, Login = login, Password = password, FirstName = firstName, LastName = lastName, Email = email, Phone = phone, IsDeleted = isdeleted, IsBanned = isbanned });
+                //if (_ctx.Set<SexStatus>().Count() == 0)
+                //{
+                //    _ctx.Set<SexStatus>().Add(new SexStatus { Sex = "male"  });
+                //    _ctx.Set<SexStatus>().Add(new SexStatus { Sex = "female" });
+                //    var t1 = _ctx.Set<SexStatus>().Count();
+                //}
+
+                //var t = _ctx.Set<SexStatus>().Count();
+
+                //var sexstatus = _ctx.Set<SexStatus>().First(s => s.Sex == "male");
+
+                _ctx.Set<Person>().Add(new Person() { SexStatus = new SexStatus { Sex = sex }, Login = login, Password = password, FirstName = firstName, LastName = lastName, Email = email, Phone = phone, IsDeleted = isdeleted, IsBanned = isbanned });
                 _ctx.SaveChanges();
 
                 return _ctx.Set<Person>().Count() > number;
