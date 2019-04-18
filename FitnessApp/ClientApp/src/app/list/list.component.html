@@ -3,7 +3,7 @@
   <mat-chip-list #chipList>
     <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
               [removable]="removable" (removed)="remove(fruit)">
-      {{fruit}}
+      {{fruit.name}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
   </mat-chip-list>
@@ -12,9 +12,9 @@
 
 <mat-drawer-container [hasBackdrop]="false">
   <mat-drawer #drawer mode="side">
-    <mat-selection-list #fruits (selectionChange)="onSelection($event, fruits.selectedOptions)">
+    <mat-selection-list #fruitsId (selectionChange)="onSelection($event, fruitsId.selectedOptions)">
       <mat-list-option *ngFor="let fruit of fruits" [value]='fruit'>
-        {{fruit}}
+        {{fruit.name}}
       </mat-list-option>
     </mat-selection-list>
 
@@ -31,7 +31,7 @@
 
 
 <p>
-  Options selected: {{fruits.selectedOptions.selected.length}}
+  Options selected: {{fruitsId.selectedOptions.selected.length}}
 </p>
 
 <p>
@@ -40,7 +40,7 @@
 
 <p>Selected:</p>
 <ul>
-  <li *ngFor="let i of fruits.selectedOptions.selected">
-    {{ i.value }}
+  <li *ngFor="let i of fruitsId.selectedOptions.selected">
+    {{ i.value.name }}
   </li>
 </ul>
