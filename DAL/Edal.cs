@@ -6,29 +6,26 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Dal
 {
+    public static class Temp
+    {
+        public static bool ToBoolean(this string input)
+        {
+            //Account for a string that does not need to be processed
+            if (string.IsNullOrEmpty(input))
+                return false;
+
+            return (input.Trim().ToLower() == "true") || (input.Trim() == "1");
+        }
+    }
+
+
+
     public class Edal : IDal
     {
-        private readonly DbContext _ctx = new FitnessCabinetContext();
-
-        public bool PersonSaveCredentials(string login, string password, string firstName, string lastName, string email, string sexStatusId, string phone, string isDeleted, string isBanned)
-        {
-            var number = _ctx.Set<Person>().Count();
-            var isdeleted = isDeleted =="true";
-            var isbanned = isBanned=="true";
-            var sexstatusid = Int32.Parse(sexStatusId);
-
-            if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && !String.IsNullOrEmpty(email) && !String.IsNullOrEmpty(password))
-            {
-                _ctx.Set<Person>().Add(new Person() { Login = login, Password = password, FirstName = firstName, LastName = lastName,  Email = email,  SexStatusId= sexstatusid, Phone =phone, IsDeleted= isdeleted, IsBanned = isbanned });
-                _ctx.SaveChanges();
-
-                return _ctx.Set<Person>().Count() > number;
-            }
-
-            return false;
-        }
+        private readonly DbContext _ctx = new FitnessCabinetContext();       
 
         public bool IsPersonEmailInDb(string loginOrEmail)
         {
@@ -40,41 +37,16 @@ namespace Dal
             throw new NotImplementedException();
         }
 
-        //public static bool ToBoolean(this string input)
-        //{
-        //    //Account for a string that does not need to be processed
-        //    if (string.IsNullOrEmpty(input))
-        //        return false;
 
-        //    return (input.Trim().ToLower() == "true") || (input.Trim() == "1");
-        //}
-
-        //public bool DBUserSaveCredentials(string login, string password, string firstName, string lastName, string email, string sex, string phone, string isDeleted, string isBanned)
-        //{
-        //    var number = _ctx.Set<Person>().Count();
-        //    var isdeleted = isDeleted == "true";
-        //    var isbanned = isBanned == "true";
-        //    var sexstatusid = 1;
-
-        //    if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && !String.IsNullOrEmpty(email) && !String.IsNullOrEmpty(password))
-        //    {
-        //        _ctx.Set<Person>().Add(new Person() { SexStatus = new SexStatus { Sex = "male" }, Login = login, Password = password, FirstName = firstName, LastName = lastName, Email = email, Phone = phone, IsDeleted = isdeleted, IsBanned = isbanned });
-        //        _ctx.SaveChanges();
-
-        //        return _ctx.Set<Person>().Count() > number;
-        //    }
-
-        //    return false;
-        //}
-
-        public bool DBUserSaveCredentials(string login, string password, string firstName, string lastName, string email, string sex, string phone, string isDeleted, string isBanned)
+        public bool PersonSaveCredentials(string login, string password, string firstName, string lastName, string email, string sex, string phone, string isDeleted, string isBanned)
         {
             var number = _ctx.Set<Person>().Count();
-            var isdeleted = isDeleted == "true";
-            var isbanned = isBanned == "true";
+            var isdeleted = isDeleted.ToBoolean();/*isDeleted == "true";*/
+            var isbanned = isBanned.ToBoolean();/*isBanned == "true";*/
 
 
-            if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName) && !String.IsNullOrEmpty(email) && !String.IsNullOrEmpty(password))
+            if (!String.IsNullOrEmpty(login) && !String.IsNullOrEmpty(password) && !String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName)
+                && !String.IsNullOrEmpty(email) && !String.IsNullOrEmpty(sex) && !String.IsNullOrEmpty(isDeleted) && !String.IsNullOrEmpty(isBanned))
             {
                 //if (_ctx.Set<SexStatus>().Count() == 0)
                 //{
@@ -89,10 +61,36 @@ namespace Dal
 
                 _ctx.Set<Person>().Add(new Person() { SexStatus = new SexStatus { Sex = sex }, Login = login, Password = password, FirstName = firstName, LastName = lastName, Email = email, Phone = phone, IsDeleted = isdeleted, IsBanned = isbanned });
                 _ctx.SaveChanges();
-
-                return _ctx.Set<Person>().Count() > number;
+                var number2 = _ctx.Set<Person>().Count();
+                return number2 > number;
             }
 
+            return false;
+        }
+
+
+        public ICollection<Person> GetAllPeople()
+        {           
+            return _ctx.Set<Person>().ToList();           
+        }
+
+        public bool PersonLoadPhoto(string login, string password, string path)
+        {
+            var person = _ctx.Set<Person>().FirstOrDefault(p => p.Login == login && p.Password == password);
+
+            if (person != null)
+            {
+                //var number = _ctx.Set<PersonsPhotos>().Count();
+                //_ctx.Set<PersonsPhotos>().Add( new PersonsPhotos() { Person = person, Photo = new Photos { Path = path} });
+                //var number2 = _ctx.Set<PersonsPhotos>().Count();
+
+                //var number = _ctx.Set<Photos>().Count();
+                //_ctx.Set<Photos>().Add(new Photos() { Path = path });
+                //var number2 = _ctx.Set<Photos>().Count();
+
+
+                return true;
+            }
             return false;
         }
     }

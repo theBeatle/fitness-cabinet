@@ -9,8 +9,20 @@ namespace ConsoleApp1
 
         public void func()
         {
-            bool t = library.DBUserSaveCredentials("login", "password", "firstName", "lastName", "email", "female", "phone", "false", "false");
+            bool t = library.PersonSaveCredentials("login", "password", "firstName", "lastName", "email@xx.ua", "male", "phone", "false", "false");
             Console.WriteLine(t);
+        }
+
+        public void func2()
+        {
+            var t = library.GetAllPeople();
+            var temp = 0;           
+        }
+
+        public void func3()
+        {
+            var t = library.PersonLoadPhoto("login", "password", @"D:\\1.jpg");
+            var temp = 0;
         }
     }
 
@@ -30,9 +42,11 @@ namespace ConsoleApp1
             Console.WriteLine("Hello World!");
             var temp = new Temp();
 
-            temp.func();
+            //temp.func();
 
+            //temp.func2();
 
+            temp.func3();
         }
     }
 }

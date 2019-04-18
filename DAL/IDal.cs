@@ -9,8 +9,12 @@ namespace Dal
 {
     public interface IDal
     {
-        bool DBUserSaveCredentials(string login, string password, string firstName, string lastName, string email, string sex, string phone, string isDeleted, string isBanned);
+        bool PersonSaveCredentials(string login, string password, string firstName, string lastName, string email, string sex, string phone, string isDeleted, string isBanned);
         bool IsPersonEmailInDb(string loginOrEmail);
         bool IsPersonInDb(string loginOrEmail, string password);
+
+        ICollection<Person> GetAllPeople();
+
+        bool PersonLoadPhoto(string login, string password,string path);
     }
 }
