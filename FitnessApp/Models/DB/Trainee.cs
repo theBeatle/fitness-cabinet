@@ -9,7 +9,7 @@ namespace FitnessApp.Models.DB
         {
             Progress = new HashSet<Progress>();
             RealService = new HashSet<RealService>();
-            TraineeAchivements = new HashSet<TraineeAchivements>();
+            TraineeAchivements = new HashSet<TraineeAchivement>();
         }
 
         public int Id { get; set; }
@@ -17,10 +17,11 @@ namespace FitnessApp.Models.DB
         public int Weight { get; set; }
         public int Height { get; set; }
         public string WorkShedule { get; set; }
+        public int PersonId { get; set; }
 
         public virtual Person Person { get; set; }
         public virtual ICollection<Progress> Progress { get; set; }
         public virtual ICollection<RealService> RealService { get; set; }
-        public virtual ICollection<TraineeAchivements> TraineeAchivements { get; set; }
+        public virtual ICollection<TraineeAchivement> TraineeAchivements { get; set; }
     }
 }

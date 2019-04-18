@@ -11,7 +11,7 @@ namespace Dal
             PlacesPhotos = new HashSet<PlacesPhotos>();
         }
 
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Path { get; set; }
 
         public virtual ICollection<PersonsPhotos> PersonsPhotos { get; set; }

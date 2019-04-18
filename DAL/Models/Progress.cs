@@ -5,8 +5,8 @@ namespace Dal
 {
     public partial class Progress
     {
-        public long Id { get; set; }
-        public long TraineeId { get; set; }
+        public int Id { get; set; }
+        public int TraineeId { get; set; }
         public string Description { get; set; }
         public int Weight { get; set; }
 

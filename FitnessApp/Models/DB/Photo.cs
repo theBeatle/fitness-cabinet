@@ -7,14 +7,16 @@ namespace FitnessApp.Models.DB
     {
         public Photo()
         {
-            People = new HashSet<Person>();
             Places = new HashSet<Place>();
+            PersonPhotos = new HashSet<PersonPhoto>();
+            PlacePhotos = new HashSet<PlacePhoto>();
         }
 
         public int Id { get; set; }
         public string Path { get; set; }
-
-        public virtual ICollection<Person> People { get; set; }
+        
         public virtual ICollection<Place> Places { get; set; }
+        public virtual ICollection<PersonPhoto> PersonPhotos { get; set; }
+        public virtual ICollection<PlacePhoto> PlacePhotos { get; set; }
     }
 }

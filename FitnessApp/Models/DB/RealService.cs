@@ -15,6 +15,10 @@ namespace FitnessApp.Models.DB
         public string CreationTime { get; set; }
         public string StartTime { get; set; }
         public string EndTime { get; set; }
+        public int CoachId { get; set; }
+        public int PlaceId { get; set; }
+        public int ServiceId { get; set; }
+        public int TraineeId { get; set; }
 
         public virtual Coach Coach { get; set; }
         public virtual Place Place { get; set; }

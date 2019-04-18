@@ -10,6 +10,7 @@ namespace FitnessApp.Models.DB
         public string EndTime { get; set; }
         public int Frequency { get; set; }
         public bool IsEnabled { get; set; }
+        public int RealServiceId { get; set; }
 
         public virtual RealService RealService { get; set; }
     }

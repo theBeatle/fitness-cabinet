@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace FitnessApp.Models.DB
 {
-    public class ApplicationContext : IdentityDbContext<Person>
+    public class ApplicationContext : IdentityDbContext<Person, IdentityRole<int>, int>
     {
         public ApplicationContext(DbContextOptions options)
         : base(options)
@@ -40,14 +41,12 @@ namespace FitnessApp.Models.DB
         public virtual DbSet<SexStatus> SexStatus { get; set; }
         public virtual DbSet<Speciality> Speciality { get; set; }
         public virtual DbSet<Trainee> Trainee { get; set; }
-        public virtual DbSet<TraineeAchivements> TraineeAchivements { get; set; }
+        public virtual DbSet<TraineeAchivement> TraineeAchivements { get; set; }
         public virtual DbSet<Usabilities> Usabilities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.HasAnnotation("ProductVersion", "2.2.2-servicing-10034");
 
             modelBuilder.Entity<Achivement>(entity =>
             {
@@ -72,7 +71,7 @@ namespace FitnessApp.Models.DB
 
                 entity.Property(e => e.Latitude).IsRequired();
 
-                entity.Property(e => e.Longitude).IsRequired();
+                entity.Property(e => e.intitude).IsRequired();
 
                 entity.Property(e => e.State)
                     .IsRequired()
@@ -85,56 +84,38 @@ namespace FitnessApp.Models.DB
 
             modelBuilder.Entity<Chat>(entity =>
             {
-                entity.Property(e => e.Receiver).HasColumnName("Receiver");
-
-                entity.Property(e => e.Sender).HasColumnName("Sender");
-
                 entity.HasOne(d => d.Receiver)
                     .WithMany(p => p.Chat)
-                    .HasForeignKey(d => d.Receiver)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Chat__Receiver_I__2F10007B");
+                    .HasForeignKey(d => d.ReceiverId);
 
                 entity.HasOne(d => d.Sender)
                     .WithMany(p => p.Chat)
-                    .HasForeignKey(d => d.Sender)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Chat__Sender_Id__2E1BDC42");
+                    .HasForeignKey(d => d.SenderId);
             });
 
             modelBuilder.Entity<Coach>(entity =>
             {
-                entity.Property(e => e.Person).HasColumnName("Person");
-
                 entity.Property(e => e.WorkShedule)
-                    .IsRequired()
-                    .HasColumnType("text");
+                    .IsRequired();
 
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.Coach)
-                    .HasForeignKey(d => d.Person)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Coach__Person_Id__31EC6D26");
+                    .HasForeignKey(d => d.PersonId);
             });
 
-            modelBuilder.Entity<CoachPlace>(entity =>
-            {
-                entity.Property(e => e.Coach).HasColumnName("Coach_Id");
+            modelBuilder.Entity<CoachPlace>()
+                .HasKey(d => new { d.PlaceId, d.CoachId });
 
-                entity.Property(e => e.Place).HasColumnName("Place_Id");
+            modelBuilder.Entity<CoachPlace>()
+                .HasOne(d => d.Coach)
+                .WithMany(d => d.CoachPlaces)
+                .HasForeignKey(d => d.Id);
 
-                entity.HasOne(d => d.Coach)
-                    .WithMany(p => p.CoachPlace)
-                    .HasForeignKey(d => d.Coach)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__CoachPlac__Coach__4BAC3F29");
-
-                entity.HasOne(d => d.Place)
-                    .WithMany(p => p.CoachPlace)
-                    .HasForeignKey(d => d.Place)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__CoachPlac__Place__4CA06362");
-            });
+            modelBuilder.Entity<CoachPlace>()
+                .HasOne(d => d.Place)
+                .WithMany(d => d.CoachPlaces)
+                .HasForeignKey(d => d.Id);
+           
 
             modelBuilder.Entity<Payment>(entity =>
             {
@@ -154,10 +135,6 @@ namespace FitnessApp.Models.DB
                     .IsRequired()
                     .HasMaxLength(300);
 
-                entity.Property(e => e.IsBanned).HasColumnName("Is_Banned");
-
-                entity.Property(e => e.IsDeleted).HasColumnName("Is_Deleted");
-
                 entity.Property(e => e.LastName)
                     .IsRequired()
                     .HasMaxLength(300);
@@ -165,161 +142,132 @@ namespace FitnessApp.Models.DB
                 entity.Property(e => e.Login)
                     .IsRequired()
                     .HasMaxLength(100);
-
-                entity.Property(e => e.SexStatus).HasColumnName("SexStatus");
-
+                
                 entity.HasOne(d => d.SexStatus)
                     .WithMany(p => p.Person)
-                    .HasForeignKey(d => d.SexStatus)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Person__SexStatu__25869641");
+                    .HasForeignKey(d => d.SexStatusId);
             });
 
             modelBuilder.Entity<Photo>(entity =>
             {
                 entity.Property(e => e.Path)
-                    .IsRequired()
-                    .HasColumnType("ntext");
+                    .IsRequired();
+            });
+
+            modelBuilder.Entity<PersonPhoto>()
+                .HasKey(d => new { d.PersonId, d.PhotoId });
+
+            modelBuilder.Entity<PersonPhoto>()
+                .HasOne(d => d.Person)
+                .WithMany(d => d.PersonPhotos)
+                .HasForeignKey(d => d.Id);
+
+            modelBuilder.Entity<PersonPhoto>(entity =>
+            {
+                entity.HasOne(d => d.Photo)
+                    .WithMany(d => d.PersonPhotos)
+                    .HasForeignKey(d => d.Id);
             });
 
             modelBuilder.Entity<Place>(entity =>
             {
-                entity.Property(e => e.Address).HasColumnName("Address");
-
                 entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasColumnType("ntext");
-
-                entity.Property(e => e.IsSimplePlace).HasColumnName("isSimplePlace");
+                    .IsRequired();
 
                 entity.Property(e => e.Name).IsRequired();
 
                 entity.Property(e => e.Track).HasMaxLength(500);
 
                 entity.Property(e => e.WorkShedule)
-                    .IsRequired()
-                    .HasColumnType("ntext");
+                    .IsRequired();
 
                 entity.HasOne(d => d.Address)
                     .WithMany(p => p.Place)
-                    .HasForeignKey(d => d.Address)
-                    .HasConstraintName("FK__Place__Address_I__3B75D760");
+                    .HasForeignKey(d => d.AddressId);
             });
+
+            modelBuilder.Entity<PlacePhoto>()
+                .HasKey(d => new { d.PlaceId, d.PhotoId });
+
+            modelBuilder.Entity<PlacePhoto>()
+                .HasOne(d => d.Place)
+                .WithMany(d => d.PlacePhotos)
+                .HasForeignKey(d => d.Id);
+
+            modelBuilder.Entity<PlacePhoto>()
+                .HasOne(d => d.Place)
+                .WithMany(d => d.PlacePhotos)
+                .HasForeignKey(d => d.Id);
 
             modelBuilder.Entity<Progress>(entity =>
             {
-                entity.Property(e => e.Description).HasColumnType("ntext");
-
-                entity.Property(e => e.Trainee).HasColumnName("Trainee_Id");
-
                 entity.HasOne(d => d.Trainee)
                     .WithMany(p => p.Progress)
-                    .HasForeignKey(d => d.Trainee)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Progress__Traine__52593CB8");
+                    .HasForeignKey(d => d.TraineeId);
             });
 
             modelBuilder.Entity<RealService>(entity =>
             {
-                entity.Property(e => e.Coach).HasColumnName("Coach_Id");
-
                 entity.Property(e => e.CreationTime)
                     .IsRequired()
-                    .HasColumnName("Creation_Time")
                     .HasMaxLength(300);
 
                 entity.Property(e => e.EndTime)
                     .IsRequired()
-                    .HasColumnName("End_Time")
                     .HasMaxLength(300);
-
-                entity.Property(e => e.Place).HasColumnName("Place_Id");
-
-                entity.Property(e => e.Price).HasColumnType("smallmoney");
-
-                entity.Property(e => e.Service).HasColumnName("Service_Id");
 
                 entity.Property(e => e.StartTime)
                     .IsRequired()
-                    .HasColumnName("Start_Time")
                     .HasMaxLength(300);
-
-                entity.Property(e => e.Trainee).HasColumnName("Trainee_Id");
 
                 entity.HasOne(d => d.Coach)
                     .WithMany(p => p.RealService)
-                    .HasForeignKey(d => d.Coach)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__RealServi__Coach__4222D4EF");
+                    .HasForeignKey(d => d.CoachId);
 
                 entity.HasOne(d => d.Place)
                     .WithMany(p => p.RealService)
-                    .HasForeignKey(d => d.Place)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__RealServi__Place__440B1D61");
+                    .HasForeignKey(d => d.PlaceId);
 
                 entity.HasOne(d => d.Service)
                     .WithMany(p => p.RealService)
-                    .HasForeignKey(d => d.Service)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__RealServi__Servi__412EB0B6");
+                    .HasForeignKey(d => d.ServiceId);
 
                 entity.HasOne(d => d.Trainee)
                     .WithMany(p => p.RealService)
-                    .HasForeignKey(d => d.Trainee)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__RealServi__Train__4316F928");
+                    .HasForeignKey(d => d.TraineeId);
             });
 
             modelBuilder.Entity<Receiver>(entity =>
             {
-                entity.Property(e => e.Person).HasColumnName("Person_Id");
-
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.Receiver)
-                    .HasForeignKey(d => d.Person)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Receiver__Person__2B3F6F97");
+                    .HasForeignKey(d => d.PersonId);
             });
 
             modelBuilder.Entity<Reminder>(entity =>
             {
                 entity.Property(e => e.EndTime)
                     .IsRequired()
-                    .HasColumnName("End_Time")
                     .HasMaxLength(300);
-
-                entity.Property(e => e.IsEnabled).HasColumnName("Is_Enabled");
-
-                entity.Property(e => e.RealService).HasColumnName("RealService_Id");
 
                 entity.Property(e => e.StartTime)
                     .IsRequired()
-                    .HasColumnName("Start_Time")
                     .HasMaxLength(300);
 
                 entity.HasOne(d => d.RealService)
                     .WithMany(p => p.Reminder)
-                    .HasForeignKey(d => d.RealService)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Reminder__RealSe__46E78A0C");
+                    .HasForeignKey(d => d.RealServiceId);
             });
 
             modelBuilder.Entity<Sender>(entity =>
             {
-                entity.Property(e => e.Person).HasColumnName("Person_Id");
-
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.Sender)
-                    .HasForeignKey(d => d.Person)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Sender__Person_I__286302EC");
+                    .HasForeignKey(d => d.PersonId);
             });
 
             modelBuilder.Entity<Service>(entity =>
             {
-                entity.Property(e => e.Description).HasColumnType("ntext");
-
                 entity.Property(e => e.TrainingName).IsRequired();
             });
 
@@ -332,74 +280,52 @@ namespace FitnessApp.Models.DB
 
             modelBuilder.Entity<Speciality>(entity =>
             {
-                entity.Property(e => e.Coach).HasColumnName("Coach");
-
                 entity.Property(e => e.Experience)
-                    .IsRequired()
-                    .HasColumnType("ntext");
+                    .IsRequired();
 
                 entity.Property(e => e.Specialities)
                     .IsRequired()
-                    .HasColumnName("Speciality")
                     .HasMaxLength(500);
 
                 entity.HasOne(d => d.Coach)
                     .WithMany(p => p.Speciality)
-                    .HasForeignKey(d => d.Coach)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Specialit__Coach__4F7CD00D");
+                    .HasForeignKey(d => d.CoachId);
             });
 
             modelBuilder.Entity<Trainee>(entity =>
             {
-                entity.Property(e => e.Person).HasColumnName("Person_Id");
-
                 entity.Property(e => e.WorkShedule)
-                    .IsRequired()
-                    .HasColumnType("ntext");
+                    .IsRequired();
 
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.Trainee)
-                    .HasForeignKey(d => d.Person)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Trainee__Person___34C8D9D1");
+                    .HasForeignKey(d => d.PersonId);
             });
 
-            modelBuilder.Entity<TraineeAchivements>(entity =>
-            {
-                entity.Property(e => e.Achivement);
+            modelBuilder.Entity<TraineeAchivement>()
+                .HasKey(d => new { d.TraineeId, d.AchivementId });
 
-                entity.Property(e => e.Trainee).HasColumnName("Trainee_Id");
+            modelBuilder.Entity<TraineeAchivement>()
+                .HasOne(d => d.Achivement)
+                .WithMany(d => d.TraineeAchivements)
+                .HasForeignKey(d => d.Id);
 
-                entity.HasOne(d => d.Achivement)
-                    .WithMany(p => p.TraineeAchivements)
-                    .HasForeignKey(d => d.Achivement)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__TraineeAc__Achiv__5812160E");
-
-                entity.HasOne(d => d.Trainee)
-                    .WithMany(p => p.TraineeAchivements)
-                    .HasForeignKey(d => d.Trainee)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__TraineeAc__Train__571DF1D5");
-            });
+            modelBuilder.Entity<TraineeAchivement>()
+                .HasOne(d => d.Trainee)
+                .WithMany(d => d.TraineeAchivements)
+                .HasForeignKey(d => d.Id);
 
             modelBuilder.Entity<Usabilities>(entity =>
             {
                 entity.Property(e => e.Description).HasMaxLength(500);
-
-                entity.Property(e => e.Place).HasColumnName("Place_Id");
-
+                
                 entity.Property(e => e.UsabilityName)
                     .IsRequired()
-                    .HasColumnName("Usability_Name")
                     .HasMaxLength(200);
 
                 entity.HasOne(d => d.Place)
                     .WithMany(p => p.Usabilities)
-                    .HasForeignKey(d => d.Place)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Usabiliti__Place__3E52440B");
+                    .HasForeignKey(d => d.PlaceId);
             });
         }
     }

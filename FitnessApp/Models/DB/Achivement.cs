@@ -7,7 +7,7 @@ namespace FitnessApp.Models.DB
     {
         public Achivement()
         {
-            TraineeAchivements = new HashSet<TraineeAchivements>();
+            TraineeAchivements = new HashSet<TraineeAchivement>();
         }
 
         public int Id { get; set; }
@@ -15,6 +15,6 @@ namespace FitnessApp.Models.DB
         public int Quantity { get; set; }
         public bool Status { get; set; }
 
-        public virtual ICollection<TraineeAchivements> TraineeAchivements { get; set; }
+        public virtual ICollection<TraineeAchivement> TraineeAchivements { get; set; }
     }
 }

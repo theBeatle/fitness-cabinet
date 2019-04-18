@@ -10,8 +10,8 @@ namespace Dal
             Chat = new HashSet<Chat>();
         }
 
-        public long Id { get; set; }
-        public long PersonId { get; set; }
+        public int Id { get; set; }
+        public int PersonId { get; set; }
 
         public virtual Person Person { get; set; }
         public virtual ICollection<Chat> Chat { get; set; }

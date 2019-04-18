@@ -10,10 +10,10 @@ namespace Dal
             Reminder = new HashSet<Reminder>();
         }
 
-        public long Id { get; set; }
-        public long ServiceId { get; set; }
-        public long CoachId { get; set; }
-        public long TraineeId { get; set; }
+        public int Id { get; set; }
+        public int ServiceId { get; set; }
+        public int CoachId { get; set; }
+        public int TraineeId { get; set; }
         public int PlaceId { get; set; }
         public decimal Price { get; set; }
         public string CreationTime { get; set; }

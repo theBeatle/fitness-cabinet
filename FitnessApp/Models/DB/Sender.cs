@@ -11,6 +11,7 @@ namespace FitnessApp.Models.DB
         }
 
         public int Id { get; set; }
+        public int PersonId { get; set; }
 
         public virtual Person Person { get; set; }
         public virtual ICollection<Chat> Chat { get; set; }

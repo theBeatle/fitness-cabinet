@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace FitnessApp.Models.DB
 {
-    public partial class Person : IdentityUser
+    public partial class Person : IdentityUser<int>
     {
         public Person()
         {
             Coach = new HashSet<Coach>();
-            Photos = new HashSet<Photo>();
             Receiver = new HashSet<Receiver>();
             Sender = new HashSet<Sender>();
+            PersonPhotos = new HashSet<PersonPhoto>();
             Trainee = new HashSet<Trainee>();
         }
         
@@ -19,12 +19,13 @@ namespace FitnessApp.Models.DB
         public string LastName { get; set; }
         public bool IsDeleted { get; set; }
         public bool IsBanned { get; set; }
+        public int SexStatusId { get; set; }
 
         public virtual SexStatus SexStatus { get; set; }
         public virtual ICollection<Coach> Coach { get; set; }
-        public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<Receiver> Receiver { get; set; }
         public virtual ICollection<Sender> Sender { get; set; }
         public virtual ICollection<Trainee> Trainee { get; set; }
+        public virtual ICollection<PersonPhoto> PersonPhotos { get; set; }
     }
 }

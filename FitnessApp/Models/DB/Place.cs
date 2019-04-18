@@ -7,9 +7,9 @@ namespace FitnessApp.Models.DB
     {
         public Place()
         {
-            CoachPlace = new HashSet<CoachPlace>();
-            Photos = new HashSet<Photo>();
+            CoachPlaces = new HashSet<CoachPlace>();
             RealService = new HashSet<RealService>();
+            PlacePhotos = new HashSet<PlacePhoto>();
             Usabilities = new HashSet<Usabilities>();
         }
 
@@ -20,11 +20,12 @@ namespace FitnessApp.Models.DB
         public bool IsSimplePlace { get; set; }
         public string WorkShedule { get; set; }
         public int Rating { get; set; }
+        public int AddressId { get; set; }
 
         public virtual Address Address { get; set; }
-        public virtual ICollection<CoachPlace> CoachPlace { get; set; }
-        public virtual ICollection<Photo> Photos { get; set; }
+        public virtual ICollection<CoachPlace> CoachPlaces { get; set; }
         public virtual ICollection<RealService> RealService { get; set; }
+        public virtual ICollection<PlacePhoto> PlacePhotos { get; set; }
         public virtual ICollection<Usabilities> Usabilities { get; set; }
     }
 }

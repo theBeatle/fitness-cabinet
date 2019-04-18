@@ -71,7 +71,7 @@ namespace Dal
 
                 entity.Property(e => e.Latitude).IsRequired();
 
-                entity.Property(e => e.Longitude).IsRequired();
+                entity.Property(e => e.intitude).IsRequired();
 
                 entity.Property(e => e.State)
                     .IsRequired()

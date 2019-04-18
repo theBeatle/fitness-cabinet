@@ -7,7 +7,7 @@ namespace FitnessApp.Models.DB
     {
         public Coach()
         {
-            CoachPlace = new HashSet<CoachPlace>();
+            CoachPlaces = new HashSet<CoachPlace>();
             RealService = new HashSet<RealService>();
             Speciality = new HashSet<Speciality>();
         }
@@ -17,9 +17,10 @@ namespace FitnessApp.Models.DB
         public int Weight { get; set; }
         public int Height { get; set; }
         public string WorkShedule { get; set; }
+        public int PersonId { get; set; }
 
         public virtual Person Person { get; set; }
-        public virtual ICollection<CoachPlace> CoachPlace { get; set; }
+        public virtual ICollection<CoachPlace> CoachPlaces { get; set; }
         public virtual ICollection<RealService> RealService { get; set; }
         public virtual ICollection<Speciality> Speciality { get; set; }
     }
