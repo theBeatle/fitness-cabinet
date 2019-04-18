@@ -41,7 +41,7 @@ namespace FitnessApp.Controllers
             }
         }
 
-        private Library db = new Library();
+        //private Library db = new Library();
 
 
     }

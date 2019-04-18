@@ -21,7 +21,7 @@ namespace ConsoleApp1
 
         public void func3()
         {
-            var t = library.PersonLoadPhoto("login", "password", @"D:\\1.jpg");
+            var t = library.PersonLoadPhoto("login", "password", @"D:\\2.jpg");
             var temp = 0;
         }
     }
@@ -42,9 +42,9 @@ namespace ConsoleApp1
             //Console.WriteLine("Hello World!");
             var temp = new Temp();
 
-            temp.func();
+           // temp.func();
 
-            temp.func2();
+            //temp.func2();
 
             temp.func3();
         }
