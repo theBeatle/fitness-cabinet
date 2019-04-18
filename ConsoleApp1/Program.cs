@@ -9,7 +9,7 @@ namespace ConsoleApp1
 
         public void func()
         {
-            bool t = library.PersonSaveCredentials("login", "password", "firstName", "lastName", "email@xx.ua", "male", "phone", "false", "false");
+            bool t = library.PersonSaveCredentials("login", "password", "firstName", "lastName", "email@xx.ua", "newmale", "phone", "false", "false");
             Console.WriteLine(t);
         }
 
@@ -39,12 +39,12 @@ namespace ConsoleApp1
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            //Console.WriteLine("Hello World!");
             var temp = new Temp();
 
-            //temp.func();
+            temp.func();
 
-            //temp.func2();
+            temp.func2();
 
             temp.func3();
         }

@@ -48,19 +48,17 @@ namespace Dal
             if (!String.IsNullOrEmpty(login) && !String.IsNullOrEmpty(password) && !String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName)
                 && !String.IsNullOrEmpty(email) && !String.IsNullOrEmpty(sex) && !String.IsNullOrEmpty(isDeleted) && !String.IsNullOrEmpty(isBanned))
             {
-                //if (_ctx.Set<SexStatus>().Count() == 0)
-                //{
-                //    _ctx.Set<SexStatus>().Add(new SexStatus { Sex = "male"  });
-                //    _ctx.Set<SexStatus>().Add(new SexStatus { Sex = "female" });
-                //    var t1 = _ctx.Set<SexStatus>().Count();
-                //}
+                var sexs = _ctx.Set<SexStatus>().FirstOrDefault(s => s.Sex == sex);
 
-                //var t = _ctx.Set<SexStatus>().Count();
+                if (sexs == null)
+                {
+                    sexs = new SexStatus { Sex = sex };
+                    _ctx.Set<SexStatus>().Add(sexs);
+                }                  
 
-                //var sexstatus = _ctx.Set<SexStatus>().First(s => s.Sex == "male");
-
-                _ctx.Set<Person>().Add(new Person() { SexStatus = new SexStatus { Sex = sex }, Login = login, Password = password, FirstName = firstName, LastName = lastName, Email = email, Phone = phone, IsDeleted = isdeleted, IsBanned = isbanned });
+                _ctx.Set<Person>().Add(new Person() { SexStatus = sexs, Login = login, Password = password, FirstName = firstName, LastName = lastName, Email = email, Phone = phone, IsDeleted = isdeleted, IsBanned = isbanned });
                 _ctx.SaveChanges();
+               
                 var number2 = _ctx.Set<Person>().Count();
                 return number2 > number;
             }
@@ -80,9 +78,10 @@ namespace Dal
 
             if (person != null)
             {
-                //var number = _ctx.Set<PersonsPhotos>().Count();
-                //_ctx.Set<PersonsPhotos>().Add( new PersonsPhotos() { Person = person, Photo = new Photos { Path = path} });
-                //var number2 = _ctx.Set<PersonsPhotos>().Count();
+                var number = _ctx.Set<PersonsPhotos>().Count();
+                _ctx.Set<PersonsPhotos>().Add(new PersonsPhotos() { Person = person, Photo = new Photos { Path = path } });
+                _ctx.SaveChanges();
+                var number2 = _ctx.Set<PersonsPhotos>().Count();
 
                 //var number = _ctx.Set<Photos>().Count();
                 //_ctx.Set<Photos>().Add(new Photos() { Path = path });
