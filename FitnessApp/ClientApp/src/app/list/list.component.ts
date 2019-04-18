@@ -11,40 +11,44 @@ export interface Fruit {
 })
  
 
- export class ListComponent {
-  checked = true;
-  title = 'app';
+export class ListComponent {
+   title = 'app';
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  fruits: Fruit[] = [
-    { name: 'Lemon' },
-    { name: 'Lime' },
-    { name: 'Apple' },
-  ];
+  //fruits:/* Fruit: */string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
+    //{ name: 'Lemon' },
+    //{ name: 'Lime' },
+    //{ name: 'Apple' },
+  //];
+  //add(event: MatChipInputEvent): void {
+  //  const input = event.input;
+  //  const value = event.value;
 
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
+  //  // Add our fruit
+  //  if ((value || '').trim()) {
+  //    this.fruits.push({ name: value.trim() });
+  //  }
 
-    // Add our fruit
-    if ((value || '').trim()) {
-      this.fruits.push({ name: value.trim() });
-    }
+  //  // Reset the input value
+  //  if (input) {
+  //    input.value = '';
+  //  }
+  //}
+  typesOfShoes = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
 
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
+  current_selected: string;
+
+  onSelection(e, v) {
+    this.current_selected = e.option.value;
   }
+  //remove(fruit: Fruit): void {
+  //  const index = this.fruits.indexOf(fruit);
 
-  remove(fruit: Fruit): void {
-    const index = this.fruits.indexOf(fruit);
-
-    if (index >= 0) {
-      this.fruits.splice(index, 1);
-    }
-  }
+  //  if (index >= 0) {
+  //    this.fruits.splice(index, 1);
+  //  }
+  //}
 }

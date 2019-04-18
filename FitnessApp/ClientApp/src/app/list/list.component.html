@@ -1,5 +1,5 @@
 <!--------------------------------------------------------------------------------------------------->
-<mat-form-field class="example-chip-list">
+<!--<mat-form-field class="example-chip-list">
   <mat-chip-list #chipList>
     <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
               [removable]="removable" (removed)="remove(fruit)">
@@ -7,21 +7,23 @@
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
   </mat-chip-list>
-</mat-form-field>
+</mat-form-field>-->
 <!------------------------------------------------------------------------------------------>
 
 <mat-drawer-container [hasBackdrop]="false">
   <mat-drawer #drawer mode="side">
-    <mat-checkbox [(ngModel)]="checked">Check me!</mat-checkbox>
-    <mat-checkbox>Check me!</mat-checkbox>
-    <mat-checkbox>Check me!</mat-checkbox>
-    <mat-checkbox>Check me!</mat-checkbox>
-    <mat-checkbox>Check me!</mat-checkbox>
-    <mat-checkbox>Check me!</mat-checkbox>
-    <mat-checkbox>Check me!</mat-checkbox>
-    <mat-checkbox>Check me!</mat-checkbox>
-    <mat-checkbox>Check me!</mat-checkbox>
-    <mat-checkbox>Check me!</mat-checkbox>
+    <mat-selection-list #fruits (selectionChange)="onSelection($event, fruits.selectedOptions)">
+      <mat-list-option *ngFor="let fruit of typesOfShoes" [value]='fruit'>
+        {{fruit}}
+      </mat-list-option>
+    </mat-selection-list>
+    <!--<mat-selection-list #fruits (selectionChange)="onSelection($event, fruits.selectedOptions)">
+      <mat-list-option *ngFor="let fruit of fruits" [value]='fruit'>
+        {{fruit}}
+      </mat-list-option>
+    </mat-selection-list>-->
+
+
   </mat-drawer>
   <mat-drawer-content>
     <button mat-icon-button mat-raised-button (click)="drawer.toggle()">
@@ -32,3 +34,17 @@
 </mat-drawer-container>
 
 
+<p>
+  Options selected: {{fruits.selectedOptions.selected.length}}
+</p>
+
+<p>
+  Current selected value: {{ current_selected }}
+</p>
+
+<p>Selected:</p>
+<ul>
+  <li *ngFor="let i of fruits.selectedOptions.selected">
+    {{ i.value }}
+  </li>
+</ul>
