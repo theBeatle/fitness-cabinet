@@ -1,40 +1,34 @@
-<!-- <mat-drawer-container class="example-container" [hasBackdrop]="hasBackdrop.value">
-  <mat-drawer #drawer [mode]="mode.value">I'm a drawer</mat-drawer>
-  <mat-drawer-content>
-    <mat-form-field>
-      <mat-label>Sidenav mode</mat-label>
-      <mat-select #mode value="side">
-        <mat-option value="side">Side</mat-option>
-        <mat-option value="over">Over</mat-option>
-        <mat-option value="push">Push</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Has backdrop</mat-label>
-      <mat-select #hasBackdrop>
-        <mat-option>Unset</mat-option>
-        <mat-option [value]="true">True</mat-option>
-        <mat-option [value]="false">False</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>
-  </mat-drawer-content>
-</mat-drawer-container> -->
+<!--------------------------------------------------------------------------------------------------->
+<mat-form-field class="example-chip-list">
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+              [removable]="removable" (removed)="remove(fruit)">
+      {{fruit.name}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+</mat-form-field>
+<!------------------------------------------------------------------------------------------>
 
-
-<mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>Auto-resizing sidenav</p>
-    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-    <button (click)="showFiller = !showFiller" mat-raised-button>
-      Toggle extra text
-    </button>
+<mat-drawer-container [hasBackdrop]="false">
+  <mat-drawer #drawer mode="side">
+    <mat-checkbox [(ngModel)]="checked">Check me!</mat-checkbox>
+    <mat-checkbox>Check me!</mat-checkbox>
+    <mat-checkbox>Check me!</mat-checkbox>
+    <mat-checkbox>Check me!</mat-checkbox>
+    <mat-checkbox>Check me!</mat-checkbox>
+    <mat-checkbox>Check me!</mat-checkbox>
+    <mat-checkbox>Check me!</mat-checkbox>
+    <mat-checkbox>Check me!</mat-checkbox>
+    <mat-checkbox>Check me!</mat-checkbox>
+    <mat-checkbox>Check me!</mat-checkbox>
   </mat-drawer>
-
-  <div class="example-sidenav-content">
-    <button type="button" mat-button (click)="drawer.toggle()">
-      Toggle sidenav
+  <mat-drawer-content>
+    <button mat-icon-button mat-raised-button (click)="drawer.toggle()">
+      <mat-icon> notes</mat-icon>
     </button>
-  </div>
 
+  </mat-drawer-content>
 </mat-drawer-container>
+
+
