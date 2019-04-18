@@ -37,7 +37,7 @@ export class ListComponent {
   //    input.value = '';
   //  }
   //}
-  typesOfShoes = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
+  typesOfShoes = ['Lemon', 'Apple', 'Strawberry'];
 
   current_selected: string;
 

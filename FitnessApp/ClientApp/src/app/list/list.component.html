@@ -1,13 +1,13 @@
 <!--------------------------------------------------------------------------------------------------->
-<!--<mat-form-field class="example-chip-list">
+<mat-form-field class="example-chip-list">
   <mat-chip-list #chipList>
     <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
               [removable]="removable" (removed)="remove(fruit)">
-      {{fruit.name}}
+      {{fruit}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
   </mat-chip-list>
-</mat-form-field>-->
+</mat-form-field>
 <!------------------------------------------------------------------------------------------>
 
 <mat-drawer-container [hasBackdrop]="false">
@@ -17,11 +17,6 @@
         {{fruit}}
       </mat-list-option>
     </mat-selection-list>
-    <!--<mat-selection-list #fruits (selectionChange)="onSelection($event, fruits.selectedOptions)">
-      <mat-list-option *ngFor="let fruit of fruits" [value]='fruit'>
-        {{fruit}}
-      </mat-list-option>
-    </mat-selection-list>-->
 
 
   </mat-drawer>
