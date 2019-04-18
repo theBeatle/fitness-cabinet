@@ -37,7 +37,7 @@ export class ListComponent {
   //    input.value = '';
   //  }
   //}
-  typesOfShoes = ['Lemon', 'Apple', 'Strawberry'];
+  fruits = ['Lemon', 'Apple', 'Strawberry'];
 
   current_selected: string;
 

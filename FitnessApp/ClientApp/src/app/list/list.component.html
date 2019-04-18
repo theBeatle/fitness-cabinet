@@ -13,7 +13,7 @@
 <mat-drawer-container [hasBackdrop]="false">
   <mat-drawer #drawer mode="side">
     <mat-selection-list #fruits (selectionChange)="onSelection($event, fruits.selectedOptions)">
-      <mat-list-option *ngFor="let fruit of typesOfShoes" [value]='fruit'>
+      <mat-list-option *ngFor="let fruit of fruits" [value]='fruit'>
         {{fruit}}
       </mat-list-option>
     </mat-selection-list>
@@ -21,6 +21,7 @@
 
   </mat-drawer>
   <mat-drawer-content>
+
     <button mat-icon-button mat-raised-button (click)="drawer.toggle()">
       <mat-icon> notes</mat-icon>
     </button>
