@@ -1,18 +1,21 @@
 import { Component } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from '@angular/material';
+ 
 export interface Fruit {
   name: string;
+  checked: boolean;
 }
+
 @Component({
   selector: 'app-list-component',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css'],
 })
- 
+
+
 
 export class ListComponent {
-   title = 'app';
+  title = 'app';
   visible = true;
   selectable = true;
   removable = true;
@@ -20,39 +23,34 @@ export class ListComponent {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   fruits: Fruit[] = [
-    { name: 'Lemon' },
-    { name: 'Lime' },
-    { name: 'Apple' },
+    { name: 'Lemon', checked: false },
+    { name: 'Lime', checked: false },
+    { name: 'Apple', checked: false },
   ];
 
-
-
-  current_selected: string;
+  chipsFruits = new Array();
 
   onSelection(e, v) {
-    this.current_selected = e.option.value;
-  }
-
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add our fruit
-    if ((value || '').trim()) {
-      this.fruits.push({name: value.trim() } );
+    if (e.option.selected) {
+      this.chipsFruits.push(e.option.value.name);
     }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
+    else {
+      const index = this.chipsFruits.indexOf(e.option.value.name);
+      if (index >= 0) {
+        this.chipsFruits.splice(index, 1);
+      }
     }
   }
 
-  remove(fruit: Fruit): void {
-    const index = this.fruits.indexOf(fruit);
-
+  remove(fruit): void {
+    const index = this.chipsFruits.indexOf(fruit);
     if (index >= 0) {
-      this.fruits.splice(index, 1);
+      for (let i = 0; i < this.fruits.length; ++i) {
+        if (this.fruits[i].name === fruit) {
+          this.fruits[i].checked = false;
+        }
+      }
+      this.chipsFruits.splice(index, 1);
     }
   }
 }

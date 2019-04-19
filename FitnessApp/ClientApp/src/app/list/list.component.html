@@ -1,9 +1,9 @@
 <!--------------------------------------------------------------------------------------------------->
 <mat-form-field class="example-chip-list">
   <mat-chip-list #chipList>
-    <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
-              [removable]="removable" (removed)="remove(fruit)">
-      {{fruit.name}}
+    <mat-chip *ngFor="let fruit of chipsFruits;" [selectable]="selectable"
+              [removable]="removable" (removed)="remove(fruit, myFruit)">
+      {{ fruit }}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
   </mat-chip-list>
@@ -12,35 +12,17 @@
 
 <mat-drawer-container [hasBackdrop]="false">
   <mat-drawer #drawer mode="side">
-    <mat-selection-list #fruitsId (selectionChange)="onSelection($event, fruitsId.selectedOptions)">
-      <mat-list-option *ngFor="let fruit of fruits" [value]='fruit'>
-        {{fruit.name}}
+    <mat-selection-list #fruitsId *ngFor="let myFruit of fruits" [(ngModel)]="myFruit.checked" (selectionChange)="onSelection($event, fruitsId.selectedOptions)">
+      <mat-list-option [value]="myFruit">
+        {{myFruit.name}}
       </mat-list-option>
     </mat-selection-list>
-
-
   </mat-drawer>
   <mat-drawer-content>
-
     <button mat-icon-button mat-raised-button (click)="drawer.toggle()">
       <mat-icon> notes</mat-icon>
     </button>
-
   </mat-drawer-content>
 </mat-drawer-container>
 
 
-<p>
-  Options selected: {{fruitsId.selectedOptions.selected.length}}
-</p>
-
-<p>
-  Current selected value: {{ current_selected }}
-</p>
-
-<p>Selected:</p>
-<ul>
-  <li *ngFor="let i of fruitsId.selectedOptions.selected">
-    {{ i.value.name }}
-  </li>
-</ul>
