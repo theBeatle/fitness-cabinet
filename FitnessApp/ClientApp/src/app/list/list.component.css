@@ -18,3 +18,11 @@ mat-checkbox {
 mat-drawer{
   width: 10%;
 }
+
+.fixedbut {
+  position: fixed;
+  display: block;
+  text-decoration: none;
+}
+
+ 

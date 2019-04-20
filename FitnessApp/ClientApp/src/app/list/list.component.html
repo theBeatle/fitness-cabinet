@@ -1,15 +1,19 @@
 <!--------------------------------------------------------------------------------------------------->
-  <mat-chip-list #chipList>
-    <mat-chip color="primary" selected *ngFor="let fruit of chipsFruits;" [selectable]="selectable"
-              [removable]="removable" (removed)="remove(fruit)">
-      {{ fruit }}
-      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-    </mat-chip>
-  </mat-chip-list>
+<div class="container">
+  <div class="fixed-bottom bg-light">
+    <mat-chip-list #chipList>
+      <mat-chip color="primary" selected *ngFor="let fruit of chipsFruits;" [selectable]="selectable"
+                [removable]="removable" (removed)="remove(fruit)">
+        {{ fruit }}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+</div>
 <!------------------------------------------------------------------------------------------>
 
-<mat-drawer-container [hasBackdrop]="false">
-  <mat-drawer #drawer mode="side">
+<mat-drawer-container [hasBackdrop]="true">
+  <mat-drawer #drawer mode="push">
     <mat-selection-list #fruitsId *ngFor="let myFruit of fruits" [(ngModel)]="myFruit.checked" (selectionChange)="onSelection($event, fruitsId.selectedOptions)">
       <mat-list-option [value]="myFruit">
         {{myFruit.name}}
@@ -17,9 +21,64 @@
     </mat-selection-list>
   </mat-drawer>
   <mat-drawer-content>
-    <button mat-icon-button mat-raised-button (click)="drawer.toggle()">
+    <button class="fixedbut" mat-icon-button mat-raised-button (click)="drawer.toggle()">
       <mat-icon> notes</mat-icon>
     </button>
+    <div class="container">
+      <div class="row">
+        <mat-card class="col">Simple card</mat-card>
+      </div>
+      <br />
+
+      <div class="row">
+        <mat-card class="col">Simple card</mat-card>
+      </div>
+      <br />
+
+      <div class="row">
+        <mat-card class="col">Simple card</mat-card>
+      </div>
+      <br />
+
+      <div class="row">
+        <mat-card class="col">Simple card</mat-card>
+      </div>
+      <br />
+      <div class="row">
+        <mat-card class="col">Simple card</mat-card>
+      </div>
+      <br />
+      <div class="row">
+        <mat-card class="col">Simple card</mat-card>
+      </div>
+      <br />
+      <div class="row">
+        <mat-card class="col">Simple card</mat-card>
+      </div>
+      <br />
+      <div class="row">
+        <mat-card class="col">Simple card</mat-card>
+      </div>
+      <br />
+      <div class="row">
+        <mat-card class="col">Simple card</mat-card>
+      </div>
+      <br />
+      <div class="row">
+        <mat-card class="col">Simple card</mat-card>
+      </div>
+      <br />
+      <div class="row">
+        <mat-card class="col">Simple card</mat-card>
+      </div>
+      <br />
+      <div class="row">
+        <mat-card class="col">Simple card</mat-card>
+      </div>
+      <br />
+    </div>
+
+
   </mat-drawer-content>
 </mat-drawer-container>
 
