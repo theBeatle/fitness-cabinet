@@ -33,3 +33,9 @@ mat-drawer{
    width: 10%;
 }
 
+.noWrp {
+  display: inline;
+}
+.whiteSpace {
+  margin: 20px;
+}

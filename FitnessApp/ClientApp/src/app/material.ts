@@ -4,7 +4,7 @@ import {PortalModule} from '@angular/cdk/portal';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {CdkStepperModule} from '@angular/cdk/stepper';
 import {CdkTableModule} from '@angular/cdk/table';
-import {CdkTreeModule} from '@angular/cdk/tree';
+import { CdkTreeModule } from '@angular/cdk/tree';
 import { NgModule } from '@angular/core';
  import {
   MatAutocompleteModule,
