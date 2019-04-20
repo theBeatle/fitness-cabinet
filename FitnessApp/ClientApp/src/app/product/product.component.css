@@ -1,2 +1,10 @@
-﻿body {
+.whiteSpace {
+  margin: 20px; 
+}
+.ctr {
+  width: 100%;
+}
+
+.noWrp {
+  display: inline;
 }

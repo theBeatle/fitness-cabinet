@@ -1,12 +1,52 @@
-<form [formGroup]="stateForm">
-  <mat-form-field>
-    <input type="text" matInput placeholder="States Group" formControlName="stateGroup" required [matAutocomplete]="autoGroup">
-    <mat-autocomplete #autoGroup="matAutocomplete">
-      <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.letter">
-        <mat-option *ngFor="let name of group.names" [value]="name">
-          {{name}}
-        </mat-option>
-      </mat-optgroup>
-    </mat-autocomplete>
+<div class="container">
+  <!------------------------------------------------------------------------------------------------------------------------>
+  <mat-form-field >
+    <mat-label>Select an option</mat-label>
+    <mat-select [(value)]="selected">
+      <mat-option>None</mat-option>
+      <mat-option value="option1">Option 1</mat-option>
+      <mat-option value="option2">Option 2</mat-option>
+      <mat-option value="option3">Option 3</mat-option>
+    </mat-select>
   </mat-form-field>
-</form>
+  <!------------------------------------------------------------------------------------------------------------------------>
+
+  <form [formGroup]="stateForm" class="whiteSpace noWrp">
+
+    <!------------------------------------------------------------------------------------------------------------------------>
+    <mat-form-field>
+      <input type="text" matInput placeholder="States Group" formControlName="stateGroup" required [matAutocomplete]="autoGroup">
+      <mat-autocomplete #autoGroup="matAutocomplete">
+        <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.letter">
+          <mat-option *ngFor="let name of group.names" [value]="name">
+            {{name}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-autocomplete>
+    </mat-form-field>
+    <!------------------------------------------------------------------------------------------------------------------------>
+    <!--<mat-form-field class="whiteSpace">
+      <input type="text" matInput placeholder="States Group" formControlName="stateGroup"  required [matAutocomplete]="autoGroup">
+      <mat-autocomplete>
+        <mat-optgroup >
+          <mat-option >
+            {{name}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-autocomplete>
+    </mat-form-field>-->
+    <!------------------------------------------------------------------------------------------------------------------------>
+    <!--<mat-form-field>
+      <input matInput type="text" placeholder="Clearable input" [(ngModel)]="value">
+      <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>-->
+    <!------------------------------------------------------------------------------------------------------------------------>
+    <mat-form-field class="ctr">
+      <input matInput #message maxlength="256" placeholder="Message">
+      <mat-hint>{{message.value.length}} / 256</mat-hint>
+    </mat-form-field>
+    <!------------------------------------------------------------------------------------------------------------------------>
+  </form>
+</div>

@@ -8,6 +8,7 @@ export interface StateGroup {
   letter: string;
   names: string[];
 }
+ 
 
 export const _filter = (opt: string[], value: string): string[] => {
   const filterValue = value.toLowerCase();
@@ -23,9 +24,11 @@ export const _filter = (opt: string[], value: string): string[] => {
 
 
 export class ProductComponent implements OnInit {
+ 
   stateForm: FormGroup = this.fb.group({
     stateGroup: '',
   });
+ 
 
   stateGroups: StateGroup[] = [{
     letter: 'A',
