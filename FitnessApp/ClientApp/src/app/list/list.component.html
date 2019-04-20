@@ -1,13 +1,11 @@
 <!--------------------------------------------------------------------------------------------------->
-<mat-form-field class="example-chip-list">
   <mat-chip-list #chipList>
-    <mat-chip *ngFor="let fruit of chipsFruits;" [selectable]="selectable"
-              [removable]="removable" (removed)="remove(fruit, myFruit)">
+    <mat-chip color="primary" selected *ngFor="let fruit of chipsFruits;" [selectable]="selectable"
+              [removable]="removable" (removed)="remove(fruit)">
       {{ fruit }}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
   </mat-chip-list>
-</mat-form-field>
 <!------------------------------------------------------------------------------------------>
 
 <mat-drawer-container [hasBackdrop]="false">
