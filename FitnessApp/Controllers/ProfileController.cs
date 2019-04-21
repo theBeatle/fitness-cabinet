@@ -30,5 +30,13 @@ namespace FitnessApp.Controllers
             return t;
         }
 
+
+        [HttpGet("[action]")]
+        public bool PersonSaveCredentials(string login, string password, string firstName, string lastName, string email, string sex, string phone, string isDeleted, string isBanned)
+        {
+            var t = db.PersonSaveCredentials(login, password, firstName, lastName, email, sex, phone, isDeleted, isBanned);
+            return t;
+        }
+
     }
 }
