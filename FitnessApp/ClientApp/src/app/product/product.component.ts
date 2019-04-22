@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
-export interface StateGroup {
+export interface CountrysGroup {
   letter: string;
   names: string[];
 }
@@ -26,11 +26,14 @@ export const _filter = (opt: string[], value: string): string[] => {
 export class ProductComponent implements OnInit {
  
   stateForm: FormGroup = this.fb.group({
-    stateGroup: '',
+    countrysGroup: '',
+    price: '',
+    trainingName: '',
+    citysGroup: '',
   });
  
 
-  stateGroups: StateGroup[] = [{
+  stateGroups: CountrysGroup[] = [{
     letter: 'A',
     names: ['Alabama', 'Alaska', 'Arizona', 'Arkansas']
   }, {
@@ -91,19 +94,19 @@ export class ProductComponent implements OnInit {
     names: ['Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
   }];
 
-  stateGroupOptions: Observable<StateGroup[]>;
+  stateGroupOptions: Observable<CountrysGroup[]>;
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.stateGroupOptions = this.stateForm.get('stateGroup')!.valueChanges
+    this.stateGroupOptions = this.stateForm.get('countrysGroup')!.valueChanges
       .pipe(
         startWith(''),
         map(value => this._filterGroup(value))
       );
   }
 
-  private _filterGroup(value: string): StateGroup[] {
+  private _filterGroup(value: string): CountrysGroup[] {
     if (value) {
       return this.stateGroups
         .map(group => ({ letter: group.letter, names: _filter(group.names, value) }))

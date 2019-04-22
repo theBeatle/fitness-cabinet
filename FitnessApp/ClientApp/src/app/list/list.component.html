@@ -1,5 +1,5 @@
 <!--------------------------------------------------------------------------------------------------->
-<div class="container fixed-bottom bg-light">
+<div class="ctrMargin container fixed-bottom bg-light">
   <mat-chip-list #chipList>
     <mat-chip color="primary" selected *ngFor="let fruit of chipsFruits;" [selectable]="selectable"
               [removable]="removable" (removed)="remove(fruit)">
@@ -49,6 +49,7 @@
           <mat-card-actions>
             <button mat-button>BUY</button>
             <button mat-button>MORE INFORMATION</button>
+            <label>Price: 100$</label>
           </mat-card-actions>
         </mat-card>
       </div>

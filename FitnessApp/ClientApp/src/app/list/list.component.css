@@ -1,6 +1,3 @@
-.example-chip-list {
-  width: 100%;
-}
 mat-drawer-container {
   margin: 12px;
   flex: 1 1 auto;
@@ -18,6 +15,8 @@ mat-checkbox {
 mat-drawer{
   width: 300px;
 }
+
+ 
 
 .fixedbut {
   position: fixed;
@@ -38,4 +37,8 @@ mat-drawer{
 }
 .whiteSpace {
   margin: 20px;
+}
+
+.ctrMargin{
+  margin-bottom: 0.3%;
 }
