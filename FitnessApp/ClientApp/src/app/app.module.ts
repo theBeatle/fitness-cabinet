@@ -10,7 +10,11 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LoadPhotoComponent } from './load-photo/load-photo.component';
+import { PersonComponent } from './person/person.component';
+import { AppRoutingModule } from './app-routing/app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { PersonService } from './person.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,8 @@ import { LoadPhotoComponent } from './load-photo/load-photo.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    LoadPhotoComponent
+    LoadPhotoComponent,
+    PersonComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -30,9 +35,13 @@ import { LoadPhotoComponent } from './load-photo/load-photo.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'load-photo', component: LoadPhotoComponent },
-    ])
+    ]),
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    HttpClientModule,
+    PersonService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

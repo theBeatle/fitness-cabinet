@@ -1,0 +1,95 @@
+<!-- <app-person></app-person>
+
+<router-outlet></router-outlet> -->
+
+<div class="container">  
+  
+  <mat-card>  
+    <mat-toolbar color="accent">  
+      <div align="center" style="color:white;text-align: right;">  
+        CRUD with Worker
+      </div>    
+    </mat-toolbar>  
+  <br><br>  
+    <mat-card-content>  
+      <form [formGroup]="personForm"(ngSubmit)="onFormSubmit(personForm.value)">  
+              <table> 
+                <tr>  
+                  <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input formControlName="FirstName" matTooltip="Enter Worker Name" matInput placeholder="Name">  
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!workerForm.get('FirstName').value && workerForm.get('FirstName').touched"></span>  
+                    </mat-error>  
+                  </td>  
+                  <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input formControlName="LastName" matTooltip="Enter Last Name" matInput placeholder="Surname">  
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!workerForm.get('LastName').value && workerForm.get('LastName').touched"></span>  
+                    </mat-error>  
+                  </td>  
+                </tr>  
+                <tr>  
+                  <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input formControlName="Age" matTooltip="Enter Worker Age" matInput placeholder="Age">  
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!workerForm.get('Age').value && workerForm.get('Age').touched"></span>  
+                    </mat-error>  
+                  </td>  
+                  <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input formControlName="Salary" matTooltip="Enter Salary" matInput placeholder="Salary">  
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!workerForm.get('Salary').value && workerForm.get('Salary').touched"></span>  
+                    </mat-error>  
+                  </td>  
+                  
+                </tr>  
+                <tr>  
+                  <td  class="content-center">  
+                    <button type="submit" mat-raised-button color="accent"matTooltip="Click Submit Button"[disabled]="!workerForm.valid">Submit</button>      
+                    <button type="reset" mat-raised-button color="accent"matTooltip="Click Reset Button" (click)="resetForm()">Reset</button>  
+                  </td>  
+                  <td>  
+                    <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">  
+                      {{message}}  
+                    </p>  
+                  </td>  
+                </tr>
+                 
+              </table>  
+  <br><br>  
+        <table class="table" mat-table >
+            <tr ngclass="btn-primary">  
+              <th class="tbl2">Worker Name</th>  
+              <th class="tbl2">Worker Surname</th>  
+              <th class="tbl2">Age</th>  
+              <th class="tbl2">Salary</th>  
+              <th class="tbl2">Edit</th>  
+              <th class="tbl2">Delete</th>  
+            </tr>  
+            <tr *ngFor="let w of allWorkers | async">  
+              <td class="tbl2">{{w.FirstName}}</td>   
+              <td class="tbl2">{{w.LastName}}</td>
+              <td class="tbl2">{{w.Age}}</td>  
+              <td class="tbl2">{{w.Salary}}</td>  
+              
+              <td class="tbl2">  
+                <button type="button" class="btn btn-info"matTooltip="Click Edit Button"(click)="loadWorkerToEdit(w.Id)">Edit</button>  
+              </td>  
+              <td class="tbl2">  
+                <button type="button" class="btn btn-danger"matTooltip="Click Delete Button"(click)="deleteWorker(w.Id)">Delete</button>  
+              </td>  
+            </tr>  
+
+          </table>  
+      </form>  
+    </mat-card-content>  
+  </mat-card>  
+  </div>  
