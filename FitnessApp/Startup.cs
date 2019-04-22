@@ -63,6 +63,7 @@ namespace FitnessApp
 
                 if (env.IsDevelopment())
                 {
+
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
