@@ -27,7 +27,7 @@ namespace FitnessApp.Controllers
 
         // POST api/auth/registration
         [HttpPost("registration")]
-        public async Task<IActionResult> Reg([FromBody]RegistrationViewModel model)
+        public async Task<IActionResult> Registration([FromBody]RegistrationViewModel model)
         {
             if (!ModelState.IsValid)
             {
