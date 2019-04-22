@@ -7,13 +7,13 @@
   <mat-card>  
     <mat-toolbar color="accent">  
       <div align="center" style="color:white;text-align: right;">  
-        CRUD with Worker
+        CRUD with Person
       </div>    
     </mat-toolbar>  
   <br><br>  
     <mat-card-content>  
       <form [formGroup]="personForm"(ngSubmit)="onFormSubmit(personForm.value)">  
-              <table> 
+              <!-- <table> 
                 <tr>  
                   <td class="tbl1">  
                     <mat-form-field class="demo-full-width">  
@@ -64,28 +64,47 @@
                 </tr>
                  
               </table>  
-  <br><br>  
+  <br><br>   -->
+
+  <!-- Login:string;
+  Password :string;
+  FirstName:string;
+  LastName :string;
+  Email:string;
+  SexStatusId :number;
+  Phone:string;  
+  IsDeleted:boolean;
+  IsBanned:boolean; -->
+
         <table class="table" mat-table >
             <tr ngclass="btn-primary">  
-              <th class="tbl2">Worker Name</th>  
-              <th class="tbl2">Worker Surname</th>  
-              <th class="tbl2">Age</th>  
-              <th class="tbl2">Salary</th>  
-              <th class="tbl2">Edit</th>  
-              <th class="tbl2">Delete</th>  
+                <th class="tbl2">Login</th>  
+                <th class="tbl2">Password</th>  
+              <th class="tbl2">Person Name</th>  
+              <th class="tbl2">Person Surname</th>  
+              <th class="tbl2">Email</th>  
+              <th class="tbl2">SexStatusId</th>  
+              <th class="tbl2">Phone</th>  
+              <th class="tbl2">IsDeleted</th> 
+              <th class="tbl2">IsBanned</th>   
             </tr>  
-            <tr *ngFor="let w of allWorkers | async">  
+            <tr *ngFor="let w of allPeople | async"> 
+                <td class="tbl2">{{w.Login}}</td>  
+                <td class="tbl2">{{w.Password}}</td>   
               <td class="tbl2">{{w.FirstName}}</td>   
               <td class="tbl2">{{w.LastName}}</td>
-              <td class="tbl2">{{w.Age}}</td>  
-              <td class="tbl2">{{w.Salary}}</td>  
+              <td class="tbl2">{{w.Email}}</td>  
+              <td class="tbl2">{{w.SexStatusId}}</td>  
+              <td class="tbl2">{{w.Phone}}</td>
+              <td class="tbl2">{{w.IsDeleted}}</td>  
+              <td class="tbl2">{{w.IsBanned}}</td>  
               
-              <td class="tbl2">  
+              <!-- <td class="tbl2">  
                 <button type="button" class="btn btn-info"matTooltip="Click Edit Button"(click)="loadWorkerToEdit(w.Id)">Edit</button>  
               </td>  
               <td class="tbl2">  
                 <button type="button" class="btn btn-danger"matTooltip="Click Delete Button"(click)="deleteWorker(w.Id)">Delete</button>  
-              </td>  
+              </td>   -->
             </tr>  
 
           </table>  
