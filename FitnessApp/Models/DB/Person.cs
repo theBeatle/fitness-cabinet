@@ -19,7 +19,7 @@ namespace FitnessApp.Models.DB
         public string LastName { get; set; }
         public bool IsDeleted { get; set; }
         public bool IsBanned { get; set; }
-        public int SexStatusId { get; set; }
+        public string SexStatusId { get; set; }
 
         public virtual SexStatus SexStatus { get; set; }
         public virtual ICollection<Coach> Coach { get; set; }
