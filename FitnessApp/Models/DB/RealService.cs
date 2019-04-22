@@ -11,7 +11,7 @@ namespace FitnessApp.Models.DB
         }
 
         public int Id { get; set; }
-        public decimal Price { get; set; }
+        public int Price { get; set; }
         public string CreationTime { get; set; }
         public string StartTime { get; set; }
         public string EndTime { get; set; }

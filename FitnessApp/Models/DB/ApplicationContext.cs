@@ -90,7 +90,8 @@ namespace FitnessApp.Models.DB
 
                 entity.HasOne(d => d.Sender)
                     .WithMany(p => p.Chat)
-                    .HasForeignKey(d => d.SenderId);
+                    .HasForeignKey(d => d.SenderId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Coach>(entity =>
@@ -234,7 +235,8 @@ namespace FitnessApp.Models.DB
 
                 entity.HasOne(d => d.Trainee)
                     .WithMany(p => p.RealService)
-                    .HasForeignKey(d => d.TraineeId);
+                    .HasForeignKey(d => d.TraineeId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Receiver>(entity =>
