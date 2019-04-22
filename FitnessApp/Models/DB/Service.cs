@@ -10,7 +10,7 @@ namespace FitnessApp.Models.DB
             RealService = new HashSet<RealService>();
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string TrainingName { get; set; }
         public string Description { get; set; }
 

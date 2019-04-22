@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FitnessApp.Models.DB
 {
-    public partial class Person : IdentityUser<int>
+    public partial class Person : IdentityUser
     {
         public Person()
         {

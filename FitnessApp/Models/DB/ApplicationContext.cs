@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace FitnessApp.Models.DB
 {
-    public class ApplicationContext : IdentityDbContext<Person, IdentityRole<int>, int>
+    public class ApplicationContext : IdentityDbContext<Person>
     {
         public ApplicationContext(DbContextOptions options)
         : base(options)
@@ -71,7 +71,7 @@ namespace FitnessApp.Models.DB
 
                 entity.Property(e => e.Latitude).IsRequired();
 
-                entity.Property(e => e.intitude).IsRequired();
+                entity.Property(e => e.Logtitude).IsRequired();
 
                 entity.Property(e => e.State)
                     .IsRequired()

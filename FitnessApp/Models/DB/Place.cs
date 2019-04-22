@@ -13,14 +13,14 @@ namespace FitnessApp.Models.DB
             Usabilities = new HashSet<Usabilities>();
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Track { get; set; }
         public bool IsSimplePlace { get; set; }
         public string WorkShedule { get; set; }
         public int Rating { get; set; }
-        public int AddressId { get; set; }
+        public string AddressId { get; set; }
 
         public virtual Address Address { get; set; }
         public virtual ICollection<CoachPlace> CoachPlaces { get; set; }

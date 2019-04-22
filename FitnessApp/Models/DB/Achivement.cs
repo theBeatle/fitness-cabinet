@@ -10,7 +10,7 @@ namespace FitnessApp.Models.DB
             TraineeAchivements = new HashSet<TraineeAchivement>();
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public int Quantity { get; set; }
         public bool Status { get; set; }

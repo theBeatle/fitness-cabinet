@@ -10,7 +10,7 @@ namespace FitnessApp.Models.DB
             Person = new HashSet<Person>();
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Sex { get; set; }
 
         public virtual ICollection<Person> Person { get; set; }

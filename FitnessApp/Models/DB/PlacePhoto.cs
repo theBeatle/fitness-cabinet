@@ -5,9 +5,9 @@ namespace FitnessApp.Models.DB
 {
     public partial class PlacePhoto
     {
-        public int Id { get; set; }
-        public int PlaceId { get; set; }
-        public int PhotoId { get; set; }
+        public string Id { get; set; }
+        public string PlaceId { get; set; }
+        public string PhotoId { get; set; }
 
         public virtual Photo Photo { get; set; }
         public virtual Place Place { get; set; }

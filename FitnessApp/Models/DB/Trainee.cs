@@ -12,12 +12,12 @@ namespace FitnessApp.Models.DB
             TraineeAchivements = new HashSet<TraineeAchivement>();
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public int Age { get; set; }
         public int Weight { get; set; }
         public int Height { get; set; }
         public string WorkShedule { get; set; }
-        public int PersonId { get; set; }
+        public string PersonId { get; set; }
 
         public virtual Person Person { get; set; }
         public virtual ICollection<Progress> Progress { get; set; }

@@ -12,7 +12,7 @@ namespace FitnessApp.Models.DB
             PlacePhotos = new HashSet<PlacePhoto>();
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Path { get; set; }
         
         public virtual ICollection<Place> Places { get; set; }

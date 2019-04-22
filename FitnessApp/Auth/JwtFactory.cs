@@ -78,5 +78,10 @@ namespace FitnessApp.Auth
                 throw new ArgumentNullException(nameof(JwtIssuerOptions.JtiGenerator));
             }
         }
+
+        public ClaimsIdentity GenerateClaimsIdentity(string userName, int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

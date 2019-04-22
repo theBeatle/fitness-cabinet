@@ -10,8 +10,8 @@ namespace FitnessApp.Models.DB
             Chat = new HashSet<Chat>();
         }
 
-        public int Id { get; set; }
-        public int PersonId { get; set; }
+        public string Id { get; set; }
+        public string PersonId { get; set; }
 
         public virtual Person Person { get; set; }
         public virtual ICollection<Chat> Chat { get; set; }
