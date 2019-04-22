@@ -1,53 +1,56 @@
 <div class="container">
-
-  <!------------------------------------------------------------------------------------------------------------------------>
-
-  <form [formGroup]="stateForm">
+  <div class="form-control">
     <!------------------------------------------------------------------------------------------------------------------------>
-    <mat-form-field class="whiteSpace">
-      <input type="text" formControlName="countrysGroup" matInput placeholder="Country's name" required [matAutocomplete]="autoGroup">
-      <mat-autocomplete #autoGroup="matAutocomplete">
-        <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.letter">
-          <mat-option *ngFor="let name of group.names" [value]="name">
-            {{name}}
-          </mat-option>
-        </mat-optgroup>
-      </mat-autocomplete>
-    </mat-form-field>
-    <!------------------------------------------------------------------------------------------------------------------------>
-    <mat-form-field class="whiteSpace">
-      <input type="text" formControlName="citysGroup" matInput placeholder="City's name" required [matAutocomplete]="autoGroup">
-      <mat-autocomplete #citiesGroup="matAutocomplete">
-        <mat-optgroup *ngFor="let group of citysGroupOptions | async" [label]="group.letter">
-          <mat-option *ngFor="let cityName of group.names" [value]="cityName">
-            {{cityName}}
-          </mat-option>
-        </mat-optgroup>
-      </mat-autocomplete>
-    </mat-form-field>
-    <!------------------------------------------------------------------------------------------------------------------------>
-    <mat-form-field class="whiteSpace">
-      <mat-label>Kind of sports</mat-label>
-      <mat-select [(value)]="selected">
-        <mat-option>Kind of sports</mat-option>
-        <mat-option value="option1">Option 1</mat-option>
-        <mat-option value="option2">Option 2</mat-option>
-        <mat-option value="option3">Option 3</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <!------------------------------------------------------------------------------------------------------------------------>
-    <mat-form-field class="whiteSpace">
-      <input formControlName="trainingName" matInput type="text" placeholder="Training name">
-     </mat-form-field>
-    <!------------------------------------------------------------------------------------------------------------------------>
-    <mat-form-field class="whiteSpace">
-      <input formControlName="price" matInput type="text" placeholder="Price">
-     </mat-form-field>
-    <!------------------------------------------------------------------------------------------------------------------------>
-    <mat-form-field class="ctr">
-      <input matInput #message maxlength="256" placeholder="Message">
-      <mat-hint>{{message.value.length}} / 256</mat-hint>
-    </mat-form-field>
-    <!------------------------------------------------------------------------------------------------------------------------>
-  </form>
+    <form [formGroup]="stateForm">
+      <!------------------------------------------------------------------------------------------------------------------------>
+      <mat-form-field class="whiteSpace">
+        <input type="text" formControlName="countrysGroup" matInput placeholder="Country's name" required [matAutocomplete]="autoGroup">
+        <mat-autocomplete #autoGroup="matAutocomplete">
+          <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.letter">
+            <mat-option *ngFor="let name of group.names" [value]="name">
+              {{name}}
+            </mat-option>
+          </mat-optgroup>
+        </mat-autocomplete>
+      </mat-form-field>
+      <!------------------------------------------------------------------------------------------------------------------------>
+      <mat-form-field class="whiteSpace">
+        <input type="text" formControlName="citysGroup" matInput placeholder="City's name" required [matAutocomplete]="autoGroup">
+        <mat-autocomplete #citiesGroup="matAutocomplete">
+          <mat-optgroup *ngFor="let group of citysGroupOptions | async" [label]="group.letter">
+            <mat-option *ngFor="let cityName of group.names" [value]="cityName">
+              {{cityName}}
+            </mat-option>
+          </mat-optgroup>
+        </mat-autocomplete>
+      </mat-form-field>
+      <!------------------------------------------------------------------------------------------------------------------------>
+      <mat-form-field class="whiteSpace">
+        <input type="text" formControlName="kindsOfSportGroup" matInput placeholder="Kind of sports" required [matAutocomplete]="autoGroup">
+        <mat-autocomplete #sportsGroup="matAutocomplete">
+          <mat-optgroup *ngFor="let group of sportsGroupOptions | async" [label]="group.letter">
+            <mat-option *ngFor="let sportName of group.names" [value]="sportName">
+              {{sportName}}
+            </mat-option>
+          </mat-optgroup>
+        </mat-autocomplete>
+      </mat-form-field>
+      <!------------------------------------------------------------------------------------------------------------------------>
+      <mat-form-field class="whiteSpace">
+        <input formControlName="trainingName" required matInput type="text" placeholder="Training name">
+      </mat-form-field>
+      <!------------------------------------------------------------------------------------------------------------------------>
+      <mat-form-field class="whiteSpace">
+        <input formControlName="price" required matInput type="text" placeholder="Price">
+      </mat-form-field>
+      <!------------------------------------------------------------------------------------------------------------------------>
+      <mat-form-field class="ctr">
+        <input matInput #message maxlength="256" required placeholder="Message">
+        <mat-hint>{{message.value.length}} / 256</mat-hint>
+      </mat-form-field>
+      <!------------------------------------------------------------------------------------------------------------------------>
+      <button mat-raised-button color="warn" style="width: 100%;">Accent</button>
+      <!------------------------------------------------------------------------------------------------------------------------>
+    </form>
+  </div>
 </div>

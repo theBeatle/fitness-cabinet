@@ -30,6 +30,7 @@ export class ProductComponent implements OnInit {
     price: '',
     trainingName: '',
     citysGroup: '',
+    kindsOfSportGroup: '',
   });
  
 
