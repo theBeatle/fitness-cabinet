@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -13,6 +13,12 @@ import { LoadPhotoComponent } from './load-photo/load-photo.component';
 import { PersonComponent } from './person/person.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatButtonModule, MatMenuModule, MatDatepickerModule } from '@angular/material';
+import { MatNativeDateModule, MatIconModule, MatCardModule } from '@angular/material';
+import { MatSidenavModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatTooltipModule, MatToolbarModule } from '@angular/material';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { PersonService } from './person.service';
 
@@ -30,6 +36,20 @@ import { PersonService } from './person.service';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatCardModule,
+    MatSidenavModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTooltipModule,
+    MatToolbarModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },

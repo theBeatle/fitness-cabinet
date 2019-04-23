@@ -30,7 +30,81 @@ export class PersonComponent implements OnInit {
       Phone: ['', [Validators.required]],
       IsDeleted: ['', [Validators.required]],     
       IsBanned: ['', [Validators.required]],
-    //   Login:string;
+    
+    });
+     this.loadAllWorkers();
+  }
+
+  loadAllWorkers() {
+    this.allPeople = this.wS.getAllPeople();
+    for (let index in this.allPeople) {
+      console.log(index);
+      
+    }
+    console.log( this.allPeople);
+  }
+
+  onFormSubmit() {
+    this.dataSaved = false;
+    const worker = this.personForm.value;
+    this.CreateWorker(worker);
+    this.personForm.reset();
+  }
+
+  CreateWorker(worker: Person) {
+    if (this.workerIdUpdate == null) {
+      this.wS.createWorker(worker).subscribe(
+        () => {
+          this.dataSaved = true;
+          this.message = 'Record saved Successfully';
+          this.loadAllWorkers();
+          this.workerIdUpdate = null;
+          this.personForm.reset();
+        }
+      );
+    } else {
+      worker.Id = this.workerIdUpdate;
+      this.wS.updateWorker(worker).subscribe(() => {
+        this.dataSaved = true;
+        this.message = 'Record Updated Successfully';
+        this.loadAllWorkers();
+        this.workerIdUpdate = null;
+        this.personForm.reset();
+      });
+    }
+  }
+
+  deleteWorker(workerId: string) {
+    if (confirm('Are you sure you want to delete this ?')) {
+      this.wS.deleteWorkerById(workerId).subscribe(() => {
+        this.dataSaved = true;
+        this.message = 'Record Deleted Succefully';
+        this.loadAllWorkers();
+        this.workerIdUpdate = null;
+        this.personForm.reset();
+      });
+    }
+  }
+
+  loadWorkerToEdit(workerId: string) {
+    this.wS.getWorkerById(workerId).subscribe( w => {
+      this.message = null;
+      this.dataSaved = false;
+      this.workerIdUpdate = w.Id;
+
+      this.personForm.controls.Login.setValue(w.Login);
+      this.personForm.controls.Password.setValue(w.Password);
+      this.personForm.controls.FirstName.setValue(w.FirstName);
+      this.personForm.controls.LastName.setValue(w.LastName);
+      this.personForm.controls.Email.setValue(w.Email);
+      this.personForm.controls.SexStatusId.setValue(w.SexStatusId);
+      this.personForm.controls.Phone.setValue(w.Phone);
+      this.personForm.controls.IsDeleted.setValue(w.IsDeleted);
+      this.personForm.controls.IsBanned.setValue(w.IsBanned);
+    });
+  }
+
+  //   Login:string;
     // Password :string;
     // FirstName:string;
     // LastName :string;
@@ -39,12 +113,11 @@ export class PersonComponent implements OnInit {
     // Phone:string;  
     // IsDeleted:boolean;
     // IsBanned:boolean;
-    });
-    this.loadAllWorkers();
-  }
 
-  loadAllWorkers() {
-    this.allPeople = this.wS.getAllPeople();
+  resetForm() {
+    this.personForm.reset();
+    this.message = null;
+    this.dataSaved = false;
   }
 
 }

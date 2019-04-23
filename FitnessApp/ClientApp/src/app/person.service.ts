@@ -10,13 +10,29 @@ import { Person } from './person';
 })
 export class PersonService {
 
-  url = 'http://localhost:44363/api/Profile';
+  url = 'https://localhost:44363/api';
   httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };
 
 
   constructor(private http: HttpClient) { }
 
   getAllPeople(): Observable<Person[]> {
-    return this.http.get<Person[]>(this.url + '/GetPeople');
+    return this.http.get<Person[]>(this.url + '/People');
+  }
+
+  getWorkerById(WorkerId: string): Observable<Person> {
+    return this.http.get<Person>(this.url + '/People/' + WorkerId);
+  }
+
+  createWorker(worker: Person): Observable<Person> {
+    return this.http.post<Person>(this.url + '/People/', worker, this.httpOptions);
+  }
+
+  updateWorker(worker: Person): Observable<Person> {
+    return this.http.put<Person>(this.url + '/People/' + worker.Id, worker, this.httpOptions);
+  }
+
+  deleteWorkerById(workerId: string): Observable<number> {
+    return this.http.delete<number>(this.url + '/People/' + workerId, this.httpOptions);
   }
 }
