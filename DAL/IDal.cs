@@ -16,5 +16,10 @@ namespace Dal
         ICollection<Person> GetAllPeople();
 
         bool PersonLoadPhoto(string login, string password,string path);
+
+        Person GetPersonById(string id);
+        void UpdatePerson(Person person);
+        bool RemovePerson(Person person);
+        bool AddPerson(Person person);
     }
 }

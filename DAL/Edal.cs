@@ -92,5 +92,37 @@ namespace Dal
             }
             return false;
         }
+
+
+        public Person GetPersonById(string id)
+        {
+            var Id = Int32.Parse(id);
+            return _ctx.Set<Person>().FirstOrDefault(s => s.Id == Id);
+        }
+
+
+        public void UpdatePerson(Person person)
+        {           
+            _ctx.Set<Person>().Update(person);
+            _ctx.SaveChanges();
+        }
+
+        public bool RemovePerson(Person person)
+        {
+            var number = _ctx.Set<Person>().Count();
+            _ctx.Set<Person>().Remove(person);
+            _ctx.SaveChanges();
+            var number2 = _ctx.Set<Person>().Count();
+            return number2 < number;
+        }
+
+        public bool AddPerson(Person person)
+        {
+            var number = _ctx.Set<Person>().Count();
+            _ctx.Set<Person>().Add(person);
+            _ctx.SaveChanges();
+            var number2 = _ctx.Set<Person>().Count();
+            return number2 > number;
+        }
     }
 }

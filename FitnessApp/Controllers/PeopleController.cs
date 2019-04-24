@@ -11,9 +11,10 @@ namespace FitnessApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PeopleController : ControllerBase
+    public class PeopleController : Controller
     {
         private readonly FitnessCabinetContext _context;
+        readonly IDal db = new Edal();
 
         public PeopleController(FitnessCabinetContext context)
         {
@@ -21,10 +22,17 @@ namespace FitnessApp.Controllers
         }
 
         // GET: api/People
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Person>>> GetPeople()
+        //{
+        //    return await _context.People.ToListAsync();
+        //}
+
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Person>>> GetPeople()
+        public ICollection<Person> GetPeople()
         {
-            return await _context.People.ToListAsync();
+            return db.GetAllPeople();
         }
 
         // GET: api/People/5
