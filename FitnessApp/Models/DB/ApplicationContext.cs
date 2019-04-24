@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace FitnessApp.Models.DB
 {
-    public class ApplicationContext : IdentityDbContext<Person>
+    public class ApplicationContext : IdentityDbContext<AppUser>
     {
         public ApplicationContext()
         {
@@ -132,7 +132,7 @@ namespace FitnessApp.Models.DB
 
             modelBuilder.Entity<Person>(entity =>
             {
-                entity.Property(e => e.Email)
+                entity.Property(e => e.Login)
                     .IsRequired()
                     .HasMaxLength(300);
 
