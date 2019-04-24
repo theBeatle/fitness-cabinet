@@ -13,6 +13,7 @@ namespace FitnessApp.Models.DB
             PersonPhotos = new HashSet<PersonPhoto>();
             Trainee = new HashSet<Trainee>();
         }
+        
         public string Id { get; set; }
         public string Login { get; set; }
         public string FirstName { get; set; }

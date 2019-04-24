@@ -18,25 +18,31 @@ using FitnessApp.Auth;
 using FitnessApp.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Diagnostics;
+using System.Diagnostics;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.AspNetCore.Mvc;
+
 namespace FitnessApp
 {
     public class Startup
     {
         private const string SecretKey = "kjvnfdkv5135fv151f53v135"; //Secure code
         private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
+
         public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
               b => b.MigrationsAssembly("FitnessCabinet")));
 
-            services.AddDefaultIdentity<Person>().AddEntityFrameworkStores<ApplicationContext>();
+            services.AddDefaultIdentity<AppUser>().AddEntityFrameworkStores<ApplicationContext>();
 
             services.AddSingleton<IJwtFactory, JwtFactory>();
 
@@ -91,23 +97,27 @@ namespace FitnessApp
 
             var builder = services.AddIdentityCore<Person>(o =>
             {
-                // configure identity options
                 o.Password.RequireDigit = false;
                 o.Password.RequireLowercase = false;
                 o.Password.RequireUppercase = false;
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 6;
             });
+
             builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
             builder.AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
-
-            // api user claim policy
+            
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("Person", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess));
+                options.AddPolicy("AppUser", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess));
             });
-
-            services.AddMvc();
+            
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -126,8 +136,6 @@ namespace FitnessApp
                  .AllowAnyMethod()
                  .AllowCredentials()
             );
-
-
 
             app.UseExceptionHandler(builder =>
             {
@@ -148,7 +156,6 @@ namespace FitnessApp
             app.UseAuthentication();
             app.UseDefaultFiles();
             app.UseStaticFiles();
-            app.UseMvc();
 
             app.UseSwagger();
 
@@ -156,9 +163,27 @@ namespace FitnessApp
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
+            
+            app.UseHttpsRedirection();
+            app.UseSpaStaticFiles();
 
-            app.UseAuthentication();
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action=Index}/{id?}");
+            });
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                    spa.Options.StartupTimeout = new TimeSpan(0, 0, 90);
+                }
+            });
 
         }
     }

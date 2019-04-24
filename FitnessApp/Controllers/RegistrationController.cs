@@ -6,9 +6,6 @@ using FitnessApp.Models.DB;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using FitnessApp.Models.Mapping;
-using System.Diagnostics;
-using System;
 
 namespace FitnessApp.Controllers
 {
@@ -49,22 +46,12 @@ namespace FitnessApp.Controllers
                 Login = userIdentity.Login
             };
 
-            IdentityResult result = null;
-
-            try
-            {
-
-                result = await _userManager.CreateAsync(person, model.Password);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-
+            var result = await _userManager.CreateAsync(person, model.Password);
             _logger.LogInformation("[SIGN-UP] Created new account");
 
             if (!result.Succeeded) return new BadRequestObjectResult(Errors.AddErrorsToModelState(result, ModelState));
-            
+
+
             
             return new OkObjectResult("Account created");
         }
