@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
-using FitnessApp.Models;
+using FitnessApp.Models.ViewModels;
 using System.Text;
 using System;
 using Microsoft.AspNetCore.Identity;
@@ -23,7 +23,7 @@ namespace FitnessApp
 {
     public class Startup
     {
-        private const string SecretKey = "VERY_SECRET_CODE_DONT_SHARE_228"; //Secure code
+        private const string SecretKey = "kjvnfdkv5135fv151f53v135"; //Secure code
         private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
         public IConfiguration Configuration { get; }
 
@@ -33,10 +33,10 @@ namespace FitnessApp
         }
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddDbContext<ApplicationContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
-              b => b.MigrationsAssembly("BackEnd")));
+              b => b.MigrationsAssembly("FitnessCabinet")));
+
             services.AddDefaultIdentity<Person>().AddEntityFrameworkStores<ApplicationContext>();
 
             services.AddSingleton<IJwtFactory, JwtFactory>();
@@ -45,8 +45,9 @@ namespace FitnessApp
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
-            services.AddAutoMapper();
 
+            services.AddAutoMapper();
+            
             var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
 
             services.AddCors(options =>
@@ -104,7 +105,7 @@ namespace FitnessApp
             // api user claim policy
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("ApiUser", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess));
+                options.AddPolicy("Person", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess));
             });
 
             services.AddMvc();

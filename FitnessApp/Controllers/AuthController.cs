@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using FitnessApp.Helpers;
-using FitnessApp.Models;
+using FitnessApp.Models.ViewModels;
 using FitnessApp.Models.DB;
 using FitnessApp.Auth;
 using Microsoft.AspNetCore.Identity;

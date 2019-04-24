@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using FitnessApp.Auth;
-using FitnessApp.Models;
+using FitnessApp.Models.ViewModels;
 using Newtonsoft.Json;
 
 namespace FitnessApp.Helpers

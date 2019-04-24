@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 
-namespace FitnessApp.Models
+namespace FitnessApp.Models.ViewModels
 {
     public class JwtIssuerOptions
     {
