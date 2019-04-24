@@ -95,7 +95,7 @@ namespace FitnessApp
                 configureOptions.SaveToken = true;
             });
 
-            var builder = services.AddIdentityCore<Person>(o =>
+            var builder = services.AddIdentityCore<AppUser>(o =>
             {
                 o.Password.RequireDigit = false;
                 o.Password.RequireLowercase = false;
