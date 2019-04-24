@@ -18,7 +18,6 @@ using FitnessApp.Auth;
 using FitnessApp.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Diagnostics;
-
 namespace FitnessApp
 {
     public class Startup

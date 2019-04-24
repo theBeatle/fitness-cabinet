@@ -7,7 +7,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   styleUrls: ['./profile.component.css'],
   template: `
 
-
+<mat-card   class="example-card">
   <mat-form-field class="example-full-width">
     <input matInput placeholder="Name">
   </mat-form-field>
@@ -19,7 +19,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
     <mat-button-toggle (click)="onClickMe()">Click me!</mat-button-toggle>
   </mat-button-toggle-group>
-    {{clickMessage}}`
+    {{clickMessage}}
+    < /mat-card> `
 })
 
 

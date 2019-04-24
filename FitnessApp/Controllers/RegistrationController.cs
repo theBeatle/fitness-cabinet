@@ -46,9 +46,7 @@ namespace FitnessApp.Controllers
                 FirstName = userIdentity.FirstName,
                 LastName = userIdentity.LastName,
                 Password = userIdentity.Password,
-                Login = userIdentity.Login,
-                UserName = userIdentity.FirstName,
-                Email = userIdentity.Login
+                Login = userIdentity.Login
             };
 
             IdentityResult result = null;
