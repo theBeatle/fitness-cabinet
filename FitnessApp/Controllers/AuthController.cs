@@ -1,34 +1,36 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
-using FitnessApp.Auth;
 using FitnessApp.Helpers;
-using FitnessApp.Models;
+using FitnessApp.Models.ViewModels;
 using FitnessApp.Models.DB;
+using FitnessApp.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-
 
 namespace FitnessApp.Controllers
 {
     [Route("api/[controller]")]
-    public class AuthController : Controller
+    [ApiController]
+    public class AuthController : ControllerBase
     {
         private readonly UserManager<Person> _userManager;
         private readonly IJwtFactory _jwtFactory;
         private readonly JwtIssuerOptions _jwtOptions;
-
-        public AuthController(UserManager<Person> userManager, IJwtFactory jwtFactory, IOptions<JwtIssuerOptions> jwtOptions)
+        private readonly ILogger _logger;
+        public AuthController(UserManager<Person> userManager, ILogger<AuthController> logger, IJwtFactory jwtFactory, IOptions<JwtIssuerOptions> jwtOptions)
         {
             _userManager = userManager;
             _jwtFactory = jwtFactory;
             _jwtOptions = jwtOptions.Value;
+            _logger = logger;
         }
 
         // POST api/auth/login
         [HttpPost("login")]
-        public async Task<IActionResult> Post([FromBody]CredentialsViewModel credentials)
+        public async Task<IActionResult> Login([FromBody]CredentialsViewModel credentials)
         {
             if (!ModelState.IsValid)
             {

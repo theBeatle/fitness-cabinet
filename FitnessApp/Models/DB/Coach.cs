@@ -17,7 +17,7 @@ namespace FitnessApp.Models.DB
         public int Weight { get; set; }
         public int Height { get; set; }
         public string WorkShedule { get; set; }
-        public int PersonId { get; set; }
+        public string PersonId { get; set; }
 
         public virtual Person Person { get; set; }
         public virtual ICollection<CoachPlace> CoachPlaces { get; set; }

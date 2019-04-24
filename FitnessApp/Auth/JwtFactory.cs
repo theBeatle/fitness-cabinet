@@ -3,7 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
-using FitnessApp.Models;
+using FitnessApp.Models.ViewModels;
 using Microsoft.Extensions.Options;
 
 

@@ -1,4 +1,4 @@
-﻿namespace FitnessApp.Models
+﻿namespace FitnessApp.Models.ViewModels
 {
     public class CredentialsViewModel
     {

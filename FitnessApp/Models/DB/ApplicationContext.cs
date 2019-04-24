@@ -9,10 +9,14 @@ namespace FitnessApp.Models.DB
 {
     public class ApplicationContext : IdentityDbContext<Person>
     {
+        public ApplicationContext()
+        {
+            Database.EnsureCreated();
+        }
+
         public ApplicationContext(DbContextOptions options)
         : base(options)
         {
-            Database.EnsureCreated();
         }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
