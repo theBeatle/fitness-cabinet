@@ -33,49 +33,25 @@ namespace FitnessApp.Controllers
             {
                 var file = Request.Form.Files[0];
 
-                var temp_folder = Path.Combine("Resources", "People", id);              
-
-               
+                var folderName = Path.Combine("Resources", "People", id);               
 
                 string webRootPath = _hostingEnvironment.WebRootPath;
                 string contentRootPath = _hostingEnvironment.ContentRootPath;
 
-                Debug.WriteLine(webRootPath);
-                Debug.WriteLine(contentRootPath);
+                var pathToSave = Path.Combine(contentRootPath, folderName);
 
-
-                var pathToCreate = Path.Combine(contentRootPath, temp_folder);
-
-                if (!Directory.Exists(pathToCreate))
+                if (!Directory.Exists(pathToSave))
                 {
-                    Directory.CreateDirectory(pathToCreate);
-                }
+                    Directory.CreateDirectory(pathToSave);
+                }                
 
-                //if (!Directory.Exists(folder))
-                //{
-                //    Directory.CreateDirectory(folder);
-                //}
-
-                //var pathEachPerson = Path.Combine(pathToCreate, id);
-
-                //if (!Directory.Exists(pathEachPerson))
-                //{
-                //    Directory.CreateDirectory(pathEachPerson);
-                //}
-
-                //var folderName = Path.Combine("Resources", "Images");
-                //var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-
-                var pathToSave = pathToCreate;
-
-                if (file.Length > 0)
+               if (file.Length > 0)
                 {
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     var fullPath = Path.Combine(pathToSave, fileName);
 
-                    db.PersonLoadPhoto(id, fullPath);
-                    // var dbPath = Path.Combine(folderName, fileName);
-                    var dbPath = Path.Combine(temp_folder, fileName);
+                    db.PersonLoadPhoto(id, fullPath);                    
+                    var dbPath = Path.Combine(folderName, fileName);
 
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
