@@ -72,9 +72,11 @@ namespace Dal
             return _ctx.Set<Person>().ToList();           
         }
 
-        public bool PersonLoadPhoto(string login, string password, string path)
+        public bool PersonLoadPhoto(string id, string path)
         {
-            var person = _ctx.Set<Person>().FirstOrDefault(p => p.Login == login && p.Password == password);
+            var Id = Int32.Parse(id);
+
+            var person = _ctx.Set<Person>().FirstOrDefault(p => p.Id == Id);
 
             if (person != null)
             {

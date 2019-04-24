@@ -126,9 +126,9 @@ namespace FitnessApp.Controllers
         }
 
         [HttpPost("[action]")]
-        public bool PersonLoadPhoto(string login, string password, string path)
+        public bool PersonLoadPhoto(string id, string path)
         {
-            var t = db.PersonLoadPhoto(login, password, path);
+            var t = db.PersonLoadPhoto(id, path);
             return t;
         }
 

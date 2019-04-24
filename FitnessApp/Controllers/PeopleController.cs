@@ -16,10 +16,10 @@ namespace FitnessApp.Controllers
         private readonly FitnessCabinetContext _context;
         readonly IDal db = new Edal();
 
-        public PeopleController(FitnessCabinetContext context)
-        {
-            _context = context;
-        }
+        //public PeopleController(FitnessCabinetContext context)
+        //{
+        //    _context = context;
+        //}
 
         // GET: api/People
         //[HttpGet]
