@@ -1,24 +1,10 @@
 .buttonlogin {
-  background-color: blue;
-  color: white;
-  text-align: center;
-  display: inline-block;
-  color: white;
-  text-decoration: none;
-  padding: .5em 2em;
-  outline: none;
-  border-width: 2px 0;
-  border-style: solid none;
-  border-color: blue;
-  border-radius: 15px;
-  transition: 0.2s;
-  margin-top: 5px;
-  margin-left: 30px;
-}
+  margin-left: 450px;
+} 
 .centerlogin {
-  margin-left: 40%;
-  margin-top: 15%;
+  margin-left: 400px;
+ 
 }
-.inputlogin {
-  border-radius: 10px;
+.centerheader{
+  margin-left: 435px;
 }

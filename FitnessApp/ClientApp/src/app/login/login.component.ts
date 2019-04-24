@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material'
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,11 +14,10 @@ password: string;
   ngOnInit() {
   }
   login() : void {
-    if(this.username == 'admin' && this.password == 'admin'){
-     this.router.navigate(["user"]);
+    if(this.username == 'user' && this.password == 'user'){
+     this.router.navigate([""]);
     }else {
-      alert("Invalid credentials");
+      alert("Invalid login/password");
     }
   }
-  }
- 
+}
