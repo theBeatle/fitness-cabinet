@@ -22,7 +22,7 @@ namespace FitnessApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            
+            services.AddCors();
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
@@ -44,11 +44,12 @@ namespace FitnessApp
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+            app.UseCors(builder => builder.AllowAnyOrigin());
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
+           
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
