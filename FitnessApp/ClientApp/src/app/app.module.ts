@@ -21,6 +21,7 @@ import { MatTooltipModule, MatToolbarModule } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { PersonService } from './person.service';
+import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { PersonService } from './person.service';
     CounterComponent,
     FetchDataComponent,
     LoadPhotoComponent,
-    PersonComponent
+    PersonComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

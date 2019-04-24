@@ -19,11 +19,58 @@ namespace FitnessApp.Controllers
         /// Read all workers information
         /// </summary>
         /// <returns>Collection of Workers</returns>
+        /// 
+
+        //[HttpGet]
+        //public ICollection<Person> GetPeople()
+        //{
+        //    return db.GetAllPeople();
+        //}
+
+
         [HttpGet]
-        public ICollection<Person> GetPeople()
+        public IActionResult GetAllUsers()
         {
-            return db.GetAllPeople();
+            try
+            {
+                var users = db.GetAllPeople();
+
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
         }
+
+
+        //[HttpPost]
+        //public IActionResult CreatePerson([FromBody]Person user)
+        //{
+        //    try
+        //    {
+        //        if (user == null)
+        //        {
+        //            return BadRequest("User object is null");
+        //        }
+
+        //        if (!ModelState.IsValid)
+        //        {
+        //            return BadRequest("Invalid model object");
+        //        }
+
+        //        db.AddPerson(user);
+        //        //user.Id = Guid.NewGuid();
+        //        //_context.Add(user);
+        //        //_context.SaveChanges();
+
+        //        return StatusCode(201);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"Internal server error: {ex}");
+        //    }
+        //}
 
 
         [HttpGet("{id}")]
@@ -86,7 +133,7 @@ namespace FitnessApp.Controllers
         }
 
 
-        [HttpGet("[action]")]
+        [HttpPut("[action]")]
         public bool PersonSaveCredentials(string login, string password, string firstName, string lastName, string email, string sex, string phone, string isDeleted, string isBanned)
         {
             var t = db.PersonSaveCredentials(login, password, firstName, lastName, email, sex, phone, isDeleted, isBanned);
