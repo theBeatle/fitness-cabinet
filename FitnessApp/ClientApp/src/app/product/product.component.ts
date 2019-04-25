@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
 export interface CountrysGroup {
   letter: string;
@@ -97,7 +97,11 @@ export class ProductComponent implements OnInit {
 
   stateGroupOptions: Observable<CountrysGroup[]>;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private bottomSheet: MatBottomSheet) { }
+
+  openBottomSheet(): void{
+    this.bottomSheet.open(ProductComponentSheet);
+  }
 
   ngOnInit() {
     this.stateGroupOptions = this.stateForm.get('countrysGroup')!.valueChanges
@@ -115,5 +119,20 @@ export class ProductComponent implements OnInit {
     }
 
     return this.stateGroups;
+  }
+}
+
+
+@Component({
+  selector: 'product.component.sheet',
+  templateUrl: 'product.component.sheet.html',
+
+})
+export class ProductComponentSheet{
+  constructor (private bottomSheetRef: MatBottomSheetRef<ProductComponentSheet>){}
+
+  openLink(event: MouseEvent): void{
+    this.bottomSheetRef.dismiss();
+    event.preventDefault();
   }
 }

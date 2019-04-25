@@ -10,10 +10,10 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ListComponent } from './list/list.component';
-import { ProductComponent } from './product/product.component';
+import { ProductComponent, ProductComponentSheet } from './product/product.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
-
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +23,9 @@ import { MaterialModule } from './material';
     FetchDataComponent,
     ListComponent,
     ProductComponent,
+    ProductComponentSheet,
   ],
+  entryComponents: [ProductComponentSheet],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
@@ -37,7 +39,6 @@ import { MaterialModule } from './material';
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'list', component: ListComponent },
       { path: 'product', component: ProductComponent },
-
     ])
   ],
   providers: [],

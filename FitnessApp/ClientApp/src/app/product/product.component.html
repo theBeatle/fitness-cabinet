@@ -44,6 +44,8 @@
         <input formControlName="price" required matInput type="text" placeholder="Price">
       </mat-form-field>
       <!------------------------------------------------------------------------------------------------------------------------>
+      <button class="whiteSpace" mat-raised-button (click)="openBottomSheet()">Load photo</button>
+      <!------------------------------------------------------------------------------------------------------------------------>
       <mat-form-field class="ctr">
         <input matInput #message maxlength="256" required placeholder="Message">
         <mat-hint>{{message.value.length}} / 256</mat-hint>
