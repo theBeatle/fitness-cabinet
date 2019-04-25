@@ -129,7 +129,7 @@ namespace FitnessApp
                 configuration.RootPath = "ClientApp/dist";
             });
 
-
+            //services.AddScoped<IDal, Dal>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -147,6 +147,7 @@ namespace FitnessApp
             });
 
             app.UseMvc();
+
 
             //////////////////////////////////////////////////////////////////////////
             if (env.IsDevelopment())

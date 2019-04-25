@@ -18,9 +18,9 @@ namespace FitnessApp.Controllers
     public class Dal
     {
         private readonly ApplicationContext db;
-        private readonly UserManager<AppUser> userManager;
+        private readonly UserManager<Person> userManager;
 
-       public Dal(ApplicationContext dB, UserManager<AppUser> UserManager)
+       public Dal(ApplicationContext dB, UserManager<Person> UserManager)
         {
             db = dB;
             userManager = UserManager;
@@ -30,18 +30,11 @@ namespace FitnessApp.Controllers
         {
            // var count1 = db.Person.Count();
             var person = await userManager.FindByIdAsync(id);
-            var photo = new Photo() { Path = path };
-
+            var photo = new Photo() { Path = path};
             
-            //var perPhoto = new PersonPhoto() { Person = person, Photo = photo  };
+            var perPhoto = new PersonPhoto() { Person = person, Photo = photo  };
 
-
-
-            //db.Photos.Add( new Photo { })
-
-
-
-
+            db.Photos.Add(photo);
         }
     }
 
@@ -52,7 +45,9 @@ namespace FitnessApp.Controllers
     {
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly ApplicationContext db;
-        //readonly IDal db = new Edal();
+        //readonly Dal db = new Dal(dB, );
+
+
 
         public UploadController(IHostingEnvironment env, ApplicationContext dB)
         {
