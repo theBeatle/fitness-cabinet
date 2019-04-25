@@ -10,7 +10,7 @@ namespace Dal
             TraineeAchivements = new HashSet<TraineeAchivements>();
         }
 
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public int Quantity { get; set; }
         public bool Status { get; set; }

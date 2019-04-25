@@ -17,7 +17,7 @@ namespace Dal
         public string Name { get; set; }
         public string Description { get; set; }
         public string Track { get; set; }
-        public long? AddressId { get; set; }
+        public int? AddressId { get; set; }
         public bool IsSimplePlace { get; set; }
         public string WorkShedule { get; set; }
         public int Rating { get; set; }

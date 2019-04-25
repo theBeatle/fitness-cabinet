@@ -10,7 +10,7 @@ namespace Dal
             RealService = new HashSet<RealService>();
         }
 
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string TrainingName { get; set; }
         public string Description { get; set; }
 

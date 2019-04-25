@@ -5,9 +5,9 @@ namespace Dal
 {
     public partial class PersonsPhotos
     {
-        public long Id { get; set; }
-        public long PersonId { get; set; }
-        public long PhotoId { get; set; }
+        public int Id { get; set; }
+        public int PersonId { get; set; }
+        public int PhotoId { get; set; }
 
         public virtual Person Person { get; set; }
         public virtual Photos Photo { get; set; }

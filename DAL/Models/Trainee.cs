@@ -12,8 +12,8 @@ namespace Dal
             TraineeAchivements = new HashSet<TraineeAchivements>();
         }
 
-        public long Id { get; set; }
-        public long PersonId { get; set; }
+        public int Id { get; set; }
+        public int PersonId { get; set; }
         public int Age { get; set; }
         public int Weight { get; set; }
         public int Height { get; set; }

@@ -10,7 +10,7 @@ namespace Dal
             Person = new HashSet<Person>();
         }
 
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Sex { get; set; }
 
         public virtual ICollection<Person> Person { get; set; }
