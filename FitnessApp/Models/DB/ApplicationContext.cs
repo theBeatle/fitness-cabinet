@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace FitnessApp.Models.DB
 {
-    public class ApplicationContext : IdentityDbContext<AppUser>
+    public class ApplicationContext : IdentityDbContext<Person>
     {
         public ApplicationContext()
         {
@@ -33,7 +33,6 @@ namespace FitnessApp.Models.DB
         public virtual DbSet<Coach> Coach { get; set; }
         public virtual DbSet<CoachPlace> CoachPlace { get; set; }
         public virtual DbSet<Payment> Payment { get; set; }
-        public virtual DbSet<Person> Person { get; set; }
         public virtual DbSet<Photo> Photos { get; set; }
         public virtual DbSet<Place> Place { get; set; }
         public virtual DbSet<Progress> Progress { get; set; }
@@ -132,10 +131,6 @@ namespace FitnessApp.Models.DB
 
             modelBuilder.Entity<Person>(entity =>
             {
-                entity.Property(e => e.Login)
-                    .IsRequired()
-                    .HasMaxLength(300);
-
                 entity.Property(e => e.FirstName)
                     .IsRequired()
                     .HasMaxLength(300);
@@ -143,11 +138,7 @@ namespace FitnessApp.Models.DB
                 entity.Property(e => e.LastName)
                     .IsRequired()
                     .HasMaxLength(300);
-
-                entity.Property(e => e.Login)
-                    .IsRequired()
-                    .HasMaxLength(100);
-                
+                                
                 entity.HasOne(d => d.SexStatus)
                     .WithMany(p => p.Person)
                     .HasForeignKey(d => d.SexStatusId);
