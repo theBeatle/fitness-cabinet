@@ -1,33 +1,81 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { HttpEventType, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-load-photo',
-  templateUrl: './load-photo.component.html'
+  templateUrl: './load-photo.component.html',
+  styleUrls: ['./load-photo.component.css']
 })
-export class LoadPhotoComponent {
-  // public currentCount = 0;
+export class LoadPhotoComponent implements OnInit{
+  public progress: number;
+  public message: string;
+  public response:boolean = true;  
 
-  // public incrementCounter() {
-  //   this.currentCount++;
-  // }
+  public imagePath;
+  imgURL: any;
+  public message2: string;
 
-  selectedFile: File
+  @Output() public onUploadFinished = new EventEmitter();
+ 
+  constructor(private http: HttpClient) { }
 
-  constructor(private http: HttpClient){}
 
-  onFileChanged(event) {
-    this.selectedFile = event.target.files[0]
-    console.log(event);
+  preview(files) {
+    if (files.length === 0)
+      return;
+ 
+    var mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message2 = "Only images are supported.";
+      return;
+    }
+ 
+    var reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]); 
+    reader.onload = (_event) => { 
+      this.imgURL = reader.result; 
+    }
   }
 
-  onUpload() {
-    // upload code goes here
-    const uploadData = new FormData();
-  uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
-   this.http.post('https://localhost:44363/api/Profile/PersonLoadPhoto?login=login1&password=password1&path=D%3A%5C%5Cpost2.png', uploadData);
-  //   .subscribe(...);
+ 
+  ngOnInit() {
+  }
+ 
+  public uploadFile = (files) => {
+    if (files.length === 0) {
+      return;
+    }
 
-  // console.log(uploadData);
+    var mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message2 = "Only images are supported.";
+      return;
+    }
+
+    var reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]); 
+    reader.onload = (_event) => { 
+      this.imgURL = reader.result; 
+    }
+ 
+    let fileToUpload = <File>files[0];
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);    
+ 
+    this.http.post('https://localhost:44363/api/Upload/2', formData, {reportProgress: true, observe: 'events'})
+      .subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress)
+          this.progress = Math.round(100 * event.loaded / event.total);
+        else if (event.type === HttpEventType.Response) {
+          this.message = 'Upload success.';
+          this.onUploadFinished.emit(event.body);
+
+       
+        }
+      });
+
+      this.progress=0;
   }
 }
