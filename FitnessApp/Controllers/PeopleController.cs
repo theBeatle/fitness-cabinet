@@ -21,7 +21,7 @@ namespace FitnessApp.Controllers
             this._context = context;
             if (!_context.Users.Any())
             {
-               // _context.Users.Add(new Person { /*Name = "Andryi" , SureName = "Lovalskyi" , Age = 33*/ });
+                //_context.Users.Add(new Person { /*Name = "Andryi" , SureName = "Kovalskyi" , Age = 33*/ });
                 _context.SaveChanges();
             }
             _context = context;
@@ -46,9 +46,11 @@ namespace FitnessApp.Controllers
             //}
 
             //return person;
-           /*!!!!!!Запитати у вчителя!!!!!!*/  Person preson = await context.Person.FirstOrDefaultAsync(x => x.Id == id);
+            Person preson = await context.Person.FirstOrDefaultAsync(x => x.Id == id);
             if (preson == null)
+            {
                 return NotFound();
+            }
             return new ObjectResult(preson);
         }
 
