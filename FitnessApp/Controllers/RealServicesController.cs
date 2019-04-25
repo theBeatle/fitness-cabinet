@@ -12,9 +12,9 @@ namespace FitnessApp.Controllers
     [ApiController]
     public class RealServicesController : ControllerBase
     {
-        public IActionResult PostProduct([FromBody] CoachProduct)
-        {
+        //public IActionResult PostProduct([FromBody] CoachProduct)
+        //{
             
-        }
+        //}
     }
 }
