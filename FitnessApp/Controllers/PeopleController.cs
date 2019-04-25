@@ -13,10 +13,17 @@ namespace FitnessApp.Controllers
     [ApiController]
     public class PeopleController : ControllerBase
     {
-        private readonly ApplicationContext _context;
 
+        private readonly ApplicationContext _context;
+        //there was some change 
         public PeopleController(ApplicationContext context)
         {
+            this._context = context;
+            if (!_context.Users.Any())
+            {
+               // _context.Users.Add(new Person { /*Name = "Andryi" , SureName = "Lovalskyi" , Age = 33*/ });
+                _context.SaveChanges();
+            }
             _context = context;
         }
 
@@ -26,19 +33,23 @@ namespace FitnessApp.Controllers
         {
             return await _context.Person.ToListAsync();
         }
-
+        //there was some change 
         // GET: api/People/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Person>> GetPerson(string id)
+        public async Task<ActionResult<Person>> GetPerson(string id, ApplicationContext context)
         {
-            var person = await _context.Person.FindAsync(id);
+            //var person = await _context.Person.FindAsync(id);
 
-            if (person == null)
-            {
+            //if (person == null)
+            //{
+            //    return NotFound();    
+            //}
+
+            //return person;
+           /*!!!!!!Запитати у вчителя!!!!!!*/  Person preson = await context.Person.FirstOrDefaultAsync(x => x.Id == id);
+            if (preson == null)
                 return NotFound();
-            }
-
-            return person;
+            return new ObjectResult(preson);
         }
 
         // PUT: api/People/5
