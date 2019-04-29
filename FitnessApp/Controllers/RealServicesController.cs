@@ -35,7 +35,8 @@ namespace FitnessApp.Controllers
                         Description = coachProduct.PlaceDescription,
                         AddressId = (111111111).ToString(), // develop!!!
                         IsSimplePlace = coachProduct.IsSimplePlace,
-
+                        WorkShedule = coachProduct.WorkShedule,
+                        Rating = 0,//develop!!!
                     }
                     );
             }
