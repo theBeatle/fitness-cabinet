@@ -47,9 +47,31 @@ namespace FitnessApp.Models.DB
         public virtual DbSet<TraineeAchivement> TraineeAchivements { get; set; }
         public virtual DbSet<Usabilities> Usabilities { get; set; }
 
+        //public virtual DbSet<PersonPhoto> PersonPhotos { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            //modelBuilder.Entity<PersonPhoto>(entity =>
+            //{
+            //    //entity.Property(e => e.PersonId).HasColumnName("Person_Id");
+
+            //    //entity.Property(e => e.PhotoId).HasColumnName("Photo_Id");
+
+            //    entity.HasOne(d => d.Person)
+            //        .WithMany(p => p.PersonPhotos)
+            //        .HasForeignKey(d => d.PersonId)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //       /* .HasConstraintName("FK__PersonsPh__Perso__60A75C0F")*/;
+
+            //    entity.HasOne(d => d.Photo)
+            //        .WithMany(p => p.PersonPhotos)
+            //        .HasForeignKey(d => d.PhotoId)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //        /*.HasConstraintName("FK__PersonsPh__Photo__619B8048")*/;
+            //});
+
 
             modelBuilder.Entity<Achivement>(entity =>
             {
