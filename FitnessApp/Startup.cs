@@ -18,10 +18,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
+//using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
+//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.AspNetCore.SpaServices.AngularCli;
 //using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -134,19 +134,19 @@ namespace FitnessApp
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseCors(builder => builder.AllowAnyOrigin());
+            //app.UseCors(builder => builder.AllowAnyOrigin());
             // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
+            //app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
             // specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                c.RoutePrefix = string.Empty;
-            });
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            //    c.RoutePrefix = string.Empty;
+            //});
 
-            app.UseMvc();
+            //app.UseMvc();
 
 
             //////////////////////////////////////////////////////////////////////////
@@ -194,7 +194,7 @@ namespace FitnessApp
             
             app.UseHttpsRedirection();
 
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
 
 
             //app.UseStaticFiles(new StaticFileOptions()
