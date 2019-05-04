@@ -24,17 +24,17 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="Registration\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="Registration\**" />
+    <EmbeddedResource Remove="Registration\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="Registration\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\list\list.component.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\list\list.component.ts" />
+    <Folder Include="ClientApp\src\app\registration\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -97,7 +97,7 @@ namespace FitnessApp
 
             var builder = services.AddIdentityCore<AppUser>(o =>
             {
-                o.Password.RequireDigit = false;
+                o.Password.RequireDigit = false;    
                 o.Password.RequireLowercase = false;
                 o.Password.RequireUppercase = false;
                 o.Password.RequireNonAlphanumeric = false;
