@@ -30,9 +30,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     <mat-button-toggle color="primary" (click)="onClickMe()">Click me!</mat-button-toggle>
   </mat-button-toggle-group>
   <br/>
-  <mat-slide-toggle>Dark mode</mat-slide-toggle>
+  <mat-slide-toggle (click)="ChangeBackground()">Dark mode</mat-slide-toggle>
   </mat-card> `
-    
+
 })
 
 
@@ -41,11 +41,23 @@ export class ProfileComponent {
   SureName = 'Iskandirov';
   SexStatus = 'Men';
   clickMessage2 = 'asd';
-
+  flag = true;
   onClickMe() {
     this.Name = this.clickMessage2;
     this.SureName = this.clickMessage2;
     this.SexStatus = this.clickMessage2;
   }
+  ChangeBackground() {
+    this.flag = !this.flag;
+    var up = document.getElementsByTagName('body')[1];
+    var down = document.getElementsByTagName('body')[0];
+    if (this.flag == false) {
+      up.style.backgroundColor = "gray";
+      down.style.backgroundColor = "gray";
+    }
+    else {
+      up.style.backgroundColor = "white";
+      down.style.backgroundColor = "white";
+    }
+  }
 }
-
