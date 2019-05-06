@@ -29,12 +29,11 @@ namespace FitnessApp.Controllers
         // POST api/auth/registration
         [HttpPost("registration")]
         public async Task<IActionResult> Registration([FromBody]RegistrationViewModel model)
-        {
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        { 
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
 
             var userIdentity = _mapper.Map<AppUser>(model);
 
