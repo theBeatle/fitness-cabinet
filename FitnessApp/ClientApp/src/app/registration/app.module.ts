@@ -21,7 +21,7 @@ import { environment } from 'src/environments/environment';
 
 @NgModule({
   imports: [
-        environment,
+       // environment,
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
