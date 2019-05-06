@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FitnessApp.Models.DB;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FitnessApp.Controllers
 {
@@ -41,24 +42,44 @@ namespace FitnessApp.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
+    [RequireHttps]
+    //[Authorize]
     public class UploadController : ControllerBase
     {
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly ApplicationContext db;
+        private readonly UserManager<Person> _userManager;
         //readonly Dal db = new Dal(dB, );
 
 
 
-        public UploadController(IHostingEnvironment env, ApplicationContext dB)
+        public UploadController(IHostingEnvironment env, ApplicationContext dB, UserManager<Person> userManager)
         {
             _hostingEnvironment = env;
             db = dB;
+            _userManager = userManager;
+        }
+
+        public async Task LoadFile(string id, string path)
+        {
+            // var count1 = db.Person.Count();
+            var person = await _userManager.FindByIdAsync(id);
+            var photo = new Photo() { Path = path };
+
+            var perPhoto = new PersonPhoto() { Person = person, Photo = photo };
+
+            db.Photos.Add(photo);
         }
 
 
-        [HttpPost("{id}"), DisableRequestSizeLimit]
-        public IActionResult Upload(string id)
+        [HttpPost/*("{id}")*/, DisableRequestSizeLimit]
+        public async Task<IActionResult> Upload(/*string id*/)
         {
+            string id = "893a36d9-262a-437f-8da7-3f5440cd2646";
+            //User.Identity.IsAuthenticated -> true
+
+            //var userToVerify = await _userManager.FindByNameAsync(User.Identity.Name);
+            //user.identity.name
             try
             {
                 var file = Request.Form.Files[0];
@@ -80,7 +101,7 @@ namespace FitnessApp.Controllers
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     var fullPath = Path.Combine(pathToSave, fileName);
 
-                    //db.PersonLoadPhoto(id, fullPath);                    
+                    await db.LoadFile(id, fullPath);                    
                     var dbPath = Path.Combine(folderName, fileName);
 
                     using (var stream = new FileStream(fullPath, FileMode.Create))

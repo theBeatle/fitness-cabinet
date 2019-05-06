@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -346,6 +347,11 @@ namespace FitnessApp.Models.DB
                     .WithMany(p => p.Usabilities)
                     .HasForeignKey(d => d.PlaceId);
             });
+        }
+
+        internal Task LoadFile(string id, string fullPath)
+        {
+            throw new NotImplementedException();
         }
     }
 }
