@@ -35,6 +35,7 @@ namespace FitnessApp.Models.DB
         public virtual DbSet<Payment> Payment { get; set; }
         public virtual DbSet<Photo> Photos { get; set; }
         public virtual DbSet<Place> Place { get; set; }
+        public virtual DbSet<PlacePhoto> PlacePhotos { get; set; }
         public virtual DbSet<Progress> Progress { get; set; }
         public virtual DbSet<RealService> RealService { get; set; }
         public virtual DbSet<Receiver> Receiver { get; set; }
