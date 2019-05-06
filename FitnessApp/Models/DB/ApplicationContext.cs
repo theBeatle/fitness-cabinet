@@ -19,13 +19,13 @@ namespace FitnessApp.Models.DB
         {
         }
         
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=FitnessCabinet;Trusted_Connection=True;");
-            }
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=FitnessCabinet;Trusted_Connection=True;");
+        //    }
+        //}
 
         public virtual DbSet<Achivement> Achivement { get; set; }
         public virtual DbSet<Address> Address { get; set; }
