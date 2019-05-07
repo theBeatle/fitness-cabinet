@@ -19,15 +19,8 @@ namespace FitnessApp.Models.DB
         public ApplicationContext(DbContextOptions options)
         : base(options)
         {
-        }
+        }       
         
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    if (!optionsBuilder.IsConfigured)
-        //    {
-        //        optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=FitnessCabinet;Trusted_Connection=True;");
-        //    }
-        //}
 
         public virtual DbSet<Achivement> Achivement { get; set; }
         public virtual DbSet<Address> Address { get; set; }
@@ -42,44 +35,16 @@ namespace FitnessApp.Models.DB
         public virtual DbSet<Receiver> Receiver { get; set; }
         public virtual DbSet<Reminder> Reminder { get; set; }
         public virtual DbSet<Sender> Sender { get; set; }
-
-        internal ICollection<Person> Users()
-        {
-            throw new NotImplementedException();
-        }
-
         public virtual DbSet<Service> Service { get; set; }
         public virtual DbSet<SexStatus> SexStatus { get; set; }
         public virtual DbSet<Speciality> Speciality { get; set; }
         public virtual DbSet<Trainee> Trainee { get; set; }
         public virtual DbSet<TraineeAchivement> TraineeAchivements { get; set; }
-        public virtual DbSet<Usabilities> Usabilities { get; set; }
-
-        //public virtual DbSet<PersonPhoto> PersonPhotos { get; set; }
+        public virtual DbSet<Usabilities> Usabilities { get; set; }       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            //modelBuilder.Entity<PersonPhoto>(entity =>
-            //{
-            //    //entity.Property(e => e.PersonId).HasColumnName("Person_Id");
-
-            //    //entity.Property(e => e.PhotoId).HasColumnName("Photo_Id");
-
-            //    entity.HasOne(d => d.Person)
-            //        .WithMany(p => p.PersonPhotos)
-            //        .HasForeignKey(d => d.PersonId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //       /* .HasConstraintName("FK__PersonsPh__Perso__60A75C0F")*/;
-
-            //    entity.HasOne(d => d.Photo)
-            //        .WithMany(p => p.PersonPhotos)
-            //        .HasForeignKey(d => d.PhotoId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        /*.HasConstraintName("FK__PersonsPh__Photo__619B8048")*/;
-            //});
-
 
             modelBuilder.Entity<Achivement>(entity =>
             {
@@ -354,11 +319,6 @@ namespace FitnessApp.Models.DB
                     .WithMany(p => p.Usabilities)
                     .HasForeignKey(d => d.PlaceId);
             });
-        }
-
-        //internal Task LoadFile(string id, string fullPath)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        }       
     }
 }

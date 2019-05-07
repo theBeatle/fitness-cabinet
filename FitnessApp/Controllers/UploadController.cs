@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-//using Dal;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Http;
@@ -26,8 +25,6 @@ namespace FitnessApp.Controllers
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly ApplicationContext db;
         private readonly UserManager<Person> _userManager;
-        //readonly Dal db = new Dal(dB, );
-
 
 
         public UploadController(IHostingEnvironment env, ApplicationContext dB, UserManager<Person> userManager)
@@ -39,46 +36,29 @@ namespace FitnessApp.Controllers
         }
 
         private async Task LoadFile(string name, string path)
-        {
-            // var count1 = db.Person.Count();
+        {           
             var person = await _userManager.FindByNameAsync(name);
             var photo = new Photo() { Path = path };
-
             var perPhoto = new PersonPhoto() { Person = person, Photo = photo };
 
             db.Photos.Add(photo);
             db.SaveChanges();
         }
-
-        //[HttpGet]
-        //public async Task<IActionResult> GetPeople()
-        //{
-        //    try
-        //    {
-        //        return db.Users();
-
-        //        return Ok(users);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, $"Internal server error: {ex}");
-        //    }
-        //}
+       
 
         // GET: api/People
-        [HttpGet]
+        [HttpGet, DisableRequestSizeLimit]
         public async Task<ActionResult<IEnumerable<Person>>> GetPeople()
         {
-
-            return await _userManager.Users.ToListAsync();
-        }
-
-
-        // [HttpPost, DisableRequestSizeLimit]
-        // public ICollection<Person> GetPeople()
-        // {
-        //     return db.Users();
-        // }
+            try
+            {
+                return await _userManager.Users.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }           
+        }        
 
 
         [HttpPost, DisableRequestSizeLimit]
@@ -126,9 +106,9 @@ namespace FitnessApp.Controllers
                     return BadRequest();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, $"Internal server error: {ex}");
             }
         }
     }
