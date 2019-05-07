@@ -17,22 +17,22 @@ export class PersonService {
   constructor(private http: HttpClient) { }
 
   getAllPeople(): Observable<Person[]> {
-    return this.http.get<Person[]>(this.url + '/Profile');
+    return this.http.get<Person[]>(this.url + '/Upload');
   }
 
   getWorkerById(WorkerId: string): Observable<Person> {
-    return this.http.get<Person>(this.url + '/Profile/' + WorkerId);
+    return this.http.get<Person>(this.url + '/Upload/' + WorkerId);
   }
 
   createWorker(worker: Person): Observable<Person> {
-    return this.http.post<Person>(this.url + '/Profile/', worker, this.httpOptions);
+    return this.http.post<Person>(this.url + '/Upload/', worker, this.httpOptions);
   }
 
   updateWorker(worker: Person): Observable<Person> {
-    return this.http.put<Person>(this.url + '/Profile/' + worker.Id, worker, this.httpOptions);
+    return this.http.put<Person>(this.url + '/Upload/' + worker.Id, worker, this.httpOptions);
   }
 
   deleteWorkerById(workerId: string): Observable<number> {
-    return this.http.delete<number>(this.url + '/Profile/' + workerId, this.httpOptions);
+    return this.http.delete<number>(this.url + '/Upload/' + workerId, this.httpOptions);
   }
 }

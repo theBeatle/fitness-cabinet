@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -41,6 +42,12 @@ namespace FitnessApp.Models.DB
         public virtual DbSet<Receiver> Receiver { get; set; }
         public virtual DbSet<Reminder> Reminder { get; set; }
         public virtual DbSet<Sender> Sender { get; set; }
+
+        internal ICollection<Person> Users()
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual DbSet<Service> Service { get; set; }
         public virtual DbSet<SexStatus> SexStatus { get; set; }
         public virtual DbSet<Speciality> Speciality { get; set; }

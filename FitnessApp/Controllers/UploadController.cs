@@ -13,33 +13,10 @@ using Microsoft.AspNetCore.Mvc;
 using FitnessApp.Models.DB;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitnessApp.Controllers
 {
-    public class Dal
-    {
-        private readonly ApplicationContext db;
-        private readonly UserManager<Person> userManager;
-
-       public Dal(ApplicationContext dB, UserManager<Person> UserManager)
-        {
-            db = dB;
-            userManager = UserManager;
-        }
-
-        public async Task LoadFile(string id, string path)
-        {
-           // var count1 = db.Person.Count();
-            var person = await userManager.FindByIdAsync(id);
-            var photo = new Photo() { Path = path};
-            
-            var perPhoto = new PersonPhoto() { Person = person, Photo = photo  };
-
-            db.Photos.Add(photo);
-        }
-    }
-
-
     [Route("api/[controller]")]
     [ApiController]
     [RequireHttps]
@@ -56,6 +33,7 @@ namespace FitnessApp.Controllers
         public UploadController(IHostingEnvironment env, ApplicationContext dB, UserManager<Person> userManager)
         {
             _hostingEnvironment = env;
+          
             db = dB;
             _userManager = userManager;
         }
@@ -71,6 +49,36 @@ namespace FitnessApp.Controllers
             db.Photos.Add(photo);
             db.SaveChanges();
         }
+
+        //[HttpGet]
+        //public async Task<IActionResult> GetPeople()
+        //{
+        //    try
+        //    {
+        //        return db.Users();
+
+        //        return Ok(users);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"Internal server error: {ex}");
+        //    }
+        //}
+
+        // GET: api/People
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Person>>> GetPeople()
+        {
+
+            return await _userManager.Users.ToListAsync();
+        }
+
+
+        // [HttpPost, DisableRequestSizeLimit]
+        // public ICollection<Person> GetPeople()
+        // {
+        //     return db.Users();
+        // }
 
 
         [HttpPost, DisableRequestSizeLimit]
