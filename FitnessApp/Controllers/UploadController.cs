@@ -44,21 +44,36 @@ namespace FitnessApp.Controllers
             db.Photos.Add(photo);
             db.SaveChanges();
         }
-       
+
 
         // GET: api/People
+        //[HttpGet, DisableRequestSizeLimit]
+        //public async Task<ActionResult<IEnumerable<Person>>> GetPeople()
+        //{
+        //    try
+        //    {
+        //        return await _userManager.Users.ToListAsync();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"Internal server error: {ex}");
+        //    }           
+        //}
+
+
+        // GET: api/Person
         [HttpGet, DisableRequestSizeLimit]
-        public async Task<ActionResult<IEnumerable<Person>>> GetPeople()
+        public async Task<ActionResult<Person>> GetPerson()
         {
             try
             {
-                return await _userManager.Users.ToListAsync();
+                return await _userManager.FindByNameAsync("string");
             }
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex}");
-            }           
-        }        
+            }
+        }
 
 
         [HttpPost, DisableRequestSizeLimit]
