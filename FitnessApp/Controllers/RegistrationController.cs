@@ -28,7 +28,7 @@ namespace FitnessApp.Controllers
             _logger = logger;
         }
 
-        // POST api/auth/registration
+        // POST api/registration/registration
         [HttpPost("registration")]
         public async Task<IActionResult> Registration([FromBody]RegistrationViewModel model)
         {
