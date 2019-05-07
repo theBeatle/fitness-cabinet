@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { getContext } from '@angular/core/src/render3/discovery_utils';
 
 @Component({
   selector: 'profile-data',
@@ -26,8 +27,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     <input matInput  placeholder="sex status" value="{{SexStatus}}">
   </mat-form-field>
   <br/>
-  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-    <mat-button-toggle color="primary" (click)="onClickMe()">Click me!</mat-button-toggle>
+  <mat-button-toggle-group name="fontStyle"  aria-label="Font Style">
+    <button mat-raised-button [color]="'success'" (click)="PushInfo()">Edit</button>
   </mat-button-toggle-group>
   <br/>
   <mat-slide-toggle (click)="ChangeBackground()">Dark mode</mat-slide-toggle>
@@ -42,18 +43,20 @@ export class ProfileComponent {
   SexStatus = 'Men';
   clickMessage2 = 'asd';
   flag = true;
-  onClickMe() {
+  PushInfo() {
     this.Name = this.clickMessage2;
     this.SureName = this.clickMessage2;
     this.SexStatus = this.clickMessage2;
+    
+    
   }
   ChangeBackground() {
     this.flag = !this.flag;
     var up = document.getElementsByTagName('body')[1];
     var down = document.getElementsByTagName('body')[0];
     if (this.flag == false) {
-      up.style.backgroundColor = "gray";
-      down.style.backgroundColor = "gray";
+      up.style.backgroundColor = "#333333";
+      down.style.backgroundColor = "#333333";
     }
     else {
       up.style.backgroundColor = "white";
