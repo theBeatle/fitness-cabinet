@@ -60,31 +60,33 @@ namespace FitnessApp.Controllers
             _userManager = userManager;
         }
 
-        public async Task LoadFile(string id, string path)
+        private async Task LoadFile(string name, string path)
         {
             // var count1 = db.Person.Count();
-            var person = await _userManager.FindByIdAsync(id);
+            var person = await _userManager.FindByNameAsync(name);
             var photo = new Photo() { Path = path };
 
             var perPhoto = new PersonPhoto() { Person = person, Photo = photo };
 
             db.Photos.Add(photo);
+            db.SaveChanges();
         }
 
 
-        [HttpPost/*("{id}")*/, DisableRequestSizeLimit]
-        public async Task<IActionResult> Upload(/*string id*/)
-        {
-            string id = "893a36d9-262a-437f-8da7-3f5440cd2646";
+        [HttpPost, DisableRequestSizeLimit]
+        public async Task<IActionResult> Upload()
+        {            
             //User.Identity.IsAuthenticated -> true
-
             //var userToVerify = await _userManager.FindByNameAsync(User.Identity.Name);
-            //user.identity.name
+            
+            var person = await _userManager.FindByNameAsync("string");
+            string id = person.Id;
+
             try
             {
                 var file = Request.Form.Files[0];
 
-                var folderName = Path.Combine("Resources", "People", id);               
+                var folderName = Path.Combine("Resources", "People", id);
 
                 string webRootPath = _hostingEnvironment.WebRootPath;
                 string contentRootPath = _hostingEnvironment.ContentRootPath;
@@ -94,14 +96,14 @@ namespace FitnessApp.Controllers
                 if (!Directory.Exists(pathToSave))
                 {
                     Directory.CreateDirectory(pathToSave);
-                }                
+                }
 
-               if (file.Length > 0)
+                if (file.Length > 0)
                 {
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     var fullPath = Path.Combine(pathToSave, fileName);
 
-                    await db.LoadFile(id, fullPath);                    
+                    await LoadFile(person.UserName, fullPath);
                     var dbPath = Path.Combine(folderName, fileName);
 
                     using (var stream = new FileStream(fullPath, FileMode.Create))
@@ -116,7 +118,7 @@ namespace FitnessApp.Controllers
                     return BadRequest();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(500, "Internal server error");
             }

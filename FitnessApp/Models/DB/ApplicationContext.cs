@@ -349,9 +349,9 @@ namespace FitnessApp.Models.DB
             });
         }
 
-        internal Task LoadFile(string id, string fullPath)
-        {
-            throw new NotImplementedException();
-        }
+        //internal Task LoadFile(string id, string fullPath)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
