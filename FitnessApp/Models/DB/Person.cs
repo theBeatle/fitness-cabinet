@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FitnessApp.Models.DB
 {
-    public partial class Person
+    public partial class Person : IdentityUser
     {
         public Person()
         {
@@ -13,13 +13,11 @@ namespace FitnessApp.Models.DB
             PersonPhotos = new HashSet<PersonPhoto>();
             Trainee = new HashSet<Trainee>();
         }
-       
 
-        public string Id { get; set; }
-        public string Login { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Password { get; set; }
+        public long? FacebookId { get; set; }
+        public string PictureUrl { get; set; }
         public bool IsDeleted { get; set; }
         public bool IsBanned { get; set; }
         public string SexStatusId { get; set; }

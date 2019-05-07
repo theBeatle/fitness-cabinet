@@ -6,113 +6,109 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FitnessApp.Models.DB;
+//using Dal;
 
 namespace FitnessApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PeopleController : ControllerBase
+    public class PeopleController : Controller
     {
+        //private readonly FitnessCabinetContext _context;
+        //readonly IDal db = new Edal();
 
-        private readonly ApplicationContext _context;
-        //there was some change 
-        public PeopleController(ApplicationContext context)
-        {
-            this._context = context;
-            if (!_context.Users.Any())
-            {
-                //_context.Users.Add(new Person { /*Name = "Andryi" , SureName = "Kovalskyi" , Age = 33*/ });
-                _context.SaveChanges();
-            }
-            _context = context;
-        }
+        //public PeopleController(FitnessCabinetContext context)
+        //{
+        //    _context = context;
+        //}
 
         // GET: api/People
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Person>>> GetPerson()
-        {
-            return await _context.Person.ToListAsync();
-        }
-        //there was some change 
-        // GET: api/People/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Person>> GetPerson(string id, ApplicationContext context)
-        {
-            //var person = await _context.Person.FindAsync(id);
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Person>>> GetPeople()
+        //{
+        //    return await _context.People.ToListAsync();
+        //}
 
-            //if (person == null)
-            //{
-            //    return NotFound();    
-            //}
 
-            //return person;
-            Person preson = await context.Person.FirstOrDefaultAsync(x => x.Id == id);
-            if (preson == null)
-            {
-                return NotFound();
-            }
-            return new ObjectResult(preson);
-        }
+        //[HttpGet]
+        //public ICollection<Person> GetPeople()
+        //{
+        //    return db.GetAllPeople();
+        //}
 
-        // PUT: api/People/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPerson(string id, Person person)
-        {
-            if (id != person.Id)
-            {
-                return BadRequest();
-            }
+        //// GET: api/People/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Person>> GetPerson(long id)
+        //{
+        //    var person = await _context.People.FindAsync(id);
 
-            _context.Entry(person).State = EntityState.Modified;
+        //    if (person == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PersonExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    return person;
+        //}
 
-            return NoContent();
-        }
+        //// PUT: api/People/5
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutPerson(long id, Person person)
+        //{
+        //    if (id != person.Id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-        // POST: api/People
-        [HttpPost]
-        public async Task<ActionResult<Person>> PostPerson(Person person)
-        {
-            _context.Person.Add(person);
-            await _context.SaveChangesAsync();
+        //    _context.Entry(person).State = EntityState.Modified;
 
-            return CreatedAtAction("GetPerson", new { id = person.Id }, person);
-        }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!PersonExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-        // DELETE: api/People/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Person>> DeletePerson(string id)
-        {
-            var person = await _context.Person.FindAsync(id);
-            if (person == null)
-            {
-                return NotFound();
-            }
+        //    return NoContent();
+        //}
 
-            _context.Person.Remove(person);
-            await _context.SaveChangesAsync();
+        //// POST: api/People
+        //[HttpPost]
+        //public async Task<ActionResult<Person>> PostPerson(Person person)
+        //{
+        //    _context.People.Add(person);
+        //    await _context.SaveChangesAsync();
 
-            return person;
-        }
+        //    return CreatedAtAction("GetPerson", new { id = person.Id }, person);
+        //}
 
-        private bool PersonExists(string id)
-        {
-            return _context.Person.Any(e => e.Id == id);
-        }
+        //// DELETE: api/People/5
+        //[HttpDelete("{id}")]
+        //public async Task<ActionResult<Person>> DeletePerson(long id)
+        //{
+        //    var person = await _context.People.FindAsync(id);
+        //    if (person == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    _context.People.Remove(person);
+        //    await _context.SaveChangesAsync();
+
+        //    return person;
+        //}
+
+        //private bool PersonExists(long id)
+        //{
+        //    return _context.People.Any(e => e.Id == id);
+        //}
     }
 }

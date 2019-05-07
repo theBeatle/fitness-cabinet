@@ -21,9 +21,8 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.Achivement", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -40,9 +39,8 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.Address", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Building")
                         .IsRequired()
@@ -59,6 +57,9 @@ namespace FitnessApp.Migrations
                     b.Property<string>("Latitude")
                         .IsRequired();
 
+                    b.Property<string>("Logtitude")
+                        .IsRequired();
+
                     b.Property<string>("State")
                         .IsRequired()
                         .HasMaxLength(500);
@@ -67,9 +68,6 @@ namespace FitnessApp.Migrations
                         .IsRequired()
                         .HasMaxLength(500);
 
-                    b.Property<string>("intitude")
-                        .IsRequired();
-
                     b.HasKey("Id");
 
                     b.ToTable("Address");
@@ -77,13 +75,12 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.Chat", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ReceiverId");
+                    b.Property<string>("ReceiverId");
 
-                    b.Property<int>("SenderId");
+                    b.Property<string>("SenderId");
 
                     b.HasKey("Id");
 
@@ -96,15 +93,14 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.Coach", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Age");
 
                     b.Property<int>("Height");
 
-                    b.Property<int>("PersonId");
+                    b.Property<string>("PersonId");
 
                     b.Property<int>("Weight");
 
@@ -120,11 +116,11 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.CoachPlace", b =>
                 {
-                    b.Property<int>("PlaceId");
+                    b.Property<string>("PlaceId");
 
-                    b.Property<int>("CoachId");
+                    b.Property<string>("CoachId");
 
-                    b.Property<int>("Id");
+                    b.Property<string>("Id");
 
                     b.HasKey("PlaceId", "CoachId");
 
@@ -135,9 +131,8 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.Payment", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Bill")
                         .IsRequired()
@@ -151,9 +146,8 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.Person", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
 
@@ -161,10 +155,11 @@ namespace FitnessApp.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(300);
+                        .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<long?>("FacebookId");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -182,10 +177,6 @@ namespace FitnessApp.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
-                    b.Property<string>("Login")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
 
@@ -198,9 +189,11 @@ namespace FitnessApp.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
+                    b.Property<string>("PictureUrl");
+
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<int>("SexStatusId");
+                    b.Property<string>("SexStatusId");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -224,11 +217,11 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.PersonPhoto", b =>
                 {
-                    b.Property<int>("PersonId");
+                    b.Property<string>("PersonId");
 
-                    b.Property<int>("PhotoId");
+                    b.Property<string>("PhotoId");
 
-                    b.Property<int>("Id");
+                    b.Property<string>("Id");
 
                     b.HasKey("PersonId", "PhotoId");
 
@@ -239,9 +232,8 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.Photo", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Path")
                         .IsRequired();
@@ -253,11 +245,10 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.Place", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AddressId");
+                    b.Property<string>("AddressId");
 
                     b.Property<string>("Description")
                         .IsRequired();
@@ -267,7 +258,7 @@ namespace FitnessApp.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<int?>("PhotoId");
+                    b.Property<string>("PhotoId");
 
                     b.Property<int>("Rating");
 
@@ -288,11 +279,11 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.PlacePhoto", b =>
                 {
-                    b.Property<int>("PlaceId");
+                    b.Property<string>("PlaceId");
 
-                    b.Property<int>("PhotoId");
+                    b.Property<string>("PhotoId");
 
-                    b.Property<int>("Id");
+                    b.Property<string>("Id");
 
                     b.HasKey("PlaceId", "PhotoId");
 
@@ -305,13 +296,12 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.Progress", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Description");
 
-                    b.Property<int>("TraineeId");
+                    b.Property<string>("TraineeId");
 
                     b.Property<int>("Weight");
 
@@ -324,11 +314,10 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.RealService", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CoachId");
+                    b.Property<string>("CoachId");
 
                     b.Property<string>("CreationTime")
                         .IsRequired()
@@ -338,17 +327,17 @@ namespace FitnessApp.Migrations
                         .IsRequired()
                         .HasMaxLength(300);
 
-                    b.Property<int>("PlaceId");
+                    b.Property<string>("PlaceId");
 
                     b.Property<int>("Price");
 
-                    b.Property<int>("ServiceId");
+                    b.Property<string>("ServiceId");
 
                     b.Property<string>("StartTime")
                         .IsRequired()
                         .HasMaxLength(300);
 
-                    b.Property<int>("TraineeId");
+                    b.Property<string>("TraineeId");
 
                     b.HasKey("Id");
 
@@ -365,11 +354,10 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.Receiver", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int>("PersonId");
+                    b.Property<string>("PersonId");
 
                     b.HasKey("Id");
 
@@ -380,9 +368,8 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.Reminder", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("EndTime")
                         .IsRequired()
@@ -392,7 +379,7 @@ namespace FitnessApp.Migrations
 
                     b.Property<bool>("IsEnabled");
 
-                    b.Property<int>("RealServiceId");
+                    b.Property<string>("RealServiceId");
 
                     b.Property<string>("StartTime")
                         .IsRequired()
@@ -407,11 +394,10 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.Sender", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int>("PersonId");
+                    b.Property<string>("PersonId");
 
                     b.HasKey("Id");
 
@@ -422,9 +408,8 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.Service", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Description");
 
@@ -438,9 +423,8 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.SexStatus", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Sex")
                         .IsRequired()
@@ -453,11 +437,10 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.Speciality", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CoachId");
+                    b.Property<string>("CoachId");
 
                     b.Property<string>("Experience")
                         .IsRequired();
@@ -477,15 +460,14 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.Trainee", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Age");
 
                     b.Property<int>("Height");
 
-                    b.Property<int>("PersonId");
+                    b.Property<string>("PersonId");
 
                     b.Property<int>("Weight");
 
@@ -501,11 +483,11 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.TraineeAchivement", b =>
                 {
-                    b.Property<int>("TraineeId");
+                    b.Property<string>("TraineeId");
 
                     b.Property<int>("AchivementId");
 
-                    b.Property<int>("Id");
+                    b.Property<string>("Id");
 
                     b.HasKey("TraineeId", "AchivementId");
 
@@ -516,14 +498,13 @@ namespace FitnessApp.Migrations
 
             modelBuilder.Entity("FitnessApp.Models.DB.Usabilities", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Description")
                         .HasMaxLength(500);
 
-                    b.Property<int>("PlaceId");
+                    b.Property<string>("PlaceId");
 
                     b.Property<int>("Quantity");
 
@@ -538,11 +519,10 @@ namespace FitnessApp.Migrations
                     b.ToTable("Usabilities");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -563,7 +543,7 @@ namespace FitnessApp.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -573,7 +553,8 @@ namespace FitnessApp.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<int>("RoleId");
+                    b.Property<string>("RoleId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -582,7 +563,7 @@ namespace FitnessApp.Migrations
                     b.ToTable("AspNetRoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -592,7 +573,8 @@ namespace FitnessApp.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -601,15 +583,18 @@ namespace FitnessApp.Migrations
                     b.ToTable("AspNetUserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128);
 
-                    b.Property<string>("ProviderKey");
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName");
 
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -618,11 +603,11 @@ namespace FitnessApp.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId");
 
-                    b.Property<int>("RoleId");
+                    b.Property<string>("RoleId");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -631,13 +616,15 @@ namespace FitnessApp.Migrations
                     b.ToTable("AspNetUserRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Value");
 
@@ -650,8 +637,7 @@ namespace FitnessApp.Migrations
                 {
                     b.HasOne("FitnessApp.Models.DB.Receiver", "Receiver")
                         .WithMany("Chat")
-                        .HasForeignKey("ReceiverId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ReceiverId");
 
                     b.HasOne("FitnessApp.Models.DB.Sender", "Sender")
                         .WithMany("Chat")
@@ -663,50 +649,43 @@ namespace FitnessApp.Migrations
                 {
                     b.HasOne("FitnessApp.Models.DB.Person", "Person")
                         .WithMany("Coach")
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("PersonId");
                 });
 
             modelBuilder.Entity("FitnessApp.Models.DB.CoachPlace", b =>
                 {
                     b.HasOne("FitnessApp.Models.DB.Coach", "Coach")
                         .WithMany("CoachPlaces")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Id");
 
                     b.HasOne("FitnessApp.Models.DB.Place", "Place")
                         .WithMany("CoachPlaces")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Id");
                 });
 
             modelBuilder.Entity("FitnessApp.Models.DB.Person", b =>
                 {
                     b.HasOne("FitnessApp.Models.DB.SexStatus", "SexStatus")
                         .WithMany("Person")
-                        .HasForeignKey("SexStatusId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("SexStatusId");
                 });
 
             modelBuilder.Entity("FitnessApp.Models.DB.PersonPhoto", b =>
                 {
                     b.HasOne("FitnessApp.Models.DB.Person", "Person")
                         .WithMany("PersonPhotos")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Id");
 
                     b.HasOne("FitnessApp.Models.DB.Photo", "Photo")
                         .WithMany("PersonPhotos")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Id");
                 });
 
             modelBuilder.Entity("FitnessApp.Models.DB.Place", b =>
                 {
                     b.HasOne("FitnessApp.Models.DB.Address", "Address")
                         .WithMany("Place")
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AddressId");
 
                     b.HasOne("FitnessApp.Models.DB.Photo")
                         .WithMany("Places")
@@ -717,8 +696,7 @@ namespace FitnessApp.Migrations
                 {
                     b.HasOne("FitnessApp.Models.DB.Place", "Place")
                         .WithMany("PlacePhotos")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Id");
 
                     b.HasOne("FitnessApp.Models.DB.Photo", "Photo")
                         .WithMany("PlacePhotos")
@@ -730,26 +708,22 @@ namespace FitnessApp.Migrations
                 {
                     b.HasOne("FitnessApp.Models.DB.Trainee", "Trainee")
                         .WithMany("Progress")
-                        .HasForeignKey("TraineeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TraineeId");
                 });
 
             modelBuilder.Entity("FitnessApp.Models.DB.RealService", b =>
                 {
                     b.HasOne("FitnessApp.Models.DB.Coach", "Coach")
                         .WithMany("RealService")
-                        .HasForeignKey("CoachId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CoachId");
 
                     b.HasOne("FitnessApp.Models.DB.Place", "Place")
                         .WithMany("RealService")
-                        .HasForeignKey("PlaceId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("PlaceId");
 
                     b.HasOne("FitnessApp.Models.DB.Service", "Service")
                         .WithMany("RealService")
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ServiceId");
 
                     b.HasOne("FitnessApp.Models.DB.Trainee", "Trainee")
                         .WithMany("RealService")
@@ -761,72 +735,64 @@ namespace FitnessApp.Migrations
                 {
                     b.HasOne("FitnessApp.Models.DB.Person", "Person")
                         .WithMany("Receiver")
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("PersonId");
                 });
 
             modelBuilder.Entity("FitnessApp.Models.DB.Reminder", b =>
                 {
                     b.HasOne("FitnessApp.Models.DB.RealService", "RealService")
                         .WithMany("Reminder")
-                        .HasForeignKey("RealServiceId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("RealServiceId");
                 });
 
             modelBuilder.Entity("FitnessApp.Models.DB.Sender", b =>
                 {
                     b.HasOne("FitnessApp.Models.DB.Person", "Person")
                         .WithMany("Sender")
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("PersonId");
                 });
 
             modelBuilder.Entity("FitnessApp.Models.DB.Speciality", b =>
                 {
                     b.HasOne("FitnessApp.Models.DB.Coach", "Coach")
                         .WithMany("Speciality")
-                        .HasForeignKey("CoachId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CoachId");
                 });
 
             modelBuilder.Entity("FitnessApp.Models.DB.Trainee", b =>
                 {
                     b.HasOne("FitnessApp.Models.DB.Person", "Person")
                         .WithMany("Trainee")
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("PersonId");
                 });
 
             modelBuilder.Entity("FitnessApp.Models.DB.TraineeAchivement", b =>
                 {
                     b.HasOne("FitnessApp.Models.DB.Achivement", "Achivement")
                         .WithMany("TraineeAchivements")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Id");
 
                     b.HasOne("FitnessApp.Models.DB.Trainee", "Trainee")
                         .WithMany("TraineeAchivements")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Id");
                 });
 
             modelBuilder.Entity("FitnessApp.Models.DB.Usabilities", b =>
                 {
                     b.HasOne("FitnessApp.Models.DB.Place", "Place")
                         .WithMany("Usabilities")
-                        .HasForeignKey("PlaceId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("PlaceId");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.HasOne("FitnessApp.Models.DB.Person")
                         .WithMany()
@@ -834,7 +800,7 @@ namespace FitnessApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.HasOne("FitnessApp.Models.DB.Person")
                         .WithMany()
@@ -842,9 +808,9 @@ namespace FitnessApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -855,7 +821,7 @@ namespace FitnessApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.HasOne("FitnessApp.Models.DB.Person")
                         .WithMany()

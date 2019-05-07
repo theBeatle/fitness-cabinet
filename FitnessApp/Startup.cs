@@ -1,26 +1,32 @@
-using FitnessApp.Models.DB;
+using System;
+using System.Net;
+using System.Text;
 using AutoMapper;
+using FitnessApp.Auth;
+using FitnessApp.Extensions;
+using FitnessApp.Helpers;
+using FitnessApp.Models.DB;
+using FitnessApp.Models.Facebook;
+using FitnessApp.Models.ViewModels;
+using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+//using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpsPolicy;
+//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.AspNetCore.SpaServices.AngularCli;
+//using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Swashbuckle.AspNetCore.Swagger;
-using FitnessApp.Models.ViewModels;
-using System.Text;
-using System;
-using Microsoft.AspNetCore.Identity;
-using FitnessApp.Helpers;
-using System.Net;
-using FitnessApp.Auth;
-using FitnessApp.Extensions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Diagnostics;
-using System.Diagnostics;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace FitnessApp
 {
@@ -40,9 +46,9 @@ namespace FitnessApp
         {
             services.AddDbContext<ApplicationContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
-              b => b.MigrationsAssembly("FitnessCabinet")));
+              b => b.MigrationsAssembly("FitnessApp"))); //FitnessCabinet
 
-            services.AddDefaultIdentity<AppUser>().AddEntityFrameworkStores<ApplicationContext>();
+            services.AddDefaultIdentity<Person>().AddEntityFrameworkStores<ApplicationContext>();
 
             services.AddSingleton<IJwtFactory, JwtFactory>();
 
@@ -52,7 +58,11 @@ namespace FitnessApp
             });
 
             services.AddAutoMapper();
-            
+
+            services.Configure<FacebookAuthSettings>(Configuration.GetSection(nameof(FacebookAuthSettings)));
+
+            services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
+
             var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
 
             services.AddCors(options =>
@@ -95,7 +105,7 @@ namespace FitnessApp
                 configureOptions.SaveToken = true;
             });
 
-            var builder = services.AddIdentityCore<AppUser>(o =>
+            var builder = services.AddIdentityCore<Person>(o =>
             {
                 o.Password.RequireDigit = false;    
                 o.Password.RequireLowercase = false;
@@ -109,7 +119,7 @@ namespace FitnessApp
             
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("AppUser", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess));
+                options.AddPolicy("Person", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess));
             });
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -118,10 +128,28 @@ namespace FitnessApp
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            //services.AddScoped<IDal, Dal>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            //app.UseCors(builder => builder.AllowAnyOrigin());
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            //app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            // specifying the Swagger JSON endpoint.
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            //    c.RoutePrefix = string.Empty;
+            //});
+
+            //app.UseMvc();
+
+
+            //////////////////////////////////////////////////////////////////////////
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -165,6 +193,17 @@ namespace FitnessApp
             });
             
             app.UseHttpsRedirection();
+
+            //app.UseStaticFiles();
+
+
+            //app.UseStaticFiles(new StaticFileOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+            //    RequestPath = new PathString("/Resources")
+            //});
+
+
             app.UseSpaStaticFiles();
 
             app.UseMvc(routes =>
