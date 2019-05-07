@@ -4,22 +4,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+import { MaterialModule } from './material';
+import { ProfileComponent } from './profile/profile.component';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { LoadPhotoComponent } from './load-photo/load-photo.component';
 import { PersonComponent } from './person/person.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { MatButtonModule, MatMenuModule, MatDatepickerModule } from '@angular/material';
 import { MatNativeDateModule, MatIconModule, MatCardModule } from '@angular/material';
 import { MatSidenavModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MatTooltipModule, MatToolbarModule } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
 import { PersonService } from './person.service';
 
 
@@ -30,7 +29,8 @@ import { PersonService } from './person.service';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    LoadPhotoComponent,
+    PersonComponent,
+    ProfileComponent,
     PersonComponent   
   ],
   imports: [
@@ -40,6 +40,7 @@ import { PersonService } from './person.service';
     ReactiveFormsModule,
     MatButtonModule,
     MatMenuModule,
+    MaterialModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
@@ -55,7 +56,7 @@ import { PersonService } from './person.service';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'load-photo', component: LoadPhotoComponent },
+      { path: 'profile', component: ProfileComponent },
     ]),
     AppRoutingModule
   ],

@@ -1,41 +1,13 @@
-import { Component } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { getContext } from '@angular/core/src/render3/discovery_utils';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { HttpEventType, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'profile-data',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  template: `
-  <mat-card  class="example-card">
-   <img src="http://synergymentor.ru/upload/iblock/43d/43d43cb8844432a2addf89f8be7200f7.jpg" style="width:200px;height:400" class="md-card-image" alt="image caption"/>
-  <mat-form-field class="example-full-width">
-    <input matInput  placeholder="Name" value="{{Name}}">
-  </mat-form-field>
-  <br />
-  <mat-form-field class="example-full-width">
-    <input matInput  placeholder="Sure Name" value="{{SureName}}">
-  </mat-form-field>
-  <br/>
-<mat-form-field>
-  <input matInput [matDatepicker]="picker" placeholder="Date of birth">
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
-</mat-form-field>
-  <br/>
-  <mat-form-field class="example-full-width">
-    <input matInput  placeholder="sex status" value="{{SexStatus}}">
-  </mat-form-field>
-  <br/>
-  <mat-button-toggle-group name="fontStyle"  aria-label="Font Style">
-    <button mat-raised-button [color]="'success'" (click)="PushInfo()">Edit</button>
-  </mat-button-toggle-group>
-  <br/>
-  <mat-slide-toggle (click)="ChangeBackground()">Dark mode</mat-slide-toggle>
-  </mat-card> `
-
 })
-
 
 export class ProfileComponent {
   Name = 'Maks';
@@ -47,8 +19,8 @@ export class ProfileComponent {
     this.Name = this.clickMessage2;
     this.SureName = this.clickMessage2;
     this.SexStatus = this.clickMessage2;
-    
-    
+
+
   }
   ChangeBackground() {
     this.flag = !this.flag;
@@ -62,5 +34,75 @@ export class ProfileComponent {
       up.style.backgroundColor = "white";
       down.style.backgroundColor = "white";
     }
+  }
+
+
+  public progress: number;
+  public message: string;
+  public response: boolean = true;
+  public imagePath;
+  imgURL: any;
+  public message2: string;
+
+  @Output() public onUploadFinished = new EventEmitter();
+
+  constructor(private http: HttpClient) { }
+  preview(files) {
+    if (files.length === 0)
+      return;
+
+    var mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message2 = "Only images are supported.";
+      return;
+    }
+
+    var reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+    }
+  }
+
+
+  ngOnInit() {
+  }
+
+  public uploadFile = (files) => {
+    if (files.length === 0) {
+      return;
+    }
+
+    var mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message2 = "Only images are supported.";
+      return;
+    }
+
+    var reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+    }
+
+    let fileToUpload = <File>files[0];
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+
+    this.http.post('https://localhost:44363/api/Upload', formData, { reportProgress: true, observe: 'events' })
+      .subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress)
+          this.progress = Math.round(100 * event.loaded / event.total);
+        else if (event.type === HttpEventType.Response) {
+          this.message = 'Upload success.';
+          this.onUploadFinished.emit(event.body);
+
+
+        }
+      });
+
+    this.progress = 0;
   }
 }
