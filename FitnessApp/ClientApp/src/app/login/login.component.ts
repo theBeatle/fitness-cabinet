@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   login(): void {
   
     let dbapp;
-      dbapp.append('username', this.userName);
+    dbapp.append('username', this.userName);
     dbapp.append('password', this.password);
     dbapp.controller("AuthController", ['$async', function ($async, ) {
       getDatafromDatabase(); 
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
               error => {
                 console.log(JSON.stringify(error.json()));
               }
-            )
+            ) 
             this.http.post('/api',
               JSON.stringify({
                 username: this.userName,
