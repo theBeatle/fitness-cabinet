@@ -9,6 +9,8 @@ import { BaseService } from "./base.service";
 import { Observable } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/Rx'; 
 
+import { NgForm} from '@angular/forms';
+
 // Add the RxJS Observable operators we need in this app.
 import '../../rxjs-operators';
 
@@ -34,15 +36,17 @@ export class UserService extends BaseService {
     this.baseUrl = configService.getApiURI();
   }
 
-  register(email: string, password: string, firstName: string, lastName: string,location: string): Observable<UserRegistration> {
-  let body = JSON.stringify({ email, password, firstName, lastName,location });
-  let headers = new Headers({ 'Content-Type': 'application/json' });
-  let options = new RequestOptions({ headers: headers });
+  register(email: string, password: string, firstName: string, lastName: string) {
+    let username = email;
+    let body = JSON.stringify({ username, password, firstName, lastName });
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
 
-  return this.http.post(this.baseUrl + "/registration", body, options)
-    .map(res => res.json())
-    .catch(this.handleError);
-  }  
+    console.log(this.baseUrl);
+    return this.http.post(this.baseUrl + "/Registration/register", body, options)
+      .subscribe(res => res.json() );
+
+  } 
 
    login(userName, password) {
     let headers = new Headers();
@@ -50,7 +54,7 @@ export class UserService extends BaseService {
 
     return this.http
       .post(
-      this.baseUrl + '/auth/login',
+      this.baseUrl + '/Auth/login',
       JSON.stringify({ userName, password }),{ headers }
       )
       .map(res => res.json())

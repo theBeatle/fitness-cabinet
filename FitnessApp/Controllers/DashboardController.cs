@@ -11,14 +11,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AngularASPNETCore2WebApiAuth.Controllers
 {
-    [Authorize(Policy = "ApiUser")]
+    [Authorize(Policy = "Person")]
     [Route("api/[controller]/[action]")]
     public class DashboardController : Controller
     {
         private readonly ClaimsPrincipal _caller;
         private readonly ApplicationContext _appDbContext;
 
-        public DashboardController(UserManager<AppUser> userManager, ApplicationContext appDbContext, IHttpContextAccessor httpContextAccessor)
+        public DashboardController(UserManager<Person> userManager, ApplicationContext appDbContext, IHttpContextAccessor httpContextAccessor)
         {
             _caller = httpContextAccessor.HttpContext.User;
             _appDbContext = appDbContext;
@@ -31,18 +31,15 @@ namespace AngularASPNETCore2WebApiAuth.Controllers
             // retrieve the user info
             //HttpContext.User
             var userId = _caller.Claims.Single(c => c.Type == "id");
-            var customer = await _appDbContext..Include(c => c.Identity).SingleAsync(c => c.Identity.Id == userId.Value);
+            var customer = await _appDbContext.Users.Include(c => c.Id).SingleAsync(c => c.Id == userId.Value);
 
             return new OkObjectResult(new
             {
                 Message = "This is secure API and user data!",
-                customer.Identity.FirstName,
-                customer.Identity.LastName,
-                customer.Identity.PictureUrl,
-                customer.Identity.FacebookId,
-                customer.Location,
-                customer.Locale,
-                customer.Gender
+                customer.FirstName,
+                customer.LastName,
+                customer.PictureUrl,
+                customer.FacebookId
             });
         }
     }

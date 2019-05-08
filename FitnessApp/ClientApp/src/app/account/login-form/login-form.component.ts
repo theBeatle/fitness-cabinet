@@ -29,7 +29,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     this.subscription = this.activatedRoute.queryParams.subscribe(
       (param: any) => {
          this.brandNew = param['brandNew'];   
-         this.credentials.email = param['email'];         
+        this.credentials.email = param['email'];         
       });      
   }
 

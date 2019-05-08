@@ -31,7 +31,7 @@ export class FacebookLoginComponent {
   handleMessage(event: Event) {
     const message = event as MessageEvent;
     // Only trust messages from the below origin.
-    if (message.origin !== "http://localhost:5000") return;
+    if (message.origin !== "https://localhost:44363") return;
 
     this.authWindow.close();
 

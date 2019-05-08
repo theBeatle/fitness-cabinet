@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace FitnessApp.Controllers
 {
-    [Route("api/login")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -30,7 +30,6 @@ namespace FitnessApp.Controllers
 
         // POST api/auth/login
         [HttpPost("login")]
-        [Route("Login")]
         public async Task<IActionResult> Login([FromBody]CredentialsViewModel credentials)
         {
             if (!ModelState.IsValid)
