@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-//using Dal;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Http;
@@ -13,33 +12,10 @@ using Microsoft.AspNetCore.Mvc;
 using FitnessApp.Models.DB;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitnessApp.Controllers
 {
-    public class Dal
-    {
-        private readonly ApplicationContext db;
-        private readonly UserManager<Person> userManager;
-
-       public Dal(ApplicationContext dB, UserManager<Person> UserManager)
-        {
-            db = dB;
-            userManager = UserManager;
-        }
-
-        public async Task LoadFile(string id, string path)
-        {
-           // var count1 = db.Person.Count();
-            var person = await userManager.FindByIdAsync(id);
-            var photo = new Photo() { Path = path};
-            
-            var perPhoto = new PersonPhoto() { Person = person, Photo = photo  };
-
-            db.Photos.Add(photo);
-        }
-    }
-
-
     [Route("api/[controller]")]
     [ApiController]
     [RequireHttps]
@@ -49,42 +25,99 @@ namespace FitnessApp.Controllers
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly ApplicationContext db;
         private readonly UserManager<Person> _userManager;
-        //readonly Dal db = new Dal(dB, );
-
 
 
         public UploadController(IHostingEnvironment env, ApplicationContext dB, UserManager<Person> userManager)
         {
             _hostingEnvironment = env;
+          
             db = dB;
             _userManager = userManager;
         }
 
-        public async Task LoadFile(string id, string path)
-        {
-            // var count1 = db.Person.Count();
-            var person = await _userManager.FindByIdAsync(id);
+        private async Task LoadFile(string name, string path)
+        {           
+            var person = await _userManager.FindByNameAsync(name);
             var photo = new Photo() { Path = path };
-
             var perPhoto = new PersonPhoto() { Person = person, Photo = photo };
 
             db.Photos.Add(photo);
+            db.SaveChanges();
         }
 
 
-        [HttpPost/*("{id}")*/, DisableRequestSizeLimit]
-        public async Task<IActionResult> Upload(/*string id*/)
-        {
-            string id = "893a36d9-262a-437f-8da7-3f5440cd2646";
-            //User.Identity.IsAuthenticated -> true
+        // GET: api/People
+        //[HttpGet, DisableRequestSizeLimit]
+        //public async Task<ActionResult<IEnumerable<Person>>> GetPeople()
+        //{
+        //    try
+        //    {
+        //        return await _userManager.Users.ToListAsync();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"Internal server error: {ex}");
+        //    }           
+        //}
 
+
+        // PUT: api/People/5
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutPerson(long id, Person person)
+        //{            
+        //     var oldPerson = await _userManager.FindByNameAsync("string");
+
+        //    _context.Entry(person).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!PersonExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return NoContent();
+        //}
+
+
+        // GET: api/Person
+        [HttpGet, DisableRequestSizeLimit]
+        public async Task<ActionResult<Person>> GetPerson()
+        {
+            try
+            {
+                return await _userManager.FindByNameAsync("string");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
+        }
+
+
+        [HttpPost, DisableRequestSizeLimit]
+        public async Task<IActionResult> Upload()
+        {            
+            //User.Identity.IsAuthenticated -> true
             //var userToVerify = await _userManager.FindByNameAsync(User.Identity.Name);
-            //user.identity.name
+            
+            var person = await _userManager.FindByNameAsync("string");
+            string id = person.Id;
+
             try
             {
                 var file = Request.Form.Files[0];
 
-                var folderName = Path.Combine("Resources", "People", id);               
+                var folderName = Path.Combine("Resources", "People", id);
 
                 string webRootPath = _hostingEnvironment.WebRootPath;
                 string contentRootPath = _hostingEnvironment.ContentRootPath;
@@ -94,14 +127,14 @@ namespace FitnessApp.Controllers
                 if (!Directory.Exists(pathToSave))
                 {
                     Directory.CreateDirectory(pathToSave);
-                }                
+                }
 
-               if (file.Length > 0)
+                if (file.Length > 0)
                 {
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     var fullPath = Path.Combine(pathToSave, fileName);
 
-                    await db.LoadFile(id, fullPath);                    
+                    await LoadFile(person.UserName, fullPath);
                     var dbPath = Path.Combine(folderName, fileName);
 
                     using (var stream = new FileStream(fullPath, FileMode.Create))
@@ -118,7 +151,7 @@ namespace FitnessApp.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, $"Internal server error: {ex}");
             }
         }
     }

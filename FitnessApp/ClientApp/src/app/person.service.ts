@@ -10,29 +10,29 @@ import { Person } from './person';
 })
 export class PersonService {
 
-  url = 'https://localhost:44363/api';
+  url = 'https://localhost:44363/api/Upload/';
   httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };
 
 
   constructor(private http: HttpClient) { }
 
-  getAllPeople(): Observable<Person[]> {
-    return this.http.get<Person[]>(this.url + '/Profile');
+  // getAllPeople(): Observable<Person[]> {
+  //   return this.http.get<Person[]>(this.url + '/Upload');
+  // }
+
+  getWorkerByUserName(): Observable<Person> {
+    return this.http.get<Person>(this.url);
   }
 
-  getWorkerById(WorkerId: string): Observable<Person> {
-    return this.http.get<Person>(this.url + '/Profile/' + WorkerId);
-  }
+  // createWorker(worker: Person): Observable<Person> {
+  //   return this.http.post<Person>(this.url + '/Upload/', worker, this.httpOptions);
+  // }
 
-  createWorker(worker: Person): Observable<Person> {
-    return this.http.post<Person>(this.url + '/Profile/', worker, this.httpOptions);
-  }
+  // updateWorker(worker: Person): Observable<Person> {
+  //   return this.http.put<Person>(this.url + '/Upload/' + worker.userName, worker, this.httpOptions);
+  // }
 
-  updateWorker(worker: Person): Observable<Person> {
-    return this.http.put<Person>(this.url + '/Profile/' + worker.Id, worker, this.httpOptions);
-  }
-
-  deleteWorkerById(workerId: string): Observable<number> {
-    return this.http.delete<number>(this.url + '/Profile/' + workerId, this.httpOptions);
-  }
+  // deleteWorkerById(WorkerUserName: string): Observable<number> {
+  //   return this.http.delete<number>(this.url + '/Upload/' + WorkerUserName, this.httpOptions);
+  // }
 }

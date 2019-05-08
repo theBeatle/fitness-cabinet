@@ -13,106 +13,120 @@ export class PersonComponent implements OnInit {
 
   dataSaved = false;
   personForm: any;
-  allPeople: Observable<Person[]>;
-  workerIdUpdate = null;
+  // allPeople: Observable<Person[]>;
+  user:Observable<Person>;
+  userNameUpdate = null;
   message = null;
 
   constructor(private formbulider: FormBuilder, private wS: PersonService) { }
 
+  // userName:string
+  // firstName:string;
+  // lastName :string;
+  // email:string;
+  // sexStatusId :number;
+  // phoneNumber:string;  
+  // isDeleted:boolean;
+  // isBanned:boolean;
+  
+
   ngOnInit() {
     this.personForm = this.formbulider.group({
-      Login: ['', [Validators.required]],
-      Password: ['', [Validators.required]],
-      FirstName: ['', [Validators.required]],
-      LastName: ['', [Validators.required]],
-      Email: ['', [Validators.required]],
-      SexStatusId: ['', [Validators.required]],
-      Phone: ['', [Validators.required]],
-      IsDeleted: ['', [Validators.required]],     
-      IsBanned: ['', [Validators.required]],
+      userName: ['', [Validators.required]],     
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      sexStatusId: ['', [Validators.required]],
+      phoneNumber: ['', [Validators.required]],
+      isDeleted: ['', [Validators.required]],     
+      isBanned: ['', [Validators.required]],
     
     });
-     this.loadAllWorkers();
+     this.loadUserByUserName()
   }
 
-  loadAllWorkers() {
-    this.allPeople = this.wS.getAllPeople();
-    for (let index in this.allPeople) {
-      console.log(index);
-      
-    }
-    console.log( this.allPeople);
+  loadUserByUserName(){
+   
+this.user = this.wS.getWorkerByUserName();
+console.log( this.user);
   }
+
+  // loadAllWorkers() {
+  //   this.allPeople = this.wS.getAllPeople();
+  //   for (let index in this.allPeople) {
+  //     console.log(index);
+      
+  //   }
+  //   console.log( this.allPeople);
+  // }
 
   onFormSubmit() {
     this.dataSaved = false;
     const worker = this.personForm.value;
-    this.CreateWorker(worker);
+    // this.CreateWorker(worker);
+    this.loadUserByUserName()
     this.personForm.reset();
   }
 
-  CreateWorker(worker: Person) {
-    if (this.workerIdUpdate == null) {
-      this.wS.createWorker(worker).subscribe(
-        () => {
-          this.dataSaved = true;
-          this.message = 'Record saved Successfully';
-          this.loadAllWorkers();
-          this.workerIdUpdate = null;
-          this.personForm.reset();
-        }
-      );
-    } else {
-      worker.Id = this.workerIdUpdate;
-      this.wS.updateWorker(worker).subscribe(() => {
-        this.dataSaved = true;
-        this.message = 'Record Updated Successfully';
-        this.loadAllWorkers();
-        this.workerIdUpdate = null;
-        this.personForm.reset();
-      });
-    }
-  }
+  // CreateWorker(worker: Person) {
+  //   if (this.workerIdUpdate == null) {
+  //     this.wS.createWorker(worker).subscribe(
+  //       () => {
+  //         this.dataSaved = true;
+  //         this.message = 'Record saved Successfully';
+  //         this.loadAllWorkers();
+  //         this.workerIdUpdate = null;
+  //         this.personForm.reset();
+  //       }
+  //     );
+  //   } else {
+  //     worker.Id = this.workerIdUpdate;
+  //     this.wS.updateWorker(worker).subscribe(() => {
+  //       this.dataSaved = true;
+  //       this.message = 'Record Updated Successfully';
+  //       this.loadAllWorkers();
+  //       this.workerIdUpdate = null;
+  //       this.personForm.reset();
+  //     });
+  //   }
+  // }
 
-  deleteWorker(workerId: string) {
-    if (confirm('Are you sure you want to delete this ?')) {
-      this.wS.deleteWorkerById(workerId).subscribe(() => {
-        this.dataSaved = true;
-        this.message = 'Record Deleted Succefully';
-        this.loadAllWorkers();
-        this.workerIdUpdate = null;
-        this.personForm.reset();
-      });
-    }
-  }
+  // deleteWorker(workerId: string) {
+  //   if (confirm('Are you sure you want to delete this ?')) {
+  //     this.wS.deleteWorkerById(workerId).subscribe(() => {
+  //       this.dataSaved = true;
+  //       this.message = 'Record Deleted Succefully';
+  //       this.loadAllWorkers();
+  //       this.workerIdUpdate = null;
+  //       this.personForm.reset();
+  //     });
+  //   }
+  // }
 
-  loadWorkerToEdit(workerId: string) {
-    this.wS.getWorkerById(workerId).subscribe( w => {
+  loadWorkerToEdit() {
+    this.wS.getWorkerByUserName().subscribe( w => {
       this.message = null;
       this.dataSaved = false;
-      this.workerIdUpdate = w.Id;
+      // this.userNameUpdate = w.userName;
 
-      this.personForm.controls.Login.setValue(w.Login);
-      this.personForm.controls.Password.setValue(w.Password);
-      this.personForm.controls.FirstName.setValue(w.FirstName);
-      this.personForm.controls.LastName.setValue(w.LastName);
-      this.personForm.controls.Email.setValue(w.Email);
-      this.personForm.controls.SexStatusId.setValue(w.SexStatusId);
-      this.personForm.controls.Phone.setValue(w.Phone);
-      this.personForm.controls.IsDeleted.setValue(w.IsDeleted);
-      this.personForm.controls.IsBanned.setValue(w.IsBanned);
+      this.personForm.controls.userName.setValue(w.userName);     
+      this.personForm.controls.firstName.setValue(w.firstName);
+      this.personForm.controls.lastName.setValue(w.lastName);
+      this.personForm.controls.email.setValue(w.email);
+      this.personForm.controls.sexStatusId.setValue(w.sexStatusId);
+      this.personForm.controls.phoneNumber.setValue(w.phoneNumber);
+      this.personForm.controls.isDeleted.setValue(w.isDeleted);
+      this.personForm.controls.isBanned.setValue(w.isBanned);
     });
-  }
-
-  //   Login:string;
-    // Password :string;
-    // FirstName:string;
-    // LastName :string;
-    // Email:string;
-    // SexStatusId :number;
-    // Phone:string;  
-    // IsDeleted:boolean;
-    // IsBanned:boolean;
+  }  
+    // userName:string
+  // firstName:string;
+  // lastName :string;
+  // email:string;
+  // sexStatusId :number;
+  // phoneNumber:string;  
+  // isDeleted:boolean;
+  // isBanned:boolean;
 
   resetForm() {
     this.personForm.reset();
