@@ -1,14 +1,15 @@
 export class Person {
-    Id:number;
-    Login:string;
-    Password :string;
-    FirstName:string;
-    LastName :string;
-    Email:string;
-    SexStatusId :number;
-    Phone:string;  
-    IsDeleted:boolean;
-    IsBanned:boolean;
+    // Id:number;
+    // Login:string;
+    // Password :string;
+    userName:string
+    firstName:string;
+    lastName :string;
+    email:string;
+    sexStatusId :number;
+    phoneNumber:string;  
+    isDeleted:boolean;
+    isBanned:boolean;
 }
 
 // public long Id { get; set; }

@@ -61,6 +61,34 @@ namespace FitnessApp.Controllers
         //}
 
 
+        // PUT: api/People/5
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutPerson(long id, Person person)
+        //{            
+        //     var oldPerson = await _userManager.FindByNameAsync("string");
+
+        //    _context.Entry(person).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!PersonExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return NoContent();
+        //}
+
+
         // GET: api/Person
         [HttpGet, DisableRequestSizeLimit]
         public async Task<ActionResult<Person>> GetPerson()
