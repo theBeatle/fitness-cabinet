@@ -1,15 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 imports: [
-  FormsModule,  
+  FormsModule,
 ]
 import { CommonModule } from '@angular/common';
 import {
   MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
-  MatToolbarModule, MatMenuModule,MatIconModule, MatProgressSpinnerModule
+  MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule
 } from '@angular/material';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -27,48 +27,48 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CounterComponent,
     FetchDataComponent,
     LoginComponent,
-  
+
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    //BrowserAnimationsModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'login', component: LoginComponent }
     ]),
-  CommonModule, 
-  MatToolbarModule,
-  MatButtonModule, 
-  MatCardModule,
-  MatInputModule,
-  MatDialogModule,
-  MatTableModule,
-  MatMenuModule,
-  MatIconModule,
-  MatProgressSpinnerModule,
-  BrowserModule,
-  FormsModule
+    CommonModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatCardModule,
+    MatInputModule,
+    MatDialogModule,
+    MatTableModule,
+    MatMenuModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    BrowserModule,
+    FormsModule
 
   ],
   exports: [
-  CommonModule,
-   MatToolbarModule, 
-   MatButtonModule, 
-   MatCardModule, 
-   MatInputModule, 
-   MatDialogModule, 
-   MatTableModule, 
-   MatMenuModule,
-   MatIconModule,
-   MatProgressSpinnerModule,
-   FormsModule,
-   BrowserModule
-   ],
-  
+    CommonModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatCardModule,
+    MatInputModule,
+    MatDialogModule,
+    MatTableModule,
+    MatMenuModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    FormsModule,
+    BrowserModule
+  ],
+
   providers: [],
   bootstrap: [AppComponent]
 })
