@@ -182,6 +182,7 @@ namespace FitnessApp
                 {
                     spa.UseAngularCliServer(npmScript: "start");
                     spa.Options.StartupTimeout = new TimeSpan(0, 0, 90);
+                    spa.UseProxyToSpaDevelopmentServer("https://localhost:4200");
                 }
             });
 
