@@ -1,7 +1,10 @@
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { getContext } from '@angular/core/src/render3/discovery_utils';
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { HttpEventType, HttpClient } from '@angular/common/http';
+import { Component, Output, OnInit, EventEmitter } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { PersonService } from '../person.service';
+import { Person } from '../person';
+
 
 @Component({
   selector: 'profile-data',
@@ -9,7 +12,24 @@ import { HttpEventType, HttpClient } from '@angular/common/http';
   styleUrls: ['./profile.component.css'],
 })
 
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
+
+  dataSaved = false;
+  personForm: any;
+  // allPeople: Observable<Person[]>;
+  user: Observable<Person>;
+  userNameUpdate = null;
+  message = null;
+  public progress: number;
+  public response: boolean = true;
+  public imagePath;
+  imgURL: any;
+  public message2: string;
+
+  @Output() public onUploadFinished = new EventEmitter();
+  http: any;
+
+  constructor(private formbulider: FormBuilder, private wS: PersonService) { }
   Name = 'Maks';
   SureName = 'Iskandirov';
   SexStatus = 'Men';
@@ -37,16 +57,7 @@ export class ProfileComponent {
   }
 
 
-  public progress: number;
-  public message: string;
-  public response: boolean = true;
-  public imagePath;
-  imgURL: any;
-  public message2: string;
 
-  @Output() public onUploadFinished = new EventEmitter();
-
-  constructor(private http: HttpClient) { }
   preview(files) {
     if (files.length === 0)
       return;
@@ -66,8 +77,62 @@ export class ProfileComponent {
   }
 
 
+
   ngOnInit() {
+    this.personForm = this.formbulider.group({
+      userName: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      sexStatusId: ['', [Validators.required]],
+      phoneNumber: ['', [Validators.required]],
+      isDeleted: ['', [Validators.required]],
+      isBanned: ['', [Validators.required]],
+
+    });
+
+    this.loadUserByUserName()
   }
+
+  loadUserByUserName() {
+
+    this.user = this.wS.getWorkerByUserName();
+    console.log(this.user);
+  }
+
+  onFormSubmit() {
+    this.dataSaved = false;
+    const worker = this.personForm.value;
+    // this.CreateWorker(worker);
+    this.loadUserByUserName()
+    this.personForm.reset();
+  }
+
+
+  loadWorkerToEdit() {
+    this.wS.getWorkerByUserName().subscribe(w => {
+      this.message = null;
+      this.dataSaved = false;
+      // this.userNameUpdate = w.userName;
+
+      this.personForm.controls.userName.setValue(w.userName);
+      this.personForm.controls.firstName.setValue(w.firstName);
+      this.personForm.controls.lastName.setValue(w.lastName);
+      this.personForm.controls.email.setValue(w.email);
+      this.personForm.controls.sexStatusId.setValue(w.sexStatusId);
+      this.personForm.controls.phoneNumber.setValue(w.phoneNumber);
+      this.personForm.controls.isDeleted.setValue(w.isDeleted);
+      this.personForm.controls.isBanned.setValue(w.isBanned);
+    });
+  }
+
+
+  resetForm() {
+    this.personForm.reset();
+    this.message = null;
+    this.dataSaved = false;
+  }
+
 
   public uploadFile = (files) => {
     if (files.length === 0) {
@@ -91,6 +156,9 @@ export class ProfileComponent {
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
 
+
+
+
     this.http.post('https://localhost:44363/api/Upload', formData, { reportProgress: true, observe: 'events' })
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress)
@@ -102,7 +170,6 @@ export class ProfileComponent {
 
         }
       });
-
     this.progress = 0;
   }
 }

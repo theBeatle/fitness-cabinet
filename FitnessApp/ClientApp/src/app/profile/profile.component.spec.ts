@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ProfileComponent } from './profile.component';
-import { CounterComponent } from '../counter/counter.component';
+
+import { ProfileComponent } from '../profile/profile.component';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -8,9 +8,9 @@ describe('ProfileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileComponent ]
+      declarations: [ProfileComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -23,6 +23,7 @@ describe('ProfileComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
 //describe('CounterComponent', () => {
 //  let component: CounterComponent;
 //  let fixture: ComponentFixture<CounterComponent>;

@@ -11,7 +11,6 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { PersonComponent } from './person/person.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatMenuModule, MatDatepickerModule } from '@angular/material';
@@ -29,9 +28,7 @@ import { PersonService } from './person.service';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    PersonComponent,
     ProfileComponent,
-    PersonComponent   
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

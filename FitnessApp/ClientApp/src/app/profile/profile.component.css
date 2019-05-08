@@ -28,8 +28,12 @@ small {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
 }
-.mat-success {
-  background-color: gray;
+.mat-success-light {
+  background-color: lawngreen;
+  color: #fff;
+}
+.mat-success-dark {
+  background-color: red;
   color: #fff;
 }
 .upload {
