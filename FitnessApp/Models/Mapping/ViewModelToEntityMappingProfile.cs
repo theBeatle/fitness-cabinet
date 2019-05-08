@@ -8,7 +8,7 @@ namespace FitnessApp.Models.Mapping
     {
         public ViewModelToEntityMappingProfile()
         {
-            CreateMap<RegistrationViewModel, AppUser>().ForMember(au => au.Login, map => map.MapFrom(vm => vm.Login));
+            CreateMap<RegistrationViewModel, Person>().ForMember(au => au.UserName, map => map.MapFrom(vm => vm.UserName));
         }
     }
 }
