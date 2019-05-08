@@ -28,9 +28,9 @@ export class PersonService {
   //   return this.http.post<Person>(this.url + '/Upload/', worker, this.httpOptions);
   // }
 
-  // updateWorker(worker: Person): Observable<Person> {
-  //   return this.http.put<Person>(this.url + '/Upload/' + worker.userName, worker, this.httpOptions);
-  // }
+  updateUser(worker: Person): Observable<Person> {
+    return this.http.put<Person>(this.url , worker, this.httpOptions);
+  }
 
   // deleteWorkerById(WorkerUserName: string): Observable<number> {
   //   return this.http.delete<number>(this.url + '/Upload/' + WorkerUserName, this.httpOptions);

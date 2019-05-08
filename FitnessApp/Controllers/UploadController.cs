@@ -13,6 +13,7 @@ using FitnessApp.Models.DB;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace FitnessApp.Controllers
 {
@@ -62,31 +63,56 @@ namespace FitnessApp.Controllers
 
 
         // PUT: api/People/5
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutPerson(long id, Person person)
-        //{            
-        //     var oldPerson = await _userManager.FindByNameAsync("string");
+        [HttpPut/*("{id}")*/]
+        public async Task<IActionResult> PutPerson(/*long id,*/ Person person)
+        {
+            var oldPerson = await _userManager.FindByNameAsync("string");
 
-        //    _context.Entry(person).State = EntityState.Modified;
+            //       userName: string
+            //firstName:string;
+            //       lastName: string;
+            //       email: string;
+            //       sexStatusId: number;
+            //       phoneNumber: string;
+            //       isDeleted: boolean;
+            //       isBanned: boolean;
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!PersonExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            oldPerson.FirstName = person.FirstName;
+            oldPerson.LastName = person.LastName;
+            oldPerson.Email = person.Email;
+            oldPerson.SexStatus = new SexStatus { Sex = "default" }; //         SexStatusId = person.SexStatusId;
+            oldPerson.PhoneNumber = person.PhoneNumber;
+            oldPerson.IsDeleted = person.IsDeleted;
+            oldPerson.IsBanned = person.IsBanned;
+            //SexStatus 
+            
+            //IdentityResult result = await UserManager.UpdateAsync(user);
+            //db.Entry(person).State = EntityState.Modified;
 
-        //    return NoContent();
-        //}
+            try
+            {
+                var result = await _userManager.UpdateAsync(oldPerson);
+                await db.SaveChangesAsync();
+               
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                if (oldPerson==null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok();
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
+
+            return NoContent();
+        }
 
 
         // GET: api/Person
@@ -154,5 +180,11 @@ namespace FitnessApp.Controllers
                 return StatusCode(500, $"Internal server error: {ex}");
             }
         }
+
+        //private async Task<IActionResult> PersonExists(string name)
+        //{
+        //    //return _context.People.Any(e => e.Id == id);
+        //    return await _userManager.FindByNameAsync("string");
+        //}
     }
 }

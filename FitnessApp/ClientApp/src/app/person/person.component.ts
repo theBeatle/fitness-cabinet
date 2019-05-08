@@ -51,6 +51,14 @@ this.user = this.wS.getWorkerByUserName();
 console.log( this.user);
   }
 
+  
+
+  editUser(){
+   
+    this.user = this.wS.getWorkerByUserName();
+    console.log( this.user);
+      }
+
   // loadAllWorkers() {
   //   this.allPeople = this.wS.getAllPeople();
   //   for (let index in this.allPeople) {
@@ -60,12 +68,22 @@ console.log( this.user);
   //   console.log( this.allPeople);
   // }
 
+
+
   onFormSubmit() {
     this.dataSaved = false;
-    const worker = this.personForm.value;
+    const user = this.personForm.value;
     // this.CreateWorker(worker);
-    this.loadUserByUserName()
-    this.personForm.reset();
+    //this.userNameUpdate();
+    console.log(user);
+    this.wS.updateUser(user)
+      .subscribe({
+        next: res => { 
+          console.log(res); 
+          this.personForm.reset(); },
+        error: err => { 
+          console.log(err); }});
+    //this.personForm.reset();
   }
 
   // CreateWorker(worker: Person) {
