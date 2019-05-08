@@ -1,6 +1,6 @@
 export class Login {
  
-    public login: string;
+    public username: string;
     public password: string;
     
 }
