@@ -1,9 +1,7 @@
 <mat-card class="example-card">
-    <img src="http://synergymentor.ru/upload/iblock/43d/43d43cb8844432a2addf89f8be7200f7.jpg" style="width:200px;height:200px" class="md-card-image" alt="image caption" />
+    <img [src]="imgURL" *ngIf="imgURL" style="width:200px;height:200px;background-repeat: no-repeat;" class="md-card-image" alt="image caption" />
 
     <mat-form-field class="example-full-width">
-
-      <img [src]="imgURL" height="200" width="200" * ngIf="imgURL" />
       <input type="file" #file placeholder="Choose file" accept='image/*' (change)="uploadFile(file.files)" style="display:none;">
       <button mat-raised-button [color]="'success'" (click)="file.click()"> Upload File</button>
       <div class="container"></div>
