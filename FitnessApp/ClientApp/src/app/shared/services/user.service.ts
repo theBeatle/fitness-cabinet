@@ -44,7 +44,7 @@ export class UserService extends BaseService {
 
     console.log(this.baseUrl);
     return this.http.post(this.baseUrl + "/Registration/register", body, options)
-      .subscribe(res => res.json() );
+      .subscribe();
 
   } 
 

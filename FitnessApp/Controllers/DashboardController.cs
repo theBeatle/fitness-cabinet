@@ -12,34 +12,35 @@ using Microsoft.EntityFrameworkCore;
 namespace AngularASPNETCore2WebApiAuth.Controllers
 {
     [Authorize(Policy = "Person")]
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     public class DashboardController : Controller
     {
         private readonly ClaimsPrincipal _caller;
+        private readonly UserManager<Person> _userManager;
         private readonly ApplicationContext _appDbContext;
 
         public DashboardController(UserManager<Person> userManager, ApplicationContext appDbContext, IHttpContextAccessor httpContextAccessor)
         {
+            _userManager = userManager;
             _caller = httpContextAccessor.HttpContext.User;
             _appDbContext = appDbContext;
         }
 
         // GET api/dashboard/home
-        [HttpGet]
+        [HttpGet("home")]
         public async Task<IActionResult> Home()
         {
             // retrieve the user info
             //HttpContext.User
             var userId = _caller.Claims.Single(c => c.Type == "id");
-            var customer = await _appDbContext.Users.Include(c => c.Id).SingleAsync(c => c.Id == userId.Value);
+            var person = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId.Value);
 
             return new OkObjectResult(new
             {
                 Message = "This is secure API and user data!",
-                customer.FirstName,
-                customer.LastName,
-                customer.PictureUrl,
-                customer.FacebookId
+                person.FirstName,
+                person.LastName,
+                person.UserName
             });
         }
     }
