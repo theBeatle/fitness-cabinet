@@ -6,8 +6,6 @@ using FitnessApp.Models.DB;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Diagnostics;
-using System;
 
 namespace FitnessApp.Controllers
 {
@@ -28,8 +26,8 @@ namespace FitnessApp.Controllers
             _logger = logger;
         }
 
-        // POST api/auth/registration
-        [HttpPost("registration")]
+        // POST api/registration/register
+        [HttpPost("register")]
         public async Task<IActionResult> Registration([FromBody]RegistrationViewModel model)
         {
             if (!ModelState.IsValid)
