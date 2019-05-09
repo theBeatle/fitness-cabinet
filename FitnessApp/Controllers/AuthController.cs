@@ -27,7 +27,7 @@ namespace FitnessApp.Controllers
             _jwtFactory = jwtFactory;
             _jwtOptions = jwtOptions.Value;
             _logger = logger;
-        }
+        } 
 
         // POST api/auth/login
         [HttpPost("login")]

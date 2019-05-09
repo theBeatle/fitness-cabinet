@@ -8,7 +8,6 @@ using FitnessApp.Helpers;
 using FitnessApp.Models.DB;
 using FitnessApp.Models.Facebook;
 using FitnessApp.Models.ViewModels;
-using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Diagnostics;
@@ -27,6 +26,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace FitnessApp
 {
@@ -76,7 +76,6 @@ namespace FitnessApp
                 options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
                 options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
             });
-
 
             var tokenValidationParameters = new TokenValidationParameters
             {

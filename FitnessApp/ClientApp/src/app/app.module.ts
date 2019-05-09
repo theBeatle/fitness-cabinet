@@ -1,13 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms'; 
+import { HttpModule, XHRBackend } from '@angular/http';
+import { AuthenticateXHRBackend } from './authenticate-xhr.backend';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+import { routing } from './app.routing';
+
+/* App Root */
 import { MaterialModule } from './material';
 import { ProfileComponent } from './profile/profile.component';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
@@ -20,6 +26,12 @@ import { MatTooltipModule, MatToolbarModule } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { PersonService } from './person.service';
 
+/* Account Imports */
+import { AccountModule }  from './account/account.module';
+/* Dashboard Imports */
+import { DashboardModule }  from './dashboard/dashboard.module';
+
+import { ConfigService } from './shared/utils/config.service';
 
 @NgModule({
   declarations: [
@@ -29,10 +41,13 @@ import { PersonService } from './person.service';
     CounterComponent,
     FetchDataComponent,
     ProfileComponent,
+    HeaderComponent,
+    HomeComponent      
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
+    AccountModule,
+    DashboardModule,
+    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
@@ -61,6 +76,10 @@ import { PersonService } from './person.service';
     HttpClientModule,
     PersonService
   ],
+  providers: [ConfigService, { 
+    provide: XHRBackend, 
+    useClass: AuthenticateXHRBackend
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
