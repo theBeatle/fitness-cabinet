@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule, XHRBackend } from '@angular/http';
 import { AuthenticateXHRBackend } from './authenticate-xhr.backend';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 
@@ -19,14 +20,14 @@ import { MatNativeDateModule, MatIconModule, MatCardModule } from '@angular/mate
 import { MatSidenavModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MatTooltipModule, MatToolbarModule } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { PersonService } from './person.service';
-
 /* Account Imports */
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { AccountModule }  from './account/account.module';
 /* Dashboard Imports */
 import { DashboardModule }  from './dashboard/dashboard.module';
 
 import { ConfigService } from './shared/utils/config.service';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -38,9 +39,10 @@ import { ConfigService } from './shared/utils/config.service';
   imports: [
     AccountModule,
     DashboardModule,
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MatButtonModule,
     HttpModule,
     MatMenuModule,

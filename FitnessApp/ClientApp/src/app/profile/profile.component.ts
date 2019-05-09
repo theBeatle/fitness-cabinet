@@ -84,13 +84,12 @@ export class ProfileComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required]],
-      sexStatusId: ['', [Validators.required]],
+      sexStatus: ['', [Validators.required]],
       phoneNumber: ['', [Validators.required]],
       isDeleted: ['', [Validators.required]],
       isBanned: ['', [Validators.required]],
 
     });
-
     this.loadUserByUserName()
   }
 
@@ -100,39 +99,50 @@ export class ProfileComponent implements OnInit {
     console.log(this.user);
   }
 
-  onFormSubmit() {
-    this.dataSaved = false;
-    const worker = this.personForm.value;
-    // this.CreateWorker(worker);
-    this.loadUserByUserName()
-    this.personForm.reset();
+  editUser() {
+
+    this.user = this.wS.getWorkerByUserName();
+    console.log(this.user);
   }
 
+  onFormSubmit() {
+    this.dataSaved = false;
+    const user = this.personForm.value;
+
+    console.log(user);
+    this.wS.updateUser(user)
+      .subscribe({
+        next: res => {
+          console.log(res);
+          this.personForm.reset();
+        },
+        error: err => {
+          console.log(err);
+        }
+      });
+  }
 
   loadWorkerToEdit() {
     this.wS.getWorkerByUserName().subscribe(w => {
       this.message = null;
       this.dataSaved = false;
-      // this.userNameUpdate = w.userName;
 
       this.personForm.controls.userName.setValue(w.userName);
       this.personForm.controls.firstName.setValue(w.firstName);
       this.personForm.controls.lastName.setValue(w.lastName);
       this.personForm.controls.email.setValue(w.email);
-      this.personForm.controls.sexStatusId.setValue(w.sexStatusId);
+      this.personForm.controls.sexStatus.setValue(w.sexStatus);
       this.personForm.controls.phoneNumber.setValue(w.phoneNumber);
       this.personForm.controls.isDeleted.setValue(w.isDeleted);
       this.personForm.controls.isBanned.setValue(w.isBanned);
     });
   }
 
-
   resetForm() {
     this.personForm.reset();
     this.message = null;
     this.dataSaved = false;
   }
-
 
   public uploadFile = (files) => {
     if (files.length === 0) {

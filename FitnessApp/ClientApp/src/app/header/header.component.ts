@@ -3,7 +3,6 @@ import {Subscription} from 'rxjs/Subscription';
 
 import { UserService } from '../shared/services/user.service';
 
-import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -16,15 +15,11 @@ export class HeaderComponent implements OnInit,OnDestroy {
   status: boolean;
  subscription:Subscription;
 
-  constructor(private userService: UserService, private router: Router) {     
+  constructor(private userService: UserService) {     
    }
 
    logout() {
      this.userService.logout();       
-  }
-
-  profile() {
-    this.router.navigate(["profile"]);
   }
 
   ngOnInit() {

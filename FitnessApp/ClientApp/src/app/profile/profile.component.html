@@ -1,17 +1,17 @@
 <mat-card class="example-card">
   <img [src]="imgURL" *ngIf="imgURL" style="height:200px;background-repeat: no-repeat;" class="md-card-image" alt="image caption" />
 
-  <mat-form-field class="example-full-width">
-    <input type="file" #file placeholder="Choose file" accept='image/*' (change)="uploadFile(file.files)" style="display:none;">
+  <!--<mat-form-field class="demo-full-width">
+    <input   type="file" #file placeholder="Choose file" accept='image/*' (change)="uploadFile(file.files)" style="display:none;">
     <button mat-raised-button [color]="'success-light'" (click)="file.click()"> Upload File</button>
     <div class="container"></div>
-  </mat-form-field>
+  </mat-form-field>-->
   <form [formGroup]="personForm" (ngSubmit)="onFormSubmit(personForm.value)">
     <table>
       <tr>
         <td class="tbl1">
           <mat-form-field class="demo-full-width">
-            <input formControlName="userName"  matTooltip="Enter userName" matInput placeholder="userName">
+            <input formControlName="userName" matTooltip="Enter userName" matInput placeholder="userName">
           </mat-form-field>
           <mat-error>
             <span *ngIf="!personForm.get('userName').value && personForm.get('userName').touched"></span>
@@ -48,10 +48,10 @@
         </td>
         <td class="tbl1">
           <mat-form-field class="demo-full-width">
-            <input formControlName="sexStatusId" matTooltip="Enter sexStatusId" matInput placeholder="sexStatusId">
+            <input formControlName="sexStatus" matTooltip="Enter sexStatus" matInput placeholder="sexStatus">
           </mat-form-field>
           <mat-error>
-            <span *ngIf="!personForm.get('sexStatusId').value && personForm.get('sexStatusId').touched"></span>
+            <span *ngIf="!personForm.get('sexStatus').value && personForm.get('sexStatus').touched"></span>
           </mat-error>
         </td>
 
@@ -90,8 +90,14 @@
       </tr>
       <tr>
         <td class="content-center">
-          <button type="submit" mat-raised-button [color]="'success-light'" matTooltip="Click Submit Button" [disabled]="!personForm.valid">Submit</button>
-          <button type="reset" mat-raised-button [color]="'success-light'" matTooltip="Click Reset Button" (click)="resetForm()">Reset</button>
+          <button type="submit" mat-raised-button color="accent" matTooltip="Click Submit Button"
+                  [disabled]="!personForm.valid">
+            Submit
+          </button>
+          <button type="reset" mat-raised-button color="accent" matTooltip="Click Reset Button"
+                  (click)="resetForm()">
+            Reset
+          </button>
         </td>
         <td>
           <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">
@@ -104,7 +110,7 @@
   </form>
 
   <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-    <button mat-raised-button [color]="'success-light'" (click)="loadWorkerToEdit()">Edit</button>
+    <button type="button" mat-raised-button [color]="'success-light'" matTooltip="Click Edit Button" (click)="loadWorkerToEdit()">Edit</button>
   </mat-button-toggle-group>
   <br />
   <mat-slide-toggle (click)="ChangeBackground()">Dark mode</mat-slide-toggle>
