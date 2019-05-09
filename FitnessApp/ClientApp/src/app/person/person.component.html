@@ -2,167 +2,120 @@
 
 <router-outlet></router-outlet> -->
 
-<div class="container">  
-  
-  <mat-card>  
-     <mat-toolbar color="accent">  
-      <div align="center" style="color:white;text-align: right;">  
+<div class="container">
+
+  <mat-card>
+    <mat-toolbar color="accent">
+      <div align="center" style="color:white;text-align: right;">
         CRUD with Person
-      </div>    
-    </mat-toolbar>  
-  <br><br>  
-      <mat-card-content>  
-      <form [formGroup]="personForm"(ngSubmit)="onFormSubmit(personForm.value)">  
-            <table> 
-                <tr>  
-                    <!-- <td class="tbl1">  
-                        <mat-form-field class="demo-full-width">  
-                          <input formControlName="Login" matTooltip="Enter Person Login" matInput placeholder="Login">  
-                        </mat-form-field>  
-                        <mat-error>  
-                          <span *ngIf="!personForm.get('Login').value && personForm.get('Login').touched"></span>  
-                        </mat-error>  
-                      </td>   -->
+      </div>
+    </mat-toolbar>
+    <br><br>
+    <mat-card-content>
+      <form [formGroup]="personForm" (ngSubmit)="onFormSubmit(personForm.value)">
+        <table>
+          <tr>          
 
-                      <td class="tbl1">  
-                          <mat-form-field class="demo-full-width">  
-                            <input formControlName="userName" matTooltip="Enter userName" matInput placeholder="userName">  
-                          </mat-form-field>  
-                          <mat-error>  
-                            <span *ngIf="!personForm.get('userName').value && personForm.get('userName').touched"></span>  
-                          </mat-error>  
-                        </td>  
-                      </tr> 
-                      <tr>
-                  <td class="tbl1">  
-                    <mat-form-field class="demo-full-width">  
-                      <input formControlName="firstName" matTooltip="Enter Worker firstName" matInput placeholder="firstName">  
-                    </mat-form-field>  
-                    <mat-error>  
-                      <span *ngIf="!personForm.get('firstName').value && personForm.get('firstName').touched"></span>  
-                    </mat-error>  
-                  </td>  
+            <td class="tbl1">
+              <mat-form-field class="demo-full-width">
+                <input formControlName="userName" matTooltip="Enter userName" matInput placeholder="userName">
+              </mat-form-field>
+              <mat-error>
+                <span *ngIf="!personForm.get('userName').value && personForm.get('userName').touched"></span>
+              </mat-error>
+            </td>
+          </tr>
+          <tr>
+            <td class="tbl1">
+              <mat-form-field class="demo-full-width">
+                <input formControlName="firstName" matTooltip="Enter Worker firstName" matInput placeholder="firstName">
+              </mat-form-field>
+              <mat-error>
+                <span *ngIf="!personForm.get('firstName').value && personForm.get('firstName').touched"></span>
+              </mat-error>
+            </td>
 
-                  <td class="tbl1">  
-                    <mat-form-field class="demo-full-width">  
-                      <input formControlName="lastName" matTooltip="Enter lastName" matInput placeholder="lastName">  
-                    </mat-form-field>  
-                    <mat-error>  
-                      <span *ngIf="!personForm.get('lastName').value && personForm.get('lastName').touched"></span>  
-                    </mat-error>  
-                  </td>  
-                </tr>  
-                <tr>  
-                  <td class="tbl1">  
-                    <mat-form-field class="demo-full-width">  
-                      <input formControlName="email" matTooltip="Enter Person email" matInput placeholder="email">  
-                    </mat-form-field>  
-                    <mat-error>  
-                      <span *ngIf="!personForm.get('email').value && personForm.get('email').touched"></span>  
-                    </mat-error>  
-                  </td>  
-                  <td class="tbl1">  
-                    <mat-form-field class="demo-full-width">  
-                      <input formControlName="sexStatusId" matTooltip="Enter sexStatusId" matInput placeholder="sexStatusId">  
-                    </mat-form-field>  
-                    <mat-error>  
-                      <span *ngIf="!personForm.get('sexStatusId').value && personForm.get('sexStatusId').touched"></span>  
-                    </mat-error>  
-                  </td>  
-                  
-                </tr>  
+            <td class="tbl1">
+              <mat-form-field class="demo-full-width">
+                <input formControlName="lastName" matTooltip="Enter lastName" matInput placeholder="lastName">
+              </mat-form-field>
+              <mat-error>
+                <span *ngIf="!personForm.get('lastName').value && personForm.get('lastName').touched"></span>
+              </mat-error>
+            </td>
+          </tr>
+          <tr>
+            <td class="tbl1">
+              <mat-form-field class="demo-full-width">
+                <input formControlName="email" matTooltip="Enter Person email" matInput placeholder="email">
+              </mat-form-field>
+              <mat-error>
+                <span *ngIf="!personForm.get('email').value && personForm.get('email').touched"></span>
+              </mat-error>
+            </td>
+            <td class="tbl1">
+              <mat-form-field class="demo-full-width">
+                <input formControlName="sexStatus" matTooltip="Enter sexStatus" matInput placeholder="sexStatus">
+              </mat-form-field>
+              <mat-error>
+                <span *ngIf="!personForm.get('sexStatus').value && personForm.get('sexStatus').touched"></span>
+              </mat-error>
+            </td>
 
-                <tr>  
-                    <td class="tbl1">  
-                      <mat-form-field class="demo-full-width">  
-                        <input formControlName="phoneNumber" matTooltip="Enter Person Phone" matInput placeholder="phoneNumber">  
-                      </mat-form-field>  
-                      <mat-error>  
-                        <span *ngIf="!personForm.get('phoneNumber').value && personForm.get('phoneNumber').touched"></span>  
-                      </mat-error>  
-                    </td>  
-                    <td class="tbl1">  
-                      <mat-form-field class="demo-full-width">  
-                        <input formControlName="isDeleted" matTooltip="Enter isDeleted" matInput placeholder="isDeleted">  
-                      </mat-form-field>  
-                      <mat-error>  
-                        <span *ngIf="!personForm.get('isDeleted').value && personForm.get('isDeleted').touched"></span>  
-                      </mat-error>  
-                    </td>  
-                    
-                  </tr>  
+          </tr>
 
-                  <tr>                         
-                      <td class="tbl1">  
-                        <mat-form-field class="demo-full-width">  
-                          <input formControlName="isBanned" matTooltip="Enter isBanned" matInput placeholder="isBanned">  
-                        </mat-form-field>  
-                        <mat-error>  
-                          <span *ngIf="!personForm.get('isBanned').value && personForm.get('isBanned').touched"></span>  
-                        </mat-error>  
-                      </td>  
-                      
-                    </tr>  
-                <tr>  
-                  <td  class="content-center">  
-                    <button type="submit" mat-raised-button color="accent"matTooltip="Click Submit Button"[disabled]="!personForm.valid">Submit</button>      
-                    <button type="reset" mat-raised-button color="accent"matTooltip="Click Reset Button" (click)="resetForm()">Reset</button>  
-                  </td>  
-                  <td>  
-                    <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">  
-                      {{message}}  
-                    </p>  
-                  </td>  
-                </tr>
-                 
-              </table>  
-  <br><br>  
-  
-    <button type="button" class="btn btn-info"matTooltip="Click Edit Button"(click)="loadWorkerToEdit()">Edit</button>  
-  
-  <!-- userName:string
-    firstName:string;
-    lastName :string;
-    email:string;
-    sexStatusId :number;
-    phoneNumber:string;  
-    isDeleted:boolean;
-    isBanned:boolean; -->
+          <tr>
+            <td class="tbl1">
+              <mat-form-field class="demo-full-width">
+                <input formControlName="phoneNumber" matTooltip="Enter Person Phone" matInput placeholder="phoneNumber">
+              </mat-form-field>
+              <mat-error>
+                <span *ngIf="!personForm.get('phoneNumber').value && personForm.get('phoneNumber').touched"></span>
+              </mat-error>
+            </td>
+            <td class="tbl1">
+              <mat-form-field class="demo-full-width">
+                <input formControlName="isDeleted" matTooltip="Enter isDeleted" matInput placeholder="isDeleted">
+              </mat-form-field>
+              <mat-error>
+                <span *ngIf="!personForm.get('isDeleted').value && personForm.get('isDeleted').touched"></span>
+              </mat-error>
+            </td>
 
-        <!-- <table class="table" mat-table >
-            <tr ngclass="btn-primary">  
-                <th class="tbl2">Login</th>  
-                <th class="tbl2">Password</th>  
-              <th class="tbl2">Person Name</th>  
-              <th class="tbl2">Person Surname</th>  
-              <th class="tbl2">Email</th>  
-              <th class="tbl2">SexStatusId</th>  
-              <th class="tbl2">Phone</th>  
-              <th class="tbl2">IsDeleted</th> 
-              <th class="tbl2">IsBanned</th>   
-            </tr>  
-            <tr *ngFor="let w of allPeople | async"> 
-                <td class="tbl2">{{w.Login}}</td>  
-                <td class="tbl2">{{w.Password}}</td>   
-              <td class="tbl2">{{w.FirstName}}</td>   
-              <td class="tbl2">{{w.LastName}}</td>
-              <td class="tbl2">{{w.Email}}</td>  
-              <td class="tbl2">{{w.SexStatusId}}</td>  
-              <td class="tbl2">{{w.Phone}}</td>
-              <td class="tbl2">{{w.IsDeleted}}</td>  
-              <td class="tbl2">{{w.IsBanned}}</td>  
-              
-               <td class="tbl2">  
-                <button type="button" class="btn btn-info"matTooltip="Click Edit Button"(click)="loadWorkerToEdit(w.Id)">Edit</button>  
-              </td>  
-              <td class="tbl2">  
-                <button type="button" class="btn btn-danger"matTooltip="Click Delete Button"(click)="deleteWorker(w.Id)">Delete</button>  
-              </td>   
-            </tr>   
+          </tr>
 
-          </table>  -->
-        </form> 
+          <tr>
+            <td class="tbl1">
+              <mat-form-field class="demo-full-width">
+                <input formControlName="isBanned" matTooltip="Enter isBanned" matInput placeholder="isBanned">
+              </mat-form-field>
+              <mat-error>
+                <span *ngIf="!personForm.get('isBanned').value && personForm.get('isBanned').touched"></span>
+              </mat-error>
+            </td>
+
+          </tr>
+          <tr>
+            <td class="content-center">
+              <button type="submit" mat-raised-button color="accent" matTooltip="Click Submit Button"
+                [disabled]="!personForm.valid">Submit</button>
+              <button type="reset" mat-raised-button color="accent" matTooltip="Click Reset Button"
+                (click)="resetForm()">Reset</button>
+              <button type="button" class="btn btn-info" matTooltip="Click Edit Button"
+                (click)="loadWorkerToEdit()">Edit</button>
+            </td>
+            <td>
+              <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success"
+                align="left">
+                {{message}}
+              </p>
+            </td>
+          </tr>
+
+        </table>
+        <br>
+      </form>
     </mat-card-content>
-         
-  </mat-card>  
-  </div>  
+
+  </mat-card>
+</div>
