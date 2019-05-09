@@ -19,8 +19,10 @@ import { MatNativeDateModule, MatIconModule, MatCardModule } from '@angular/mate
 import { MatSidenavModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MatTooltipModule, MatToolbarModule } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { PersonService } from './person.service';
+import { AutocompleteFilterComponent } from './autocomplete-filter/autocomplete-filter.component';
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { PersonService } from './person.service';
     CounterComponent,
     FetchDataComponent,
     LoadPhotoComponent,
-    PersonComponent   
+    PersonComponent,
+    AutocompleteFilterComponent   
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -43,6 +46,7 @@ import { PersonService } from './person.service';
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
+    MatAutocompleteModule,
     MatPaginatorModule,
     MatCardModule,
     MatSidenavModule,
