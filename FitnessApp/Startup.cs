@@ -41,7 +41,7 @@ namespace FitnessApp
         {
             services.AddDbContext<ApplicationContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
-              b => b.MigrationsAssembly("FitnessCabinet")));
+              b => b.MigrationsAssembly("FitnessApp")));
 
             services.AddDefaultIdentity<Person>().AddEntityFrameworkStores<ApplicationContext>();
 
