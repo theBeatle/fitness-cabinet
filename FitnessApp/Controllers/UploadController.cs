@@ -13,6 +13,8 @@ using FitnessApp.Models.DB;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using FitnessApp.ViewModels;
 
 namespace FitnessApp.Controllers
 {
@@ -41,8 +43,8 @@ namespace FitnessApp.Controllers
             var photo = new Photo() { Path = path };
             var perPhoto = new PersonPhoto() { Person = person, Photo = photo };
 
-            db.Photos.Add(photo);
-            db.SaveChanges();
+            db.Photos.Add(photo);           
+            await db.SaveChangesAsync();
         }
 
 
@@ -61,41 +63,74 @@ namespace FitnessApp.Controllers
         //}
 
 
-        // PUT: api/People/5
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutPerson(long id, Person person)
-        //{            
-        //     var oldPerson = await _userManager.FindByNameAsync("string");
+        // PUT: api/Upload
+        [HttpPut]
+        public async Task<IActionResult> PutPerson(PersonDTO person)
+        {
+            var oldPerson = await _userManager.FindByNameAsync("string");
+            var sex = await db.SexStatus.FirstOrDefaultAsync(p => p.Sex == person.SexStatus);
 
-        //    _context.Entry(person).State = EntityState.Modified;
+            if (sex==null)
+            {
+                sex = new SexStatus { Sex = person.SexStatus.ToLower() };
+            }           
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!PersonExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            oldPerson.FirstName = person.FirstName;
+            oldPerson.LastName = person.LastName;
+            oldPerson.Email = person.Email;
+            oldPerson.SexStatus = sex;//new SexStatus { Sex = person.SexStatus };
+            oldPerson.PhoneNumber = person.PhoneNumber;
+            oldPerson.IsDeleted = person.IsDeleted;
+            oldPerson.IsBanned = person.IsBanned;           
 
-        //    return NoContent();
-        //}
+            try
+            {
+                var result = await _userManager.UpdateAsync(oldPerson);
+                await db.SaveChangesAsync();
+               
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                if (oldPerson==null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok();
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
+
+            return NoContent();
+        }
 
 
-        // GET: api/Person
+        // GET: api/Upload
         [HttpGet, DisableRequestSizeLimit]
-        public async Task<ActionResult<Person>> GetPerson()
+        public async Task<ActionResult<PersonDTO>> GetPerson()
         {
             try
             {
-                return await _userManager.FindByNameAsync("string");
+                var oldPerson = await _userManager.FindByNameAsync("string");
+                var sex =  await db.SexStatus.FirstOrDefaultAsync(s => s.Id == oldPerson.SexStatusId);               
+                var sexstatus = sex.Sex;
+                
+                var newPerson = new PersonDTO {
+                    UserName=oldPerson.UserName,
+                    FirstName=oldPerson.FirstName,
+                    LastName=oldPerson.LastName,
+                    Email=oldPerson.Email,
+                    SexStatus=sexstatus,
+                    PhoneNumber=oldPerson.PhoneNumber,
+                    IsDeleted=oldPerson.IsDeleted,
+                    IsBanned=oldPerson.IsBanned
+                };
+
+                return newPerson;
             }
             catch (Exception ex)
             {
@@ -153,6 +188,6 @@ namespace FitnessApp.Controllers
             {
                 return StatusCode(500, $"Internal server error: {ex}");
             }
-        }
+        }       
     }
 }
