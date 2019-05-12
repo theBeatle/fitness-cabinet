@@ -1,11 +1,16 @@
 <mat-card class="example-card">
   <img [src]="imgURL" *ngIf="imgURL" style="height:200px;background-repeat: no-repeat;" class="md-card-image" alt="image caption" />
 
-  <!--<mat-form-field class="demo-full-width">
-    <input   type="file" #file placeholder="Choose file" accept='image/*' (change)="uploadFile(file.files)" style="display:none;">
-    <button mat-raised-button [color]="'success-light'" (click)="file.click()"> Upload File</button>
-    <div class="container"></div>
-  </mat-form-field>-->
+  <div class="col-md-4">
+    <input type="file" #file placeholder="Choose file" accept='image/*' (change)="uploadFile(file.files)" style="display:none;">
+    <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+    <span class="upload" *ngIf="progress > 0">
+      {{progress}}%
+    </span>
+    <span class="upload" *ngIf="message">
+      {{message}}
+    </span>
+  </div>
   <form [formGroup]="personForm" (ngSubmit)="onFormSubmit(personForm.value)">
     <table>
       <tr>
