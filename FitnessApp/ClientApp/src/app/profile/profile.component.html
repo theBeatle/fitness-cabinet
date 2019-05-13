@@ -11,7 +11,7 @@
       {{message}}
     </span>
   </div>
-  <form [formGroup]="personForm" (ngSubmit)="onFormSubmit(personForm.value)">
+  <form [formGroup]="personForm" class="Righter" (ngSubmit)="onFormSubmit(personForm.value)">
     <table>
       <tr>
         <td class="tbl1">
@@ -95,11 +95,11 @@
       </tr>
       <tr>
         <td class="content-center">
-          <button type="submit" mat-raised-button color="accent" matTooltip="Click Submit Button"
+          <button type="submit" mat-raised-button color="accent" class="margin" matTooltip="Click Submit Button"
                   [disabled]="!personForm.valid">
             Submit
           </button>
-          <button type="reset" mat-raised-button color="accent" matTooltip="Click Reset Button"
+          <button type="reset" mat-raised-button color="accent" class="margin" matTooltip="Click Reset Button"
                   (click)="resetForm()">
             Reset
           </button>
@@ -114,7 +114,9 @@
     </table>
   </form>
 
-  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-    <button type="button" mat-raised-button [color]="'success-light'" matTooltip="Click Edit Button" (click)="loadWorkerToEdit()">Edit</button>
+  <mat-button-toggle-group id="Edit" name="fontStyle" aria-label="Font Style">
+    <button type="button"  mat-raised-button [color]="'success'" matTooltip="Click Edit Button" (click)="loadWorkerToEdit()">Edit</button>
   </mat-button-toggle-group>
+  <br>
+  <mat-slide-toggle id="Edit" (click)="ChangeBackground()">Dark mode</mat-slide-toggle>
 </mat-card>

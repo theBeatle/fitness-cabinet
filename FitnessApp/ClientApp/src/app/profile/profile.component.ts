@@ -1,9 +1,10 @@
 import { HttpEventType, HttpClient } from '@angular/common/http';
-import { Component, Output, OnInit, EventEmitter } from '@angular/core';
+import { Component, Output, OnInit, EventEmitter, ElementRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { PersonService } from '../person.service';
 import { Person } from '../person';
+import { Element } from '@angular/compiler/src/render3/r3_ast';
 
 
 @Component({
@@ -28,30 +29,15 @@ export class ProfileComponent implements OnInit {
 
   @Output() public onUploadFinished = new EventEmitter();
 
-  constructor(private formbulider: FormBuilder, private wS: PersonService,private http: HttpClient) { }
-  Name = 'Maks';
-  SureName = 'Iskandirov';
-  SexStatus = 'Men';
-  clickMessage2 = 'asd';
+  constructor(private formbulider: FormBuilder, private wS: PersonService, private http: HttpClient, private elementRef: ElementRef) { }
   flag = true;
-  PushInfo() {
-    this.Name = this.clickMessage2;
-    this.SureName = this.clickMessage2;
-    this.SexStatus = this.clickMessage2;
-
-
-  }
   ChangeBackground() {
     this.flag = !this.flag;
-    var up = document.getElementsByTagName('body')[1];
-    var down = document.getElementsByTagName('body')[0];
     if (this.flag == false) {
-      up.style.backgroundColor = "#333333";
-      down.style.backgroundColor = "#333333";
+      this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "#333333";
     }
     else {
-      up.style.backgroundColor = "white";
-      down.style.backgroundColor = "white";
+      this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "white";
     }
   }
 
