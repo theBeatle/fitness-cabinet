@@ -48,19 +48,22 @@ namespace FitnessApp.Controllers
         }
 
 
-        // GET: api/People
-        //[HttpGet, DisableRequestSizeLimit]
-        //public async Task<ActionResult<IEnumerable<Person>>> GetPeople()
-        //{
-        //    try
-        //    {
-        //        return await _userManager.Users.ToListAsync();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, $"Internal server error: {ex}");
-        //    }           
-        //}
+       // GET: api/People
+       //[HttpGet, DisableRequestSizeLimit]
+       // public async Task<ActionResult<IEnumerable<SexStatus>>> GetSexStatuses()
+       // {
+       //     try
+       //     {
+       //         //return await _userManager.Users.ToListAsync();
+       //         return await db.SexStatus.ToListAsync();
+       //     }
+       //     catch (Exception ex)
+       //     {
+       //         return StatusCode(500, $"Internal server error: {ex}");
+       //     }
+       // }
+
+
 
 
         // PUT: api/Upload
@@ -142,6 +145,8 @@ namespace FitnessApp.Controllers
                 return StatusCode(500, $"Internal server error: {ex}");
             }
         }
+
+
 
 
         [HttpPost, DisableRequestSizeLimit]

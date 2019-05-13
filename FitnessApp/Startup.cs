@@ -133,22 +133,7 @@ namespace FitnessApp
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            //app.UseCors(builder => builder.AllowAnyOrigin());
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            //app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
-            // specifying the Swagger JSON endpoint.
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            //    c.RoutePrefix = string.Empty;
-            //});
-
-            //app.UseMvc();
-
-
-            //////////////////////////////////////////////////////////////////////////
+           
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -157,6 +142,7 @@ namespace FitnessApp
             {
                 app.UseHsts();
             }
+
             app.UseCors(builder => builder
                  .AllowAnyOrigin()
                  .AllowAnyHeader()
@@ -192,17 +178,6 @@ namespace FitnessApp
             });
             
             app.UseHttpsRedirection();
-
-            //app.UseStaticFiles();
-
-
-            //app.UseStaticFiles(new StaticFileOptions()
-            //{
-            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
-            //    RequestPath = new PathString("/Resources")
-            //});
-
-
             app.UseSpaStaticFiles();
 
             app.UseMvc(routes =>

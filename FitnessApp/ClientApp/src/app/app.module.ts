@@ -28,6 +28,8 @@ import { DashboardModule }  from './dashboard/dashboard.module';
 
 import { ConfigService } from './shared/utils/config.service';
 import { from } from 'rxjs';
+import { PersonService } from './person.service';
+import { AutocompleteFilterComponent } from './autocomplete-filter/autocomplete-filter.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { from } from 'rxjs';
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
+    MatAutocompleteModule,
     MatPaginatorModule,
     MatCardModule,
     MatSidenavModule,
