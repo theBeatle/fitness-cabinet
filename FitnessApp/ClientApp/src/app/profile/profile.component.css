@@ -42,3 +42,9 @@ small {
   margin-left: 15px;
   line-height: 36px;
 }
+.demo-full-width {
+  width:100px;
+}
+.btn btn-success {
+  margin-top:20px;
+}

@@ -27,7 +27,6 @@ export class ProfileComponent implements OnInit {
   public message2: string;
 
   @Output() public onUploadFinished = new EventEmitter();
-  http: any;
 
   constructor(private formbulider: FormBuilder, private wS: PersonService) { }
   Name = 'Maks';

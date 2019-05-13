@@ -3,7 +3,7 @@
 
   <div class="col-md-4">
     <input type="file" #file placeholder="Choose file" accept='image/*' (change)="uploadFile(file.files)" style="display:none;">
-    <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+    <button type="button" class="btn btn-success" (click)="file.click()">Upload</button>
     <span class="upload" *ngIf="progress > 0">
       {{progress}}%
     </span>
