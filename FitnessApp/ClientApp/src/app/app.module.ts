@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule, XHRBackend } from '@angular/http';
+import { HttpModule, XHRBackend, Http } from '@angular/http';
 import { AuthenticateXHRBackend } from './authenticate-xhr.backend';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
