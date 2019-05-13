@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
 
   @Output() public onUploadFinished = new EventEmitter();
 
-  constructor(private formbulider: FormBuilder, private wS: PersonService) { }
+  constructor(private formbulider: FormBuilder, private wS: PersonService,private http: HttpClient) { }
   Name = 'Maks';
   SureName = 'Iskandirov';
   SexStatus = 'Men';
