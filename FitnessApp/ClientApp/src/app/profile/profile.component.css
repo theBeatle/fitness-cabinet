@@ -51,7 +51,6 @@ small {
   margin-left:35%;
 }
 .Righter {
-  margin-left:60%;
   float:right;
 }
 .margin{
@@ -59,4 +58,10 @@ small {
 }
 .btn-success{
   margin:5px;
+}
+.col-md-4{
+  float:left;
+}
+.md-card-image {
+  float: left;
 }
