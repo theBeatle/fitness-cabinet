@@ -119,7 +119,12 @@ namespace FitnessApp.Controllers
             try
             {
                 var oldPerson = await _userManager.FindByNameAsync("string");
-                var sex =  await db.SexStatus.FirstOrDefaultAsync(s => s.Id == oldPerson.SexStatusId);               
+                var sex =  await db.SexStatus.FirstOrDefaultAsync(s => s.Id == oldPerson.SexStatusId);
+
+                if (sex ==null)
+                {
+                    sex = new SexStatus { Sex = "male" };
+                }
                 var sexstatus = sex.Sex;
                 
                 var newPerson = new PersonDTO {

@@ -1,48 +1,59 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule, XHRBackend } from '@angular/http';
+import { AuthenticateXHRBackend } from './authenticate-xhr.backend';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+
+/* App Root */
+import { MaterialModule } from './material';
+import { ProfileComponent } from './profile/profile.component';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { LoadPhotoComponent } from './load-photo/load-photo.component';
-import { PersonComponent } from './person/person.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { MatButtonModule, MatMenuModule, MatDatepickerModule } from '@angular/material';
 import { MatNativeDateModule, MatIconModule, MatCardModule } from '@angular/material';
 import { MatSidenavModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MatTooltipModule, MatToolbarModule } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+/* Account Imports */
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { AccountModule }  from './account/account.module';
+/* Dashboard Imports */
+import { DashboardModule }  from './dashboard/dashboard.module';
 
 import { PersonService } from './person.service';
 import { AutocompleteFilterComponent } from './autocomplete-filter/autocomplete-filter.component';
-
+import { ConfigService } from './shared/utils/config.service';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
     LoadPhotoComponent,
     PersonComponent,
     AutocompleteFilterComponent   
+    ProfileComponent,
+    HeaderComponent,
   ],
   imports: [
+    AccountModule,
+    DashboardModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MatButtonModule,
+    HttpModule,
     MatMenuModule,
+    MaterialModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
@@ -57,15 +68,16 @@ import { AutocompleteFilterComponent } from './autocomplete-filter/autocomplete-
     BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'load-photo', component: LoadPhotoComponent },
+      { path: 'profile', component: ProfileComponent },
     ]),
     AppRoutingModule
   ],
   providers: [
-    HttpClientModule,
-    PersonService
+   
+    ConfigService, {
+      provide: XHRBackend,
+      useClass: AuthenticateXHRBackend
+    }
   ],
   bootstrap: [AppComponent]
 })
