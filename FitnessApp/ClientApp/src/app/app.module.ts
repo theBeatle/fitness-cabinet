@@ -35,11 +35,8 @@ import { from } from 'rxjs';
   declarations: [
     AppComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
-    LoadPhotoComponent,
-    PersonComponent,
-    AutocompleteFilterComponent   
+    
+    AutocompleteFilterComponent,   
     ProfileComponent,
     HeaderComponent,
   ],
