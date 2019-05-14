@@ -17,7 +17,7 @@ export class FacebookLoginComponent {
   isRequesting: boolean; 
 
   launchFbLogin() {
-    this.authWindow = window.open('https://www.facebook.com/v2.11/dialog/oauth?&response_type=token&display=popup&client_id=1528751870549294&display=popup&redirect_uri=http://localhost:5000/facebook-auth.html&scope=email',null,'width=600,height=400');    
+    this.authWindow = window.open('https://www.facebook.com/v3.3/dialog/oauth?&response_type=token&display=popup&client_id=2282221595358035&display=popup&redirect_uri=http://localhost:44363/facebook-auth.html&scope=email', null, 'width=600,height=400');
   }
 
   constructor(private userService: UserService, private router: Router) {

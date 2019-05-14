@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace FitnessApp.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     public class ExternalAuthController : Controller
     {
         private readonly ApplicationContext _appDbContext;
@@ -34,7 +34,7 @@ namespace FitnessApp.Controllers
         }
 
         // POST api/externalauth/facebook
-        [HttpPost]
+        [HttpPost("facebook")]
         public async Task<IActionResult> Facebook([FromBody]FacebookAuthViewModel model)
         {
             // 1.generate an app access token
