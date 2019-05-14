@@ -161,8 +161,6 @@ export class ProfileComponent implements OnInit {
         else if (event.type === HttpEventType.Response) {
           this.message = 'Upload success.';
           this.onUploadFinished.emit(event.body);
-
-
         }
       });
     this.progress = 0;
