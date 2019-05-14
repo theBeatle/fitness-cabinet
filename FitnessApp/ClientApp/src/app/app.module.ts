@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule, XHRBackend } from '@angular/http';
+import { HttpModule, XHRBackend, Http } from '@angular/http';
 import { AuthenticateXHRBackend } from './authenticate-xhr.backend';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,6 +20,7 @@ import { MatNativeDateModule, MatIconModule, MatCardModule } from '@angular/mate
 import { MatSidenavModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MatTooltipModule, MatToolbarModule } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 /* Account Imports */
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { AccountModule }  from './account/account.module';
@@ -31,11 +32,11 @@ import { AutocompleteFilterComponent } from './autocomplete-filter/autocomplete-
 import { ConfigService } from './shared/utils/config.service';
 import { from } from 'rxjs';
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    
+    HomeComponent,    
     AutocompleteFilterComponent,   
     ProfileComponent,
     HeaderComponent,
@@ -62,6 +63,7 @@ import { from } from 'rxjs';
     MatInputModule,
     MatTooltipModule,
     MatToolbarModule,
+    MatSlideToggleModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },

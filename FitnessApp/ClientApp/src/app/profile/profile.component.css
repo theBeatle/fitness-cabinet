@@ -20,20 +20,12 @@ small {
   border-radius: 5px;
 }
 .example-card {
-  max-width: 300px;
+  max-width: 600px;
   margin: 4px
 }
 
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
-}
-.mat-success-light {
+.mat-success {
   background-color: lawngreen;
-  color: #fff;
-}
-.mat-success-dark {
-  background-color: red;
   color: #fff;
 }
 .upload {
@@ -47,4 +39,29 @@ small {
 }
 .btn btn-success {
   margin-top:20px;
+}
+.example-card{
+  margin-left:30%;
+  margin-top:10px;
+}
+.tbl1 table{
+  float:right;
+}
+#Edit {
+  margin-left:35%;
+}
+.Righter {
+  float:right;
+}
+.margin{
+  margin:5px;
+}
+.btn-success{
+  margin:5px;
+}
+.col-md-4{
+  float:left;
+}
+.md-card-image {
+  float: left;
 }

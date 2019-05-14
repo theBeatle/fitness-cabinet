@@ -1,7 +1,6 @@
 <mat-card class="example-card">
-  <img [src]="imgURL" *ngIf="imgURL" style="height:200px;background-repeat: no-repeat;" class="md-card-image" alt="image caption" />
-
   <div class="col-md-4">
+    <img [src]="imgURL" *ngIf="imgURL" style="height:200px;background-repeat: no-repeat;" class="md-card-image" alt="image caption" />
     <input type="file" #file placeholder="Choose file" accept='image/*' (change)="uploadFile(file.files)" style="display:none;">
     <button type="button" class="btn btn-success" (click)="file.click()">Upload</button>
     <span class="upload" *ngIf="progress > 0">
@@ -12,7 +11,7 @@
     </span>
   </div>
   <form [formGroup]="personForm" (ngSubmit)="onFormSubmit(personForm.value)">
-    <table>
+    <table class="Righter">
       <tr>
         <td class="tbl1">
           <mat-form-field class="demo-full-width">
@@ -95,11 +94,11 @@
       </tr>
       <tr>
         <td class="content-center">
-          <button type="submit" mat-raised-button color="accent" matTooltip="Click Submit Button"
+          <button type="submit" mat-raised-button color="accent" class="margin" matTooltip="Click Submit Button"
                   [disabled]="!personForm.valid">
             Submit
           </button>
-          <button type="reset" mat-raised-button color="accent" matTooltip="Click Reset Button"
+          <button type="reset" mat-raised-button color="accent" class="margin" matTooltip="Click Reset Button"
                   (click)="resetForm()">
             Reset
           </button>
@@ -114,9 +113,10 @@
     </table>
   </form>
 
-  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-    <button type="button" mat-raised-button [color]="'success-light'" matTooltip="Click Edit Button" (click)="loadWorkerToEdit()">Edit</button>
-  </mat-button-toggle-group>
   <br />
-  <mat-slide-toggle (click)="ChangeBackground()">Dark mode</mat-slide-toggle>
+  <mat-slide-toggle id="Edit" (click)="ChangeBackground()">Dark mode</mat-slide-toggle>
+  <br />
+  <mat-button-toggle-group id="Edit" name="fontStyle" aria-label="Font Style">
+    <button type="button" mat-raised-button [color]="'success'" matTooltip="Click Edit Button" (click)="loadWorkerToEdit()">Edit</button>
+  </mat-button-toggle-group>
 </mat-card>
