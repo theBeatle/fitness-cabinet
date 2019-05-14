@@ -30,10 +30,10 @@ namespace FitnessApp.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Registration([FromBody]RegistrationViewModel model)
         {
-           using(ApplicationContext db = new ApplicationContext())
-            {
-              db.Achivement.Add(new Achivement());
-            }
+           //using(ApplicationContext db = new ApplicationContext())
+           // {
+           //   db.Achivement.Add(new Achivement());
+           // }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
