@@ -1,0 +1,122 @@
+<mat-card class="example-card">
+  <div class="col-md-4">
+    <img [src]="imgURL" *ngIf="imgURL" style="height:200px;background-repeat: no-repeat;" class="md-card-image" alt="image caption" />
+    <input type="file" #file placeholder="Choose file" accept='image/*' (change)="uploadFile(file.files)" style="display:none;">
+    <button type="button" class="btn btn-success" (click)="file.click()">Upload</button>
+    <span class="upload" *ngIf="progress > 0">
+      {{progress}}%
+    </span>
+    <span class="upload" *ngIf="message">
+      {{message}}
+    </span>
+  </div>
+  <form [formGroup]="personForm" (ngSubmit)="onFormSubmit(personForm.value)">
+    <table class="Righter">
+      <tr>
+        <td class="tbl1">
+          <mat-form-field class="demo-full-width">
+            <input formControlName="userName" matTooltip="Enter userName" matInput placeholder="userName">
+          </mat-form-field>
+          <mat-error>
+            <span *ngIf="!personForm.get('userName').value && personForm.get('userName').touched"></span>
+          </mat-error>
+        </td>
+      </tr>
+      <tr>
+        <td class="tbl1">
+          <mat-form-field class="demo-full-width">
+            <input formControlName="firstName" matTooltip="Enter Worker firstName" matInput placeholder="firstName">
+          </mat-form-field>
+          <mat-error>
+            <span *ngIf="!personForm.get('firstName').value && personForm.get('firstName').touched"></span>
+          </mat-error>
+        </td>
+
+        <td class="tbl1">
+          <mat-form-field class="demo-full-width">
+            <input formControlName="lastName" matTooltip="Enter lastName" matInput placeholder="lastName">
+          </mat-form-field>
+          <mat-error>
+            <span *ngIf="!personForm.get('lastName').value && personForm.get('lastName').touched"></span>
+          </mat-error>
+        </td>
+      </tr>
+      <tr>
+        <td class="tbl1">
+          <mat-form-field class="demo-full-width">
+            <input formControlName="email" matTooltip="Enter Person email" matInput placeholder="email">
+          </mat-form-field>
+          <mat-error>
+            <span *ngIf="!personForm.get('email').value && personForm.get('email').touched"></span>
+          </mat-error>
+        </td>
+        <td class="tbl1">
+          <mat-form-field class="demo-full-width">
+            <input formControlName="sexStatus" matTooltip="Enter sexStatus" matInput placeholder="sexStatus">
+          </mat-form-field>
+          <mat-error>
+            <span *ngIf="!personForm.get('sexStatus').value && personForm.get('sexStatus').touched"></span>
+          </mat-error>
+        </td>
+
+      </tr>
+
+      <tr>
+        <td class="tbl1">
+          <mat-form-field class="demo-full-width">
+            <input formControlName="phoneNumber" matTooltip="Enter Person Phone" matInput placeholder="phoneNumber">
+          </mat-form-field>
+          <mat-error>
+            <span *ngIf="!personForm.get('phoneNumber').value && personForm.get('phoneNumber').touched"></span>
+          </mat-error>
+        </td>
+        <td class="tbl1">
+          <mat-form-field class="demo-full-width">
+            <input formControlName="isDeleted" matTooltip="Enter isDeleted" matInput placeholder="isDeleted">
+          </mat-form-field>
+          <mat-error>
+            <span *ngIf="!personForm.get('isDeleted').value && personForm.get('isDeleted').touched"></span>
+          </mat-error>
+        </td>
+
+      </tr>
+
+      <tr>
+        <td class="tbl1">
+          <mat-form-field class="demo-full-width">
+            <input formControlName="isBanned" matTooltip="Enter isBanned" matInput placeholder="isBanned">
+          </mat-form-field>
+          <mat-error>
+            <span *ngIf="!personForm.get('isBanned').value && personForm.get('isBanned').touched"></span>
+          </mat-error>
+        </td>
+
+      </tr>
+      <tr>
+        <td class="content-center">
+          <button type="submit" mat-raised-button color="accent" class="margin" matTooltip="Click Submit Button"
+                  [disabled]="!personForm.valid">
+            Submit
+          </button>
+          <button type="reset" mat-raised-button color="accent" class="margin" matTooltip="Click Reset Button"
+                  (click)="resetForm()">
+            Reset
+          </button>
+        </td>
+        <td>
+          <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">
+            {{message}}
+          </p>
+        </td>
+      </tr>
+
+    </table>
+  </form>
+
+  <br />
+  <mat-slide-toggle id="Edit" (click)="ChangeBackground()">Dark mode</mat-slide-toggle>
+  <br />
+  <mat-button-toggle-group id="Edit" name="fontStyle" aria-label="Font Style">
+    <button type="button" mat-raised-button [color]="'success'" matTooltip="Click Edit Button" (click)="loadWorkerToEdit()">Edit</button>
+  </mat-button-toggle-group>
+</mat-card>

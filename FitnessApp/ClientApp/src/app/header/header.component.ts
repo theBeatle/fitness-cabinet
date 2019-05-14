@@ -3,6 +3,7 @@ import {Subscription} from 'rxjs/Subscription';
 
 import { UserService } from '../shared/services/user.service';
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -14,7 +15,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
   status: boolean;
  subscription:Subscription;
 
-  constructor(private userService:UserService) {     
+  constructor(private userService: UserService) {     
    }
 
    logout() {
