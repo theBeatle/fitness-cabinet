@@ -25,9 +25,17 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="Registration\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="Registration\**" />
+    <EmbeddedResource Remove="Registration\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="Registration\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\People\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

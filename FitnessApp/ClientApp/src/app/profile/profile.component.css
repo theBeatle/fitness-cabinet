@@ -1,0 +1,67 @@
+body {
+  padding-top: 30px;
+}
+
+.glyphicon {
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+small {
+  display: block;
+  line-height: 1.428571429;
+  color: #999;
+}
+
+.button {
+  width: 160px;
+  height: 30px;
+  background-color: dodgerblue;
+  border-radius: 5px;
+}
+.example-card {
+  max-width: 600px;
+  margin: 4px
+}
+
+.mat-success {
+  background-color: lawngreen;
+  color: #fff;
+}
+.upload {
+  font-weight: bold;
+  color: #28a745;
+  margin-left: 15px;
+  line-height: 36px;
+}
+.demo-full-width {
+  width:100px;
+}
+.btn btn-success {
+  margin-top:20px;
+}
+.example-card{
+  margin-left:30%;
+  margin-top:10px;
+}
+.tbl1 table{
+  float:right;
+}
+#Edit {
+  margin-left:35%;
+}
+.Righter {
+  float:right;
+}
+.margin{
+  margin:5px;
+}
+.btn-success{
+  margin:5px;
+}
+.col-md-4{
+  float:left;
+}
+.md-card-image {
+  float: left;
+}

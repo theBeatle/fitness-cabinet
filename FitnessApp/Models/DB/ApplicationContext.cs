@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -17,15 +19,8 @@ namespace FitnessApp.Models.DB
         public ApplicationContext(DbContextOptions options)
         : base(options)
         {
-        }
+        }       
         
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=FitnessCabinet;Trusted_Connection=True;");
-            }
-        }
 
         public virtual DbSet<Achivement> Achivement { get; set; }
         public virtual DbSet<Address> Address { get; set; }
@@ -47,7 +42,7 @@ namespace FitnessApp.Models.DB
         public virtual DbSet<Speciality> Speciality { get; set; }
         public virtual DbSet<Trainee> Trainee { get; set; }
         public virtual DbSet<TraineeAchivement> TraineeAchivements { get; set; }
-        public virtual DbSet<Usabilities> Usabilities { get; set; }
+        public virtual DbSet<Usabilities> Usabilities { get; set; }       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -326,6 +321,6 @@ namespace FitnessApp.Models.DB
                     .WithMany(p => p.Usabilities)
                     .HasForeignKey(d => d.PlaceId);
             });
-        }
+        }       
     }
 }

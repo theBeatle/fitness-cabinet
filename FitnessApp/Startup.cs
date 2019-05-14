@@ -17,6 +17,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+//using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpsPolicy;
+//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.AspNetCore.SpaServices.AngularCli;
+//using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -41,7 +46,7 @@ namespace FitnessApp
         {
             services.AddDbContext<ApplicationContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
-              b => b.MigrationsAssembly("FitnessCabinet")));
+              b => b.MigrationsAssembly("FitnessApp"))); //FitnessCabinet
 
             services.AddDefaultIdentity<Person>().AddEntityFrameworkStores<ApplicationContext>();
 
@@ -122,10 +127,13 @@ namespace FitnessApp
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            //services.AddScoped<IDal, Dal>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+           
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -134,6 +142,7 @@ namespace FitnessApp
             {
                 app.UseHsts();
             }
+
             app.UseCors(builder => builder
                  .AllowAnyOrigin()
                  .AllowAnyHeader()
