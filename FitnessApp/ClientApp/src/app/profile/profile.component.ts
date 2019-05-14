@@ -30,10 +30,10 @@ export class ProfileComponent implements OnInit {
   @Output() public onUploadFinished = new EventEmitter();
 
   constructor(private formbulider: FormBuilder, private wS: PersonService, private http: HttpClient, private elementRef: ElementRef) { }
-  flag = true;
+  flag = false;
   ChangeBackground() {
     this.flag = !this.flag;
-    if (this.flag == false) {
+    if (this.flag == true) {
       this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "#333333";
     }
     else {
