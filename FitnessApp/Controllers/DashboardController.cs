@@ -32,6 +32,7 @@ namespace FitnessApp.Controllers
         {
             // retrieve the user info
             //HttpContext.User
+            var req = this.Request;
             var userId = _caller.Claims.Single(c => c.Type == "id");
             var person = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId.Value);
 

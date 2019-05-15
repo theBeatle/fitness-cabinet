@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FitnessApp.Models.DB;
+using Microsoft.AspNetCore.Identity;
 //using Dal;
 
 namespace FitnessApp.Controllers
@@ -14,101 +15,30 @@ namespace FitnessApp.Controllers
     [ApiController]
     public class PeopleController : Controller
     {
-        //private readonly FitnessCabinetContext _context;
-        //readonly IDal db = new Edal();
+        private readonly UserManager<Person> _userManager;
+        private readonly ApplicationContext _appDbContext;
 
-        //public PeopleController(FitnessCabinetContext context)
-        //{
-        //    _context = context;
-        //}
+        public PeopleController(UserManager<Person> userManager, ApplicationContext appDbContext)
+        {
+            _userManager = userManager;
+            _appDbContext = appDbContext;
+        }
 
-        // GET: api/People
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Person>>> GetPeople()
-        //{
-        //    return await _context.People.ToListAsync();
-        //}
-
-
-        //[HttpGet]
-        //public ICollection<Person> GetPeople()
-        //{
-        //    return db.GetAllPeople();
-        //}
-
-        //// GET: api/People/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Person>> GetPerson(long id)
-        //{
-        //    var person = await _context.People.FindAsync(id);
-
-        //    if (person == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return person;
-        //}
-
-        //// PUT: api/People/5
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutPerson(long id, Person person)
-        //{
-        //    if (id != person.Id)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    _context.Entry(person).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!PersonExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
-
-        //// POST: api/People
-        //[HttpPost]
-        //public async Task<ActionResult<Person>> PostPerson(Person person)
-        //{
-        //    _context.People.Add(person);
-        //    await _context.SaveChangesAsync();
-
-        //    return CreatedAtAction("GetPerson", new { id = person.Id }, person);
-        //}
-
-        //// DELETE: api/People/5
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult<Person>> DeletePerson(long id)
-        //{
-        //    var person = await _context.People.FindAsync(id);
-        //    if (person == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.People.Remove(person);
-        //    await _context.SaveChangesAsync();
-
-        //    return person;
-        //}
-
-        //private bool PersonExists(long id)
-        //{
-        //    return _context.People.Any(e => e.Id == id);
-        //}
+        //GET: api/People
+        [HttpGet, DisableRequestSizeLimit]
+        public async Task<ActionResult<IEnumerable<string>>> GetSexStatuses()
+        {
+            try
+            {
+                var sexes = await _appDbContext.SexStatus.Select(s => s.Sex).Distinct().ToListAsync();
+                //var sexes = sexStats..ToList(); ;
+                //return await db.SexStatus.ToListAsync();
+                return sexes;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
+        }
     }
 }

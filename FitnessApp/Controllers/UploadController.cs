@@ -49,25 +49,6 @@ namespace FitnessApp.Controllers
             await db.SaveChangesAsync();
         }
 
-
-       // GET: api/People
-       //[HttpGet, DisableRequestSizeLimit]
-       // public async Task<ActionResult<IEnumerable<SexStatus>>> GetSexStatuses()
-       // {
-       //     try
-       //     {
-       //         //return await _userManager.Users.ToListAsync();
-       //         return await db.SexStatus.ToListAsync();
-       //     }
-       //     catch (Exception ex)
-       //     {
-       //         return StatusCode(500, $"Internal server error: {ex}");
-       //     }
-       // }
-
-
-
-
         // PUT: api/Upload
         [HttpPut]
         public async Task<IActionResult> PutPerson(PersonDTO person)

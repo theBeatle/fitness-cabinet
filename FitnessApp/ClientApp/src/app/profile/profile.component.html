@@ -15,7 +15,7 @@
       <tr>
         <td class="tbl1">
           <mat-form-field class="demo-full-width">
-            <input formControlName="userName" matTooltip="Enter userName" matInput placeholder="userName" value="{{homeDetails?.userName}}">
+            <input formControlName="userName" matTooltip="Enter userName" matInput placeholder="userName">
           </mat-form-field>
           <mat-error>
             <span *ngIf="!personForm.get('userName').value && personForm.get('userName').touched"></span>
