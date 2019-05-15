@@ -17,10 +17,21 @@ export class PersonService {
   constructor(private http: HttpClient) { }  
 
   getWorkerByUserName(): Observable<Person> {
-    return this.http.get<Person>(this.url + "Upload/");
+    let authToken = localStorage.getItem('auth_token');
+
+    this.httpOptions.headers.append('Content-Type', 'application/json');
+    this.httpOptions.headers.append('Authorization', `Bearer ${authToken}`);
+
+    return this.http.get<Person>(this.url + "Upload/", this.httpOptions);
   }  
 
   updateUser(worker: Person): Observable<Person> {
+    
+    let authToken = localStorage.getItem('auth_token');
+
+    this.httpOptions.headers.append('Content-Type', 'application/json');
+    this.httpOptions.headers.append('Authorization', `Bearer ${authToken}`);
+
     return this.http.put<Person>(this.url + "Upload/", worker, this.httpOptions);
   }  
 

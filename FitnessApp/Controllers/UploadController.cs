@@ -22,9 +22,8 @@ namespace FitnessApp.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [RequireHttps]
-    //[Authorize]
     [Authorize(Policy = "Person")]
-    public class UploadController : Controller
+    public class UploadController : ControllerBase
     {
         private readonly ClaimsPrincipal _caller;
         private readonly IHostingEnvironment _hostingEnvironment;
