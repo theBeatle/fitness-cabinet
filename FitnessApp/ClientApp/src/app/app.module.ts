@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
-
 /* App Root */
 import { MaterialModule } from './material';
 import { ProfileComponent } from './profile/profile.component';
@@ -25,11 +24,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { AccountModule }  from './account/account.module';
 /* Dashboard Imports */
 import { DashboardModule }  from './dashboard/dashboard.module';
-
 import { ConfigService } from './shared/utils/config.service';
-import { from } from 'rxjs';
-import { PersonService } from './person.service';
-import { AutocompleteFilterComponent } from './autocomplete-filter/autocomplete-filter.component';
 
 @NgModule({
   declarations: [

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace AngularASPNETCore2WebApiAuth.Controllers
+namespace FitnessApp.Controllers
 {
     [Authorize(Policy = "Person")]
     [Route("api/[controller]")]

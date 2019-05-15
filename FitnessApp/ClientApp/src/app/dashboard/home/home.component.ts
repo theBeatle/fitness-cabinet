@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
-
     this.dashboardService.getHomeDetails()
     .subscribe((homeDetails: HomeDetails) => {
       this.homeDetails = homeDetails;
@@ -23,6 +22,5 @@ export class HomeComponent implements OnInit {
     error => {
       //this.notificationService.printErrorMessage(error);
     });
-    
   }
 }

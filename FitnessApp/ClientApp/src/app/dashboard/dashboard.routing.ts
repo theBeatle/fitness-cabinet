@@ -12,10 +12,10 @@ export const routing: ModuleWithProviders = RouterModule.forChild([
       path: 'dashboard',
       component: RootComponent, canActivate: [AuthGuard],
 
-      children: [      
+      children: [
        { path: '', component: HomeComponent },
        { path: 'home',  component: HomeComponent },
        { path: 'settings',  component: SettingsComponent },
-      ]       
-    }  
+      ]
+  }
 ]);

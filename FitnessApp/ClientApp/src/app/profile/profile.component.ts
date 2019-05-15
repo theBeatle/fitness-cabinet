@@ -5,15 +5,19 @@ import { Observable } from 'rxjs';
 import { PersonService } from '../person.service';
 import { Person } from '../person';
 import { Element } from '@angular/compiler/src/render3/r3_ast';
-
+import { ProfileDetails } from './models/profile.details.interface';
+import { ProfileService } from './services/profile.service';
 
 @Component({
   selector: 'profile-data',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
+  providers: [ProfileService]
 })
 
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit { 
+
+  profileDetails: ProfileDetails;
 
   dataSaved = false;
   personForm: any;
@@ -29,7 +33,7 @@ export class ProfileComponent implements OnInit {
 
   @Output() public onUploadFinished = new EventEmitter();
 
-  constructor(private formbulider: FormBuilder, private wS: PersonService, private http: HttpClient, private elementRef: ElementRef) { }
+  constructor(private formbulider: FormBuilder, private wS: PersonService, private http: HttpClient, private elementRef: ElementRef, private profileService: ProfileService) { }
   flag = false;
   ChangeBackground() {
     this.flag = !this.flag;
@@ -40,8 +44,6 @@ export class ProfileComponent implements OnInit {
       this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "white";
     }
   }
-
-
 
   preview(files) {
     if (files.length === 0)
@@ -61,8 +63,6 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-
-
   ngOnInit() {
     this.personForm = this.formbulider.group({
       userName: ['', [Validators.required]],
@@ -76,6 +76,15 @@ export class ProfileComponent implements OnInit {
 
     });
     this.loadUserByUserName()
+
+    // get profile
+    this.profileService.getHomeDetails()
+      .subscribe((profileDetails: ProfileDetails) => {
+        this.profileDetails = profileDetails;
+      },
+        error => {
+          //this.notificationService.printErrorMessage(error);
+        });
   }
 
   loadUserByUserName() {

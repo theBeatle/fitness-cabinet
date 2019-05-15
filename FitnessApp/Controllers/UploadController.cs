@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using FitnessApp.ViewModels;
+using System.Security.Claims;
 
 namespace FitnessApp.Controllers
 {
@@ -22,17 +23,18 @@ namespace FitnessApp.Controllers
     [ApiController]
     [RequireHttps]
     //[Authorize]
-    public class UploadController : ControllerBase
+    [Authorize(Policy = "Person")]
+    public class UploadController : Controller
     {
+        private readonly ClaimsPrincipal _caller;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly ApplicationContext db;
         private readonly UserManager<Person> _userManager;
 
-
-        public UploadController(IHostingEnvironment env, ApplicationContext dB, UserManager<Person> userManager)
+        public UploadController(IHostingEnvironment env, ApplicationContext dB, UserManager<Person> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _hostingEnvironment = env;
-          
+            _caller = httpContextAccessor.HttpContext.User;
             db = dB;
             _userManager = userManager;
         }
@@ -145,24 +147,26 @@ namespace FitnessApp.Controllers
                 return StatusCode(500, $"Internal server error: {ex}");
             }
         }
-
-
-
-
+        
         [HttpPost, DisableRequestSizeLimit]
         public async Task<IActionResult> Upload()
-        {            
-            //User.Identity.IsAuthenticated -> true
-            //var userToVerify = await _userManager.FindByNameAsync(User.Identity.Name);
-            
-            var person = await _userManager.FindByNameAsync("string");
-            string id = person.Id;
-
+        {
+            Person person = null;
+            Claim id = null;
+            try
+            {
+                id = _caller?.Claims?.Single(c => c.Type == "id");
+                person = await _userManager.FindByIdAsync(id.Value);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
             try
             {
                 var file = Request.Form.Files[0];
 
-                var folderName = Path.Combine("Resources", "People", id);
+                var folderName = Path.Combine("Resources", "People", id.Value);
 
                 string webRootPath = _hostingEnvironment.WebRootPath;
                 string contentRootPath = _hostingEnvironment.ContentRootPath;
